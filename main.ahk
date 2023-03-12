@@ -12,6 +12,7 @@
 #Include point.ahk
 #Include dispatch.ahk
 #Include skip.ahk
+#Include team.ahk
 ;触发区
 
 ;快速拾取&对话
@@ -52,3 +53,15 @@ v Up:: SendInput('{Space Up}')
 
 ;圣遗物副本下一轮
 F1:: Skip.next_round()
+
+; Ctrl + [1 ~ 0] 切换队伍
+^1:: Team.changeTeam(1)
+^2:: Team.changeTeam(2)
+^3:: Team.changeTeam(3)
+^4:: Team.changeTeam(4)
+^5:: Team.changeTeam(5)
+^6:: Team.changeTeam(6)
+^7:: Team.changeTeam(7)
+^8:: Team.changeTeam(8)
+^9:: Team.changeTeam(9)
+^0:: Team.changeTeam(0)
