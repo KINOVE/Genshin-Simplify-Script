@@ -69,12 +69,16 @@ class Artifact {
         this.refresh_pos()
         static targetColorPositionX
         static targetColorPositionY
+        static nowMousePosX
+        static nowMousePosY
+        MouseGetPos(&nowMousePosX, &nowMousePosY)
         if( PixelSearch(&targetColorPositionX,&targetColorPositionY,1442,320,1512,502,'0x9da0a7') || 
             PixelSearch(&targetColorPositionX,&targetColorPositionY,1442,320,1512,502,'0xff8a75')){
             MouseClick(,targetColorPositionX,targetColorPositionY,,0)
             SendInput("{Esc}")
         }
         else{
+            ; 圣遗物强化界面下
             ; 转到详情页
             MouseClick(, this.p_details_tab.x, this.p_details_tab.y)
             Sleep(this.time_sleep)
@@ -82,5 +86,7 @@ class Artifact {
             MouseClick(, this.p_lock.x, this.p_lock.y)
             SendInput "{Esc}"
         }
+        Sleep(20)
+        MouseMove(nowMousePosX, nowMousePosY, 0)
     }
 }

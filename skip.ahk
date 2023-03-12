@@ -45,4 +45,21 @@ class Skip {
         Sleep(500)
         MouseMove(p3.x,p3.y,0)
     }
+    static next_round(){
+        size := Genshin.get_game_pos()
+        width := size[1]
+        height := size[2]
+        static p1 := Point(1324,978)
+        static p2 := Point(1369,1021)
+        p1.refresh_pos(width, height)
+        p2.refresh_pos(width, height)
+        static targetColorPositionX
+        static targetColorPositionY
+        if( PixelSearch(&targetColorPositionX,&targetColorPositionY,p1.x,p1.y,p2.x,p2.y,'0x323131') && 
+            PixelSearch(&targetColorPositionX,&targetColorPositionY,p1.x,p1.y,p2.x,p2.y,'0xffcb32')){
+            MouseClick(,targetColorPositionX, targetColorPositionY,,0)
+            Sleep(1000)
+            Click(2)
+        }
+    }
 }

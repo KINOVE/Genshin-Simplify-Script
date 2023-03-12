@@ -49,3 +49,6 @@ v Up:: SendInput('{Space Up}')
 
 ;自动跳过时间动画(仍然会有滴滴答答的声音)
 -:: Skip.skip_time()
+
+;圣遗物副本下一轮
+F1:: Skip.next_round()
