@@ -13,6 +13,7 @@
 #Include dispatch.ahk
 #Include skip.ahk
 #Include team.ahk
+#Include battlePass.ahk
 ;触发区
 
 ;快速拾取&对话
@@ -53,6 +54,9 @@ v Up:: SendInput('{Space Up}')
 
 ;圣遗物副本下一轮
 F1:: Skip.next_round()
+
+;纪行奖励领取
+F4:: BattlePass.bp_award()
 
 ; Ctrl + [1 ~ 0] 切换队伍
 ^1:: Team.changeTeam(1)
