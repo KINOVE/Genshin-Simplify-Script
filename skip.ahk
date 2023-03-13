@@ -55,8 +55,8 @@ class Skip {
         p2.refresh_pos(width, height)
         static targetColorPositionX
         static targetColorPositionY
-        if( PixelSearch(&targetColorPositionX,&targetColorPositionY,p1.x,p1.y,p2.x,p2.y,'0x323131') && 
-            PixelSearch(&targetColorPositionX,&targetColorPositionY,p1.x,p1.y,p2.x,p2.y,'0xffcb32')){
+        if( PixelSearch(&targetColorPositionX,&targetColorPositionY,p1.x,p1.y,p2.x,p2.y,'0x323131', 20) && 
+            PixelSearch(&targetColorPositionX,&targetColorPositionY,p1.x,p1.y,p2.x,p2.y,'0xffcb32', 20)){
             MouseClick(,targetColorPositionX, targetColorPositionY,,0)
             Sleep(1000)
             Click(2)
