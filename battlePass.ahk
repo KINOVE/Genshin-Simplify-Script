@@ -20,6 +20,9 @@ class BattlePass {
         ; }
         MouseClick( , this.p1.x, this.p1.y, , 0)
         Sleep(1000)
+        MouseClick( , this.p1.x, this.p1.y, , 0)
+        MouseClick( , this.p1.x, this.p1.y, , 0)
+        MouseClick( , this.p1.x, this.p1.y, , 0)
         if (PixelSearch( &temp1, &temp2, this.upgrade.x - 10, this.upgrade.y - 10 , this.upgrade.x + 10, this.upgrade.y + 10 , '0xdad9cd', 20)){
             MouseClick( , this.upgrade.x, this.upgrade.y, , 0)
         }
