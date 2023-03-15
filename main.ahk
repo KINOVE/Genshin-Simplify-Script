@@ -14,6 +14,7 @@
 #Include skip.ahk
 #Include team.ahk
 #Include battlePass.ahk
+#Include map.ahk
 ;触发区
 
 ;快速拾取&对话
@@ -69,3 +70,5 @@ F1:: Skip.next_round()
 ^8:: Team.changeTeam(8)
 ^9:: Team.changeTeam(9)
 ^0:: Team.changeTeam(0)
+
+^q:: mapTeleport.teleportToArea(2)
