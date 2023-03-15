@@ -56,7 +56,7 @@ v Up:: SendInput('{Space Up}')
 F1:: Skip.next_round()
 
 ;纪行奖励领取
-F4:: BattlePass.bp_award()
+^F4:: BattlePass.bp_award()
 
 ; Ctrl + [1 ~ 0] 切换队伍
 ^1:: Team.changeTeam(1)

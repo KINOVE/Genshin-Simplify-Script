@@ -51,7 +51,7 @@ class Dispatch {
 
     static sendpatch() {
         ;等待界面打开
-        Sleep(200)
+        Sleep(400)
         if PixelGetColor(this.p_favourable[1].x, this.p_favourable[1].y) = this.color_in_yes {
             MouseClick(,this.p_favourable[1].x, this.p_favourable[1].y,,0)
         }
@@ -63,23 +63,22 @@ class Dispatch {
             Sleep(100)
             MouseClick(,this.p_favourable[3].x, this.p_favourable[3].y,,0)
         }
+        ;等待界面关闭
         Sleep(200)
     }
     
     static checkifpatch() {
-        Sleep(50)
+        ; Sleep(50)
         if (PixelGetColor(this.p_button_pos.x, this.p_button_pos.y) = this.color_yes) {
             MouseClick(,this.p_button_pos.x, this.p_button_pos.y,,0)
             Sleep(this.sleep_time)
             MouseClick(,this.p_button_pos.x, this.p_button_pos.y,,0)
             Sleep(this.sleep_time)
             MouseClick(,this.p_button_pos.x, this.p_button_pos.y,,0)
-            Sleep(this.sleep_time)
             this.sendpatch()
         }
         else if (PixelGetColor(this.p_button_pos.x, this.p_button_pos.y) = this.color_ready) {
             MouseClick(,this.p_button_pos.x, this.p_button_pos.y,,0)
-            Sleep(this.sleep_time)
             this.sendpatch()
         }
     }
@@ -88,20 +87,20 @@ class Dispatch {
         this.refresh_pos()
         ;点击第2区域
         MouseClick(,this.p_area_range_2.x,this.p_area_range_2.y,,0)
-            MouseClick(,this.p_characters_2[1].x,this.p_characters_2[1].y,,0) 
-            this.checkifpatch()
-            MouseClick(,this.p_characters_2[4].x,this.p_characters_2[4].y,,0)
-            this.checkifpatch()
-            MouseClick(,this.p_characters_2[3].x,this.p_characters_2[3].y,,0)
-            this.checkifpatch()
+        MouseClick(,this.p_characters_2[1].x,this.p_characters_2[1].y,,0) 
+        this.checkifpatch()
+        MouseClick(,this.p_characters_2[4].x,this.p_characters_2[4].y,,0)
+        this.checkifpatch()
+        MouseClick(,this.p_characters_2[3].x,this.p_characters_2[3].y,,0)
+        this.checkifpatch()
         ;点击第3区域
         MouseClick(,this.p_area_range_3.x,this.p_area_range_3.y,,0)
-            MouseClick(,this.p_characters_3[6].x,this.p_characters_3[6].y,,0)
-            this.checkifpatch()
+        MouseClick(,this.p_characters_3[6].x,this.p_characters_3[6].y,,0)
+        this.checkifpatch()
         ;点击第4区域
         MouseClick(,this.p_area_range_4.x,this.p_area_range_4.y,,0)
-            MouseClick(,this.p_characters_4[3].x,this.p_characters_4[3].y,,0)
-            this.checkifpatch()
+        MouseClick(,this.p_characters_4[3].x,this.p_characters_4[3].y,,0)
+        this.checkifpatch()
         ;退出
         SendInput("{Esc}")
     }
