@@ -15,9 +15,15 @@ class Team {
     static changeTeam(teamId){
         ;进入队伍切换界面(因为我游戏中将键改成了g)
         SendInput('g')
-        Sleep(3000)
-        if (PixelGetColor(this.greenButtonPos.x, this.greenButtonPos.y) != this.greenButtonColor)
-            return
+        Sleep(2000)
+        ; 每隔20毫秒，检测一次是否进入到了界面中
+        time := A_TickCount
+        while (PixelGetColor(this.greenButtonPos.x, this.greenButtonPos.y) != this.greenButtonColor){
+            Sleep(20)
+            ; 如果超过了2000ms, 那么直接结束本次队伍切换
+            if (A_TickCount - time > 2000)
+                return
+        }
         ;检测到已经进入界面
         MouseClick(,this.teamButtonPos.x, this.teamButtonPos.y, , 0)
         Sleep(100)
