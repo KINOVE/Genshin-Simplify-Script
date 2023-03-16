@@ -15,6 +15,7 @@
 #Include team.ahk
 #Include battlePass.ahk
 #Include map.ahk
+#Include whichGUI.ahk
 ;触发区
 
 ;快速拾取&对话
