@@ -23,8 +23,10 @@ class Genshin {
     }
 
     static close_game(){
-        WinClose('ahk_exe ' this.game_name_cn)
-        WinClose('ahk_exe ' this.game_name_global)
+        if WinExist('ahk_exe ' this.game_name_cn)
+            WinClose
+        else if WinExist('ahk_exe ' this.game_name_global)
+            WinClose
         ExitApp
     }
 }
