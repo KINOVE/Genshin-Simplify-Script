@@ -71,4 +71,12 @@ F1:: Skip.next_round()
 ^9:: Team.changeTeam(9)
 ^0:: Team.changeTeam(0)
 
+; 测试功能：传送到日常差事结算地点璃月👍
 ^q:: mapTeleport.teleportToArea(2)
+
+; 快速退出游戏
+^Esc:: Genshin.close_game()
+
+
+;调试用功能，快速Reload脚本
+^!r:: Reload

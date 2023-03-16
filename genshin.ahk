@@ -21,4 +21,10 @@ class Genshin {
     static is_game_active(){
         return WinActive('ahk_exe ' this.game_name_cn) or WinActive('ahk_exe ' this.game_name_global)
     }
+
+    static close_game(){
+        WinClose('ahk_exe ' this.game_name_cn)
+        WinClose('ahk_exe ' this.game_name_global)
+        ExitApp
+    }
 }
