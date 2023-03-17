@@ -3,16 +3,19 @@
 
 class Dispatch {
     static sleep_time := 200
+    
     ;四个派遣区域
-    static p_area_range_1 := Point(208, 165)
-    static p_area_range_2 := Point(208, 237)
-    static p_area_range_3 := Point(208, 309)
-    static p_area_range_4 := Point(208, 382)
+    static p_area_range := [Point(208, 165), Point(208, 237), Point(208, 309), Point(208, 382)]
+
     ;四个派遣区域的六个点位
-    static p_characters_1 := [Point(883,414), Point(1135,248), Point(1375,338), Point(1439,455), Point(1063,538), Point(1495,662)]
-    static p_characters_2 := [Point(883,572), Point(1047,332), Point(1283,456), Point(1131,563), Point(1493,619), Point(1051,822)]
-    static p_characters_3 := [Point(1420,283),Point(1257,350), Point(1467,441), Point(1046,700), Point(906,809), Point(1150,834)]
-    static p_characters_4 := [Point(1374,248),Point(1117,301), Point(1280,380), Point(1221,563), Point(1350,616), Point(1000,643)]
+    static p_characters := [
+        [Point(883,414), Point(1135,248), Point(1375,338), Point(1439,455), Point(1063,538), Point(1495,662)],
+        [Point(883,572), Point(1047,332), Point(1283,456), Point(1131,563), Point(1493,619), Point(1051,822)],
+        [Point(1420,283),Point(1257,350), Point(1467,441), Point(1046,700), Point(906,809), Point(1150,834)],
+        [Point(1374,248),Point(1117,301), Point(1280,380), Point(1221,563), Point(1350,616), Point(1000,643)]
+    ]
+
+
     ;派遣检查
     static p_favourable := [Point(1200,362), Point(1200,257), Point(1200,151)]
 
@@ -26,24 +29,23 @@ class Dispatch {
         size := Genshin.get_game_pos()
         width := size[1]
         height := size[2]
-        ;刷新点位坐标
-        this.p_area_range_1.refresh_pos(width, height)
-        this.p_area_range_2.refresh_pos(width, height)
-        this.p_area_range_3.refresh_pos(width, height)
-        this.p_area_range_4.refresh_pos(width, height)
+        
+        ; 刷新点位坐标---------------------------------------
+
+        ; 区域选择
+        for i in this.p_area_range {
+            i.refresh_pos(width, height)
+        }
         this.p_button_pos.refresh_pos(width, height)
-        for i in this.p_characters_1 {
-            i.refresh_pos(width, height)
+
+        ; 各区域点位
+        for i in this.p_characters{
+            for j in i{
+                j.refresh_pos(width, height)
+            }
         }
-        for i in this.p_characters_2 {
-            i.refresh_pos(width, height)
-        }
-        for i in this.p_characters_3 {
-            i.refresh_pos(width, height)
-        }
-        for i in this.p_characters_4 {
-            i.refresh_pos(width, height)
-        }
+        
+        ; 派遣加成
         for i in this.p_favourable {
             i.refresh_pos(width, height)
         }
@@ -67,8 +69,13 @@ class Dispatch {
         Sleep(200)
     }
     
-    static checkifpatch() {
-        ; Sleep(50)
+    static checkifpatch( AreaId, PointId) {
+
+        ; 切换对应区域，对应点位的详情
+        MouseClick(,this.p_characters[Areaid][PointId].x,this.p_characters[Areaid][PointId].y,,0) 
+        Sleep(100)
+
+        ; 这里以后处理一下派遣时间（目前暂时用不上）
         if (PixelGetColor(this.p_button_pos.x, this.p_button_pos.y) = this.color_yes) {
             MouseClick(,this.p_button_pos.x, this.p_button_pos.y,,0)
             Sleep(this.sleep_time)
@@ -83,24 +90,30 @@ class Dispatch {
         }
     }
 
+    ; 切换地区。
+    static changeArea(AreaId){
+        MouseClick(, this.p_area_range[AreaId].x, this.p_area_range[AreaId].y, , 0)
+        Sleep(50)
+    }
+
     static dispatch() {
+        ; 刷新所有点位
         this.refresh_pos()
+
         ;点击第2区域
-        MouseClick(,this.p_area_range_2.x,this.p_area_range_2.y,,0)
-        MouseClick(,this.p_characters_2[1].x,this.p_characters_2[1].y,,0) 
-        this.checkifpatch()
-        MouseClick(,this.p_characters_2[4].x,this.p_characters_2[4].y,,0)
-        this.checkifpatch()
-        MouseClick(,this.p_characters_2[3].x,this.p_characters_2[3].y,,0)
-        this.checkifpatch()
+        this.changeArea(2)
+        this.checkifpatch(2,1)
+        this.checkifpatch(2,4)
+        this.checkifpatch(2,3)
+
         ;点击第3区域
-        MouseClick(,this.p_area_range_3.x,this.p_area_range_3.y,,0)
-        MouseClick(,this.p_characters_3[6].x,this.p_characters_3[6].y,,0)
-        this.checkifpatch()
+        this.changeArea(3)
+        this.checkifpatch(3,6)
+
         ;点击第4区域
-        MouseClick(,this.p_area_range_4.x,this.p_area_range_4.y,,0)
-        MouseClick(,this.p_characters_4[3].x,this.p_characters_4[3].y,,0)
-        this.checkifpatch()
+        this.changeArea(4)
+        this.checkifpatch(4,3)
+
         ;退出
         SendInput("{Esc}")
     }
