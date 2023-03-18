@@ -1,10 +1,10 @@
 
-;大概是圣遗物
-;"快捷放入"按钮
-;"强化按钮"
-;"强化按钮"的颜色
-;"详情"
-;"强化"
+; 圣遗物强化/加减锁功能
+; "快捷放入"按钮
+; "强化按钮"
+; "强化按钮"的颜色
+; "详情"
+; "强化"
 
 class Artifact {
     static p_auto_add_button := Point(2321, 768)
@@ -23,9 +23,11 @@ class Artifact {
         size := Genshin.get_game_pos()
         width := size[1]
         height := size[2]
+        
         this.p_auto_add_button.refresh_pos(width, height)
         this.p_enhance_button.refresh_pos(width, height)
         this.p_check_button.refresh_pos(width, height)
+        this.p_five_enhance_button.refresh_pos(width, height)
         this.p_details_tab.refresh_pos(width, height)
         this.p_enhance_tab.refresh_pos(width, height)
     }
@@ -71,10 +73,10 @@ class Artifact {
         static targetColorPositionY
         static nowMousePosX
         static nowMousePosY
-        MouseGetPos(&nowMousePosX, &nowMousePosY)
-        if( PixelSearch(&targetColorPositionX,&targetColorPositionY,1442,320,1512,502,'0x9da0a7') || 
-            PixelSearch(&targetColorPositionX,&targetColorPositionY,1442,320,1512,502,'0xff8a75')){
-            MouseClick(,targetColorPositionX,targetColorPositionY,,0)
+        MouseGetPos( &nowMousePosX, &nowMousePosY)
+        if( PixelSearch( &targetColorPositionX, &targetColorPositionY, 1442, 320, 1512, 502, '0x9da0a7') || 
+            PixelSearch( &targetColorPositionX, &targetColorPositionY, 1442, 320, 1512, 502, '0xff8a75')){
+            MouseClick( , targetColorPositionX, targetColorPositionY, , 0)
             SendInput("{Esc}")
         }
         else{
@@ -87,6 +89,6 @@ class Artifact {
             SendInput "{Esc}"
         }
         Sleep(20)
-        MouseMove(nowMousePosX, nowMousePosY, 0)
+        MouseMove( nowMousePosX, nowMousePosY, 0)
     }
 }
