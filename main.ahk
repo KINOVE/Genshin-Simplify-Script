@@ -61,19 +61,27 @@ F1:: Skip.next_round()
 ^F4:: BattlePass.bp_award()
 
 ; Ctrl + [1 ~ 0] 切换队伍
-^1:: Team.changeTeam(1)
-^2:: Team.changeTeam(2)
-^3:: Team.changeTeam(3)
-^4:: Team.changeTeam(4)
-^5:: Team.changeTeam(5)
-^6:: Team.changeTeam(6)
-^7:: Team.changeTeam(7)
+; Ctrl + [1 ~ 7] 传送到各地区（注意：此功能会根据游戏进度不同导致部分地区未解锁，请按实际情况选择）
+; 蒙德
+; 璃月
+; 稻妻
+; 须弥
+; 渊下宫
+; 层岩
+; 尘歌壶
+^1:: WhichGUI.changeTeamOrTeleport(1)
+^2:: WhichGUI.changeTeamOrTeleport(2)
+^3:: WhichGUI.changeTeamOrTeleport(3)
+^4:: WhichGUI.changeTeamOrTeleport(4)
+^5:: WhichGUI.changeTeamOrTeleport(5)
+^6:: WhichGUI.changeTeamOrTeleport(6)
+^7:: WhichGUI.changeTeamOrTeleport(7)
 ^8:: Team.changeTeam(8)
 ^9:: Team.changeTeam(9)
 ^0:: Team.changeTeam(0)
 
-; 测试功能：传送到日常差事结算地点璃月👍
-^q:: mapTeleport.teleportToArea(2)
+; 测试功能：传送到日常差事结算地点璃月👍 已修改至上方
+; ^q:: mapTeleport.teleportToArea(2)
 
 ; 快速退出游戏
 ^Esc:: Genshin.close_game()

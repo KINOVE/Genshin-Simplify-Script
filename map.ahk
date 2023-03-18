@@ -4,7 +4,7 @@
 
 Class mapTeleport {
     static chioceAreaBtn := Point(2411, 1018)
-    static AreaBtn := [Point(2115,149), Point(2115,268)]
+    static AreaBtn := [Point(2115,149), Point(2115,268), Point(2115,387), Point(2115,506), Point(2115,625), Point(2115,744), Point(2115,863)]
     static CenterPoint := Point(1272,535)
     static targetBtnRange := [Point(1730,160), Point(1794,938)]
 

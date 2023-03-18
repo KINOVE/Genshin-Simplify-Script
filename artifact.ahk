@@ -17,7 +17,7 @@ class Artifact {
     static color_enhance_button := '0x313131'
     static p_details_tab := Point(157, 154)
     static p_enhance_tab := Point(157, 225)
-    static time_sleep := 50
+    static time_sleep := 40
 
     static refresh_pos() {
         size := Genshin.get_game_pos()
@@ -33,35 +33,35 @@ class Artifact {
     static enhance_once() {
         this.refresh_pos()
         if PixelGetColor(this.p_enhance_button.x, this.p_enhance_button.y) = this.color_enhance_button {
-            MouseClick(, this.p_auto_add_button.x, this.p_auto_add_button.y)
+            MouseClick(, this.p_auto_add_button.x, this.p_auto_add_button.y, , 0)
             Sleep(this.time_sleep)
-            MouseClick(, this.p_enhance_button.x, this.p_enhance_button.y)
+            MouseClick(, this.p_enhance_button.x, this.p_enhance_button.y, , 0)
             Sleep(this.time_sleep)
-            MouseClick(, this.p_details_tab.x, this.p_details_tab.y)
+            MouseClick(, this.p_details_tab.x, this.p_details_tab.y, , 0)
             Sleep(this.time_sleep)
-            MouseClick(, this.p_enhance_tab.x, this.p_enhance_tab.y)
+            MouseClick(, this.p_enhance_tab.x, this.p_enhance_tab.y, , 0)
             Sleep(this.time_sleep)
-            MouseMove(this.p_auto_add_button.x, this.p_auto_add_button.y)
+            MouseMove(this.p_auto_add_button.x, this.p_auto_add_button.y, 0)
         }
     }
     
     static enhance_five() {
         this.refresh_pos()
         ; 随便点击一个位置去除圣遗物详情
-        MouseClick(, this.p_five_enhance_button.x, this.p_five_enhance_button.y)
+        MouseClick(, this.p_five_enhance_button.x, this.p_five_enhance_button.y, , 0)
         Sleep(500)
         ; 点击强化
-        MouseClick(, this.p_five_enhance_button.x, this.p_five_enhance_button.y)
+        MouseClick(, this.p_five_enhance_button.x, this.p_five_enhance_button.y, , 0)
         Sleep(this.time_sleep)
         ; 点击确认
-        MouseClick(, this.p_check_button.x, this.p_check_button.y)
+        MouseClick(, this.p_check_button.x, this.p_check_button.y, , 0)
         Sleep(500)
         ; 强化跳过
-        MouseClick(, this.p_details_tab.x, this.p_details_tab.y)
+        MouseClick(, this.p_details_tab.x, this.p_details_tab.y, , 0)
         Sleep(this.time_sleep)
-        MouseClick(, this.p_enhance_tab.x, this.p_enhance_tab.y)
+        MouseClick(, this.p_enhance_tab.x, this.p_enhance_tab.y, , 0)
         Sleep(this.time_sleep)
-        MouseClick(, this.p_details_tab.x, this.p_details_tab.y)
+        MouseClick(, this.p_details_tab.x, this.p_details_tab.y, , 0)
         Sleep(this.time_sleep)
     }
 
@@ -80,10 +80,10 @@ class Artifact {
         else{
             ; 圣遗物强化界面下
             ; 转到详情页
-            MouseClick(, this.p_details_tab.x, this.p_details_tab.y)
+            MouseClick(, this.p_details_tab.x, this.p_details_tab.y, , 0)
             Sleep(this.time_sleep)
             ; 取消lock
-            MouseClick(, this.p_lock.x, this.p_lock.y)
+            MouseClick(, this.p_lock.x, this.p_lock.y, , 0)
             SendInput "{Esc}"
         }
         Sleep(20)
