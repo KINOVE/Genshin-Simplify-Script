@@ -51,6 +51,7 @@ class Dispatch {
         }
     }
 
+    ; 选择点位要派遣的角色
     static sendpatch() {
         ;等待界面打开
         Sleep(400)
@@ -58,11 +59,11 @@ class Dispatch {
             MouseClick(,this.p_favourable[1].x, this.p_favourable[1].y,,0)
         }
         if PixelGetColor(this.p_favourable[2].x, this.p_favourable[2].y) = this.color_in_yes {
-            Sleep(100)
+            Sleep(50)
             MouseClick(,this.p_favourable[2].x, this.p_favourable[2].y,,0)
         }
         if PixelGetColor(this.p_favourable[3].x, this.p_favourable[3].y) = this.color_in_yes {
-            Sleep(100)
+            Sleep(50)
             MouseClick(,this.p_favourable[3].x, this.p_favourable[3].y,,0)
         }
         ;等待界面关闭
@@ -92,6 +93,7 @@ class Dispatch {
 
     ; 切换地区。
     static changeArea(AreaId){
+        Sleep(50)
         MouseClick(, this.p_area_range[AreaId].x, this.p_area_range[AreaId].y, , 0)
         Sleep(50)
     }

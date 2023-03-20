@@ -26,11 +26,24 @@ class Team {
         }
         ;检测到已经进入界面
         MouseClick(,this.teamButtonPos.x, this.teamButtonPos.y, , 0)
+        ; Sleep(100)
+
+        ; 等待内置界面打开
+        time := A_TickCount
+        while (PixelGetColor(269, 1025) != '0xece5d8'){
+            Sleep(20)
+            ; 如果超过了2000ms, 那么直接结束本次队伍切换
+            if (A_TickCount - time > 2000)
+                return
+        }
         Sleep(100)
-        MouseMove(350, 350, 0)
-        loop 100
-            MouseClick('WU',,, 2)
-        Sleep(400)
+
+        ; 将内置界面滚动条拉至最上
+        targetx := 0
+        targety := 0
+        PixelSearch(&targetx, &targety, 761,111, 777,944, '0xbbb8b1')
+        MouseClickDrag("left", targetx, targety, 773, 82, 0)
+
         if (teamId > 4){
             ;这里有个坑，最好是先切换到第一个队伍，再切换到后续队伍
             ;当你在第5个队伍想切换第六个队伍时，点击第五个队伍并不会向下正确滚动页面，导致卡在第五个队伍
@@ -57,9 +70,11 @@ class Team {
                 case 4: MouseClick(, this.teamPos4.x, this.teamPos4.y, , 0)
             }
         }
+        ; Sleep(100)
         MouseClick(, this.innerCheckBtn.x, this.innerCheckBtn.y, , 0)
         Sleep(50)
         MouseClick(, this.CheckBtn.x, this.CheckBtn.y, , 0)
+        Sleep(100)
         SendInput('{Esc}')
     }
 }

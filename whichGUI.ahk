@@ -15,11 +15,14 @@ class WhichGUI {
         static temp := 0
         if (PixelGetColor(this.mainPaimon.x, this.mainPaimon.y) == '0xFFFFFF'
             && PixelGetColor(this.mainMission.x, this.mainMission.y) == '0xFFFFFF'){
-                ; ToolTip("1")
-                return 1
-            }
-        else if (PixelSearch(&temp, &temp, this.mapChioceAreaBtn.x - 5, this.mapChioceAreaBtn.y - 5, this.mapChioceAreaBtn.x + 5, this.mapChioceAreaBtn.y + 5, '0xe2dccf', 20))
+            ; ToolTip("1")
+            return 1
+        }
+        else if (PixelSearch(&temp, &temp, this.mapChioceAreaBtn.x - 5, this.mapChioceAreaBtn.y - 5, this.mapChioceAreaBtn.x + 5, this.mapChioceAreaBtn.y + 5, '0xe2dccf', 20)){
+            ; ToolTip("2")
             return 2
+        }
+            
         else if (PixelGetColor(this.mainPaimon.x, this.mainPaimon.y) != '0xFFFFFF' 
                 && PixelGetColor(this.mainMission.x, this.mainMission.y) == '0xFFFFFF')
             return 3
@@ -38,6 +41,7 @@ class WhichGUI {
         }
         ; 如果是地图界面：
         else if (this.whichGUI() == 2){
+            ; ToolTip("1")
             mapTeleport.teleportToArea(num)
         }
     }
