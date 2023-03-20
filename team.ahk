@@ -43,6 +43,7 @@ class Team {
         targety := 0
         PixelSearch(&targetx, &targety, 761,111, 777,944, '0xbbb8b1')
         MouseClickDrag("left", targetx, targety, 773, 82, 0)
+        Sleep(100)
 
         if (teamId > 4){
             ;这里有个坑，最好是先切换到第一个队伍，再切换到后续队伍
