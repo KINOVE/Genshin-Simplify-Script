@@ -80,8 +80,10 @@ F1:: Skip.next_round()
 ^9:: Team.changeTeam(9)
 ^0:: Team.changeTeam(0)
 
-; 测试功能：传送到日常差事结算地点璃月👍 已修改至上方
-; ^q:: mapTeleport.teleportToArea(2)
+; 测试功能：判断当前场景
+^q:: {
+    ToolTip(WhichGUI.whichGUI())
+} 
 
 ; 快速退出游戏
 ^Esc:: Genshin.close_game()
