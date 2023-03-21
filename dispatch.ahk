@@ -63,17 +63,7 @@ class Dispatch {
                 MouseClick(,p.x, p.y,,0)
             }
         }
-        ; if PixelGetColor(this.p_favourable[1].x, this.p_favourable[1].y) = this.color_in_yes {
-        ;     MouseClick(,this.p_favourable[1].x, this.p_favourable[1].y,,0)
-        ; }
-        ; if PixelGetColor(this.p_favourable[2].x, this.p_favourable[2].y) = this.color_in_yes {
-        ;     Sleep(50)
-        ;     MouseClick(,this.p_favourable[2].x, this.p_favourable[2].y,,0)
-        ; }
-        ; if PixelGetColor(this.p_favourable[3].x, this.p_favourable[3].y) = this.color_in_yes {
-        ;     Sleep(50)
-        ;     MouseClick(,this.p_favourable[3].x, this.p_favourable[3].y,,0)
-        ; }
+        
         ;等待界面关闭
         Sleep(200)
     }
