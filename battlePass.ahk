@@ -29,6 +29,7 @@ class BattlePass {
         static temp1,temp2
         if (PixelSearch( &temp1, &temp2, this.upgrade.x - 10, this.upgrade.y - 10 , this.upgrade.x + 10, this.upgrade.y + 10 , '0xdad9cd', 20)){
             MouseClick( , this.upgrade.x, this.upgrade.y, , 0)
+            Sleep(50)
             MouseClick( , this.p1.x, this.p1.y, , 0)
             Sleep(100)
             ; 如果退出按钮的颜色正常，即未进入奖励窗口，则不休眠
@@ -38,13 +39,14 @@ class BattlePass {
         
         ; 打开奖励领取界面
         ; 这里其实可以加一个延时等待判断(判断是否完成动画，是否可点击)的逻辑
-        MouseClick( , this.p1.x, this.p1.y, , 0)
-        MouseClick( , this.p1.x, this.p1.y, , 0)
-        MouseClick( , this.p1.x, this.p1.y, , 0)
-        
+        loop 3
+            MouseClick( , this.p1.x, this.p1.y, , 0)
         ; 如果奖励领取按钮可触发
         if (PixelSearch( &temp1, &temp2, this.upgrade.x - 10, this.upgrade.y - 10 , this.upgrade.x + 10, this.upgrade.y + 10 , '0xdad9cd', 20))
-            MouseClick( , this.upgrade.x, this.upgrade.y, , 0)
+            {MouseClick( , this.upgrade.x, this.upgrade.y, , 0)
+            Sleep(50)
+            SendInput('{Esc}')
+        }
         
         ; 退出界面
         SendInput('{Esc}')

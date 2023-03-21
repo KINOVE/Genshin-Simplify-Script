@@ -15,9 +15,11 @@ class Dispatch {
         [Point(1374,248),Point(1117,301), Point(1280,380), Point(1221,563), Point(1350,616), Point(1000,643)]
     ]
 
+    ; 设置点位派遣时间
+    static p_time := Point(2400, 682)
 
     ;派遣检查
-    static p_favourable := [Point(1200,362), Point(1200,257), Point(1200,151)]
+    static p_favourable := [Point(1200,467), Point(1200,362), Point(1200,257), Point(1200,151)]
 
     ;按钮信息
     static p_button_pos := Point(2170,1021)
@@ -54,29 +56,36 @@ class Dispatch {
     ; 选择点位要派遣的角色
     static sendpatch() {
         ;等待界面打开
-        Sleep(400)
-        if PixelGetColor(this.p_favourable[1].x, this.p_favourable[1].y) = this.color_in_yes {
-            MouseClick(,this.p_favourable[1].x, this.p_favourable[1].y,,0)
+        Sleep(350)
+        for p in this.p_favourable{
+            if PixelGetColor(p.x, p.y) = this.color_in_yes {
+                Sleep(50)
+                MouseClick(,p.x, p.y,,0)
+            }
         }
-        if PixelGetColor(this.p_favourable[2].x, this.p_favourable[2].y) = this.color_in_yes {
-            Sleep(50)
-            MouseClick(,this.p_favourable[2].x, this.p_favourable[2].y,,0)
-        }
-        if PixelGetColor(this.p_favourable[3].x, this.p_favourable[3].y) = this.color_in_yes {
-            Sleep(50)
-            MouseClick(,this.p_favourable[3].x, this.p_favourable[3].y,,0)
-        }
+        ; if PixelGetColor(this.p_favourable[1].x, this.p_favourable[1].y) = this.color_in_yes {
+        ;     MouseClick(,this.p_favourable[1].x, this.p_favourable[1].y,,0)
+        ; }
+        ; if PixelGetColor(this.p_favourable[2].x, this.p_favourable[2].y) = this.color_in_yes {
+        ;     Sleep(50)
+        ;     MouseClick(,this.p_favourable[2].x, this.p_favourable[2].y,,0)
+        ; }
+        ; if PixelGetColor(this.p_favourable[3].x, this.p_favourable[3].y) = this.color_in_yes {
+        ;     Sleep(50)
+        ;     MouseClick(,this.p_favourable[3].x, this.p_favourable[3].y,,0)
+        ; }
         ;等待界面关闭
         Sleep(200)
     }
     
+    ; 检查是否需要派遣
     static checkifpatch( AreaId, PointId) {
 
         ; 切换对应区域，对应点位的详情
         MouseClick(,this.p_characters[Areaid][PointId].x,this.p_characters[Areaid][PointId].y,,0) 
         Sleep(100)
-
-        ; 这里以后处理一下派遣时间（目前暂时用不上）
+        MouseClick(, this.p_time.x, this.p_time.y, , 0)
+        
         if (PixelGetColor(this.p_button_pos.x, this.p_button_pos.y) = this.color_yes) {
             MouseClick(,this.p_button_pos.x, this.p_button_pos.y,,0)
             Sleep(this.sleep_time)
