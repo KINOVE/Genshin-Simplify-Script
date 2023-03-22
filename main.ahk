@@ -16,6 +16,7 @@
 #Include battlePass.ahk
 #Include map.ahk
 #Include whichGUI.ahk
+#Include tool.ahk
 ;触发区
 
 ;快速拾取&对话
@@ -47,6 +48,9 @@ v Up:: SendInput('{Space Up}')
 
 ; 跳过圣遗物副本动画
 `:: Skip.skip_award()
+
+; 显示当前界面快捷键
+Ctrl:: WhichGUI.smartGuiTips()
 
 ;自动派遣
 !p:: Dispatch.dispatch()
@@ -81,9 +85,10 @@ F1:: Skip.next_round()
 ^0:: Team.changeTeam(0)
 
 ; 测试功能：判断当前场景
-^q:: {
-    ToolTip(WhichGUI.whichGUI())
-} 
+; ^q:: {
+;     ToolTip(WhichGUI.whichGUI())
+;     WhichGUI.smartGuiTips()
+; } 
 
 ; 快速退出游戏
 ^Esc:: Genshin.close_game()

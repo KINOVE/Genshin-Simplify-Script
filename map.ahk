@@ -10,21 +10,12 @@ Class mapTeleport {
     static teleportBtn := Point(2047, 1013)
 
     
-    ; 在目标点位附近搜素颜色相近的目标，可选择是否提供目标输出
-    static pixelExist(target, colorId, &outputX?, &outputY?, range := 10, colorDeviation := 10){
-        ; 假如提供了输出（被找到的点位坐标）
-        if IsSet(outputX){
-            return PixelSearch(&outputX, &outputY, target.x - range/2, target.y - range/2, target.x + range/2, target.y + range/2, colorId, colorDeviation)
-        }
-        else{
-            local temp
-            return PixelSearch(&temp, &temp, target.x - range/2, target.y - range/2, target.x + range/2, target.y + range/2, colorId, colorDeviation)
-        }
-    }
-
+    ; 传送到地区
     static teleportToArea(AreaId) {
+        ; 如果并不在地图界面
         if (WhichGUI.whichGUI() != 2)
             return
+        ; 打开地图切换列表
         MouseClick(, this.chioceAreaBtn.x, this.chioceAreaBtn.y, ,0)
         if (AreaId = 1)
             MouseClick(, this.AreaBtn[2].x, this.AreaBtn[2].y, ,0)
@@ -44,7 +35,7 @@ Class mapTeleport {
             MouseClick(, targetBtnX, targetBtnY, ,0)
             MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
         }
-        else if (this.pixelExist(this.teleportBtn, '0xffcd33')){
+        else if (tool.pixelExist(this.teleportBtn, '0xffcd33')){
             MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
         }
     }
