@@ -1,4 +1,4 @@
-Class Tool{
+class Tool{
 
     ; 在目标点位附近搜素颜色相近的目标，可选择是否提供目标输出
     static pixelExist(target, colorId, &outputX?, &outputY?, range := 10, colorDeviation := 10){

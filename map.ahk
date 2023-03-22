@@ -2,7 +2,7 @@
 #Include genshin.ahk
 #Include whichGUI.ahk
 
-Class mapTeleport {
+class mapTeleport {
     static chioceAreaBtn := Point(2411, 1018)
     static AreaBtn := [Point(2115,149), Point(2115,268), Point(2115,387), Point(2115,506), Point(2115,625), Point(2115,744), Point(2115,863)]
     static CenterPoint := Point(1272,535)
@@ -17,16 +17,17 @@ Class mapTeleport {
             return
         ; 打开地图切换列表
         MouseClick(, this.chioceAreaBtn.x, this.chioceAreaBtn.y, ,0)
-        if (AreaId = 1)
-            MouseClick(, this.AreaBtn[2].x, this.AreaBtn[2].y, ,0)
+        if (AreaId <= 4)
+            MouseClick(, this.AreaBtn[5].x, this.AreaBtn[5].y, ,0)
         else{
             MouseClick(, this.AreaBtn[1].x, this.AreaBtn[1].y, ,0)
         }
-        Sleep(500)
+        Sleep(50)
         MouseClick(, this.chioceAreaBtn.x, this.chioceAreaBtn.y, ,0)
         MouseClick(, this.AreaBtn[AreaId].x, this.AreaBtn[AreaId].y, ,0)
         MouseClick(, this.CenterPoint.x, this.CenterPoint.y, ,0)
         Sleep(400)
+        ; Pause
         static targetBtnX := 0
         static targetBtnY := 0
         if(PixelSearch(&targetBtnX, &targetBtnY

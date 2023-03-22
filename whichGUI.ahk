@@ -17,7 +17,7 @@ class WhichGUI {
     ; 清空tooltip
     static emptyToolTip(){
         loop 20{
-            ToolTip('', , A_Index)
+            ToolTip('', , ,  A_Index)
         }
     }
 
@@ -28,7 +28,9 @@ class WhichGUI {
         height := size[2]
         switch this.WhichGUI() {
             case 1:
-                ToolTip('游戏主界面', width/2, height/4, 1)
+                ToolTip('游戏主界面', width/20, height/4, 1)
+                ToolTip('Ctrl+[1~10]: 切换队伍', width/20, height/4 + 30, 2)
+                ToolTip('Alt+F4: 纪行', width/20, height/4 + 60, 3)
             case 2:
                 ToolTip('地图界面', width/2, height/4, 1)
             case 3:
@@ -38,7 +40,7 @@ class WhichGUI {
             case -1:
                 ToolTip('未能识别', width/2, height/4, 1)
         }
-        SetTimer () => this.emptyToolTip(), -1000
+        SetTimer () => this.emptyToolTip(), -3000
     }
 
     ; 判断当前所处界面并返回
