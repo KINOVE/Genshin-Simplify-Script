@@ -34,7 +34,8 @@ class BattlePass {
             Sleep(100)
             ; 如果退出按钮的颜色正常，即未进入奖励窗口，则不休眠
             if (PixelGetColor(this.exitBtn.x, this.exitBtn.y) != '0xece5d8')
-                Sleep(4900)
+                Sleep(400)
+                SendInput('{Esc}')
         }
         
         ; 打开奖励领取界面
