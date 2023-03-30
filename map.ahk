@@ -19,6 +19,7 @@ class mapTeleport {
             if(A_TickCount - time > 3000)
                 return
         }
+        Sleep(20)
     }
 
     ; 判断当前的地区
