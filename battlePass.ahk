@@ -36,7 +36,10 @@ class BattlePass {
             if (PixelGetColor(this.exitBtn.x, this.exitBtn.y) != '0xece5d8'){
                 MouseMove(900, 900, 0)
                 Sleep(100)
-                SendInput('{Esc}')
+                ; SendInput('{Esc}')
+                loop 30{
+                    MouseClick( , this.p1.x, this.p1.y, , 0)
+                }
             }
         }
         if (WhichGUI.whichGUI == 1){
@@ -51,6 +54,7 @@ class BattlePass {
             {MouseClick( , this.upgrade.x, this.upgrade.y, , 0)
             Sleep(50)
             SendInput('{Esc}')
+            Sleep(200)
         }
         
         ; 退出界面

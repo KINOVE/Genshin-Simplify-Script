@@ -66,18 +66,41 @@ class mapTeleport {
 
         ; 正式切换目标地图
         this.untilListOpen()
+        Sleep(20)
         MouseClick(, this.AreaBtn[AreaId].x, this.AreaBtn[AreaId].y, ,0)
+        Sleep(20)
         MouseClick(, this.CenterPoint.x, this.CenterPoint.y, ,0)
         Sleep(400)
+        this.fastTeleport()
+        ; static targetBtnX := 0
+        ; static targetBtnY := 0
+        ; if(PixelSearch(&targetBtnX, &targetBtnY
+        ;     , this.targetBtnRange[1].x, this.targetBtnRange[1].y
+        ;     , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0x2d91d9', 10)) {
+        ;     MouseClick(, targetBtnX, targetBtnY, ,0)
+        ;     MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
+        ; }
+        ; else if (tool.pixelExist(this.teleportBtn, '0xffcd33')){
+        ;     MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
+        ; }
+    }
+
+    ; 快速传送
+    static fastTeleport(){
+        ; 如果并不在地图界面
+        if (WhichGUI.whichGUI() != 2)
+            return
+        ; 传送
         static targetBtnX := 0
         static targetBtnY := 0
-        if(PixelSearch(&targetBtnX, &targetBtnY
+        if (tool.pixelExist(this.teleportBtn, '0xffcd33')){
+            MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
+        }
+        else if(PixelSearch(&targetBtnX, &targetBtnY
             , this.targetBtnRange[1].x, this.targetBtnRange[1].y
             , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0x2d91d9', 10)) {
             MouseClick(, targetBtnX, targetBtnY, ,0)
-            MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
-        }
-        else if (tool.pixelExist(this.teleportBtn, '0xffcd33')){
+            Sleep(100)
             MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
         }
     }

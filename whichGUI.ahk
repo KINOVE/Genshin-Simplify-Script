@@ -45,25 +45,29 @@ class WhichGUI {
 
     ; 判断当前所处界面并返回
     static whichGUI(){
-        static temp := 0
+        ; 判别依据
+        main_1 := PixelGetColor(this.mainPaimon.x, this.mainPaimon.y) == '0xFFFFFF'
+        main_2 := PixelGetColor(this.mainMission.x, this.mainMission.y) == '0xFFFFFF'
+        ; 测试只通过zoom是否能够判别地图界面
+        ; map_1 := Tool.pixelExist(this.mapChioceAreaBtn, '0xe2dccf')
+        map_2 := Tool.pixelSearchPlus(this.mapZoomA, this.mapZoomB, '0xede5da', , , 0)
+        ; map_3 := Tool.pixelExist()
+        battle_1 := PixelGetColor(this.mainPaimon.x, this.mainPaimon.y) != '0xFFFFFF' 
+        battle_2 := PixelGetColor(this.mainMission.x, this.mainMission.y) == '0xFFFFFF'
+        dispatch_1 := PixelGetColor(this.dispathIcon.x, this.dispathIcon.y) == '0xECE5D8'
         ;   1:游戏主界面
-        if (PixelGetColor(this.mainPaimon.x, this.mainPaimon.y) == '0xFFFFFF'
-            && PixelGetColor(this.mainMission.x, this.mainMission.y) == '0xFFFFFF'){
+        if ( main_1 && main_2){
             return 1
         }
         ;   2:地图界面
-        else if (
-            Tool.pixelExist(this.mapChioceAreaBtn, '0xe2dccf')
-            && Tool.pixelSearchPlus(this.mapZoomA, this.mapZoomB, '0xede5da', , , 0)
-            ){
+        else if (map_2){
             return 2
         }
         ;   3:副本界面
-        else if (PixelGetColor(this.mainPaimon.x, this.mainPaimon.y) != '0xFFFFFF' 
-                && PixelGetColor(this.mainMission.x, this.mainMission.y) == '0xFFFFFF')
+        else if (battle_1 && battle_2)
             return 3
         ;   4:派遣界面
-        else if (PixelGetColor(this.dispathIcon.x, this.dispathIcon.y) == '0xECE5D8')
+        else if (dispatch_1)
             return 4
         ;   -1:未能识别
         else{

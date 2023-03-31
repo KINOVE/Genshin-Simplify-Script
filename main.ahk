@@ -7,7 +7,7 @@
 ;脚本只在以下条件满足时执行
 #HotIf Genshin.is_game_active()
 
-;引用区
+;---------------------------------引用区
 #Include artifact.ahk
 #Include point.ahk
 #Include dispatch.ahk
@@ -17,7 +17,7 @@
 #Include map.ahk
 #Include whichGUI.ahk
 #Include tool.ahk
-;触发区
+;---------------------------------功能区
 
 ;快速拾取&对话
 f::{
@@ -83,6 +83,24 @@ F1:: Skip.next_round()
 ^8:: Team.changeTeam(8)
 ^9:: Team.changeTeam(9)
 ^0:: Team.changeTeam(0)
+
+; Test:快速传送
+^t::mapTeleport.fastTeleport()
+
+; 鼠标快速连点
+^!LButton::{
+    Click
+    clickPlus(){
+        if GetKeyState('LButton','P'){
+            Sleep(Random(100,150))
+            Click
+        } else {
+            SetTimer(clickPlus, 0)
+        }
+    }
+    SetTimer(clickPlus, 50)
+}
+
 
 ; 测试功能：判断当前场景
 ; ^q:: {
