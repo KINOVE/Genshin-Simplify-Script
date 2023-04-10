@@ -1,13 +1,13 @@
 class Tool{
 
     ; 在目标点位附近搜素颜色相近的目标，可选择是否提供目标输出
-    static pixelExist(target, colorId, &outputX?, &outputY?, range := 10, colorDeviation := 10){
+    static pixelExist(target, colorId, range := 10, colorDeviation := 10, &outputX?, &outputY?){
         ; 假如提供了输出（被找到的点位坐标）
         if IsSet(outputX){
             return PixelSearch(&outputX, &outputY, target.x - range/2, target.y - range/2, target.x + range/2, target.y + range/2, colorId, colorDeviation)
         }
         else{
-            local temp
+            temp := 0
             return PixelSearch(&temp, &temp, target.x - range/2, target.y - range/2, target.x + range/2, target.y + range/2, colorId, colorDeviation)
         }
     }

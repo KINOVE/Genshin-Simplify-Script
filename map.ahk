@@ -72,46 +72,53 @@ class mapTeleport {
         MouseClick(, this.CenterPoint.x, this.CenterPoint.y, ,0)
         Sleep(400)
         this.fastTeleport()
-        ; static targetBtnX := 0
-        ; static targetBtnY := 0
-        ; if(PixelSearch(&targetBtnX, &targetBtnY
-        ;     , this.targetBtnRange[1].x, this.targetBtnRange[1].y
-        ;     , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0x2d91d9', 10)) {
-        ;     MouseClick(, targetBtnX, targetBtnY, ,0)
-        ;     MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
-        ; }
-        ; else if (tool.pixelExist(this.teleportBtn, '0xffcd33')){
-        ;     MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
-        ; }
     }
 
     ; 快速传送
     static fastTeleport(){
+        
+        ; 等待完整界面打开
         Sleep(100)
+        
         ; 如果并不在地图界面
         if (WhichGUI.whichGUI() != 2)
             return
+
+        ; ----------------------------------变量准备--------------------------------------
+
         ; 存放传送锚点坐标
         targetBtnX := 0
         targetBtnY := 0
         
         ; 存放List左侧的小箭头坐标
-        tempTargetBtnX := 0
-        tempTargetBtnY := 0
+        arrowTargetBtnX := 0
+        arrowTargetBtnY := 0
 
-        ; 找到小箭头，将箭头坐标传入tempTargetBtnX/Y
-        condition0 := PixelSearch(&tempTargetBtnX, &tempTargetBtnY
+        ; ----------------------------------条件准备--------------------------------------
+
+        ; (因为搜索语句太乱了，提前放在前面存入变量)
+        ; condition0 : 是否存在小箭头
+        ; condition1 : 是否存在蓝色的传送锚点
+        ; condition2 : 蓝色锚点附近是否有深色（目的为找到List背景颜色）
+
+        ; 找到小箭头，将箭头坐标传入arrowTargetBtnX/Y
+        condition0 := PixelSearch(&arrowTargetBtnX, &arrowTargetBtnY
             , this.targetBtnRange[1].x, this.targetBtnRange[1].y
             , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0xece5d8', 7)
         if(condition0){
             ; 在此基础上，找到传送锚点的蓝色，将传送锚点坐标传入targetBtnX/Y
-            conditionPlus1 := PixelSearch(&targetBtnX, &targetBtnY
-                , tempTargetBtnX, tempTargetBtnY
+            condition1 := PixelSearch(&targetBtnX, &targetBtnY
+                , arrowTargetBtnX, arrowTargetBtnY
                 , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0x2d91d9', 10)
+            if(condition1){
+                temp_point := Point(targetBtnX, targetBtnY)
+                ; 查找锚点附近是否有List背景颜色（有待实验是否有效）
+                condition2 := Tool.pixelExist(temp_point, '0x1c242c', 40, 10)
+            }
         }
-        temp_point := Point(targetBtnX, targetBtnY)
-        ; 查找锚点附近是否有List背景颜色（有待实验是否有效）
-        condition2 := Tool.pixelExist(temp_point, '0x1c242c',,, 40, 10)
+
+        ; ----------------------------------判断执行---------------------------------------
+        
         if (tool.pixelExist(this.teleportBtn, '0xffcd33')){
             MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
         }
