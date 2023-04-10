@@ -56,7 +56,7 @@ class Dispatch {
     ; 选择点位要派遣的角色
     static sendpatch() {
         ;等待界面打开
-        Sleep(350)
+        Sleep(500)
         for p in this.p_favourable{
             if PixelGetColor(p.x, p.y) = this.color_in_yes {
                 Sleep(50)

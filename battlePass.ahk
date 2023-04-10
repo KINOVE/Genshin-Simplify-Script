@@ -34,17 +34,17 @@ class BattlePass {
             Sleep(100)
             ; 如果退出按钮的颜色正常，即未进入奖励窗口，则不休眠
             if (PixelGetColor(this.exitBtn.x, this.exitBtn.y) != '0xece5d8'){
-                MouseMove(900, 900, 0)
-                Sleep(100)
-                ; SendInput('{Esc}')
-                loop 30{
-                    MouseClick( , this.p1.x, this.p1.y, , 0)
-                }
+                ; MouseMove(900, 900, 0)
+                ; Sleep(100)
+                SendInput('{Esc}')
+                ; loop 30{
+                ;     MouseClick( , this.p1.x, this.p1.y, , 0)
+                ; }
             }
         }
-        if (WhichGUI.whichGUI == 1){
-            this.bp_award()
-        }        
+        ; if (WhichGUI.whichGUI == 1){
+        ;     this.bp_award()
+        ; }        
         ; 打开奖励领取界面
         ; 这里其实可以加一个延时等待判断(判断是否完成动画，是否可点击)的逻辑
         loop 3

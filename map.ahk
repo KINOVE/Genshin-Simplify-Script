@@ -87,21 +87,42 @@ class mapTeleport {
 
     ; 快速传送
     static fastTeleport(){
+        Sleep(100)
         ; 如果并不在地图界面
         if (WhichGUI.whichGUI() != 2)
             return
-        ; 传送
-        static targetBtnX := 0
-        static targetBtnY := 0
+        ; 存放传送锚点坐标
+        targetBtnX := 0
+        targetBtnY := 0
+        
+        ; 存放List左侧的小箭头坐标
+        tempTargetBtnX := 0
+        tempTargetBtnY := 0
+
+        ; 找到小箭头，将箭头坐标传入tempTargetBtnX/Y
+        condition0 := PixelSearch(&tempTargetBtnX, &tempTargetBtnY
+            , this.targetBtnRange[1].x, this.targetBtnRange[1].y
+            , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0xece5d8', 7)
+        if(condition0){
+            ; 在此基础上，找到传送锚点的蓝色，将传送锚点坐标传入targetBtnX/Y
+            conditionPlus1 := PixelSearch(&targetBtnX, &targetBtnY
+                , tempTargetBtnX, tempTargetBtnY
+                , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0x2d91d9', 10)
+        }
+        temp_point := Point(targetBtnX, targetBtnY)
+        ; 查找锚点附近是否有List背景颜色（有待实验是否有效）
+        condition2 := Tool.pixelExist(temp_point, '0x1c242c',,, 40, 10)
         if (tool.pixelExist(this.teleportBtn, '0xffcd33')){
             MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
         }
-        else if(PixelSearch(&targetBtnX, &targetBtnY
-            , this.targetBtnRange[1].x, this.targetBtnRange[1].y
-            , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0x2d91d9', 10)) {
+        else if (condition0 && condition2) {
             MouseClick(, targetBtnX, targetBtnY, ,0)
             Sleep(100)
             MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
+        }
+        else{
+            ToolTip("当前程序未找到目标传送点，请检查内容")
+            SetTimer () => ToolTip(""), -1000
         }
     }
 }
