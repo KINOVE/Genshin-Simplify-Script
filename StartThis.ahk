@@ -1,23 +1,23 @@
 #Requires AutoHotkey v2.0
 #SingleInstance
-
-#Include genshin.ahk
-
-
 ;脚本只在以下条件满足时执行
 #HotIf Genshin.is_game_active()
 
-;---------------------------------引用区
-#Include artifact.ahk
-#Include point.ahk
-#Include dispatch.ahk
-#Include skip.ahk
-#Include team.ahk
-#Include battlePass.ahk
-#Include map.ahk
-#Include whichGUI.ahk
-#Include tool.ahk
-;---------------------------------功能区
+; --------------------------------Core
+#Include core/genshin.ahk
+#Include core/whichGUI.ahk
+#Include core/tool.ahk
+#Include core/point.ahk
+
+;---------------------------------Module
+#Include module/artifact.ahk
+#Include module/dispatch.ahk
+#Include module/skip.ahk
+#Include module/team.ahk
+#Include module/battlePass.ahk
+#Include module/map.ahk
+
+;---------------------------------Trigger
 
 ;快速拾取&对话
 f::{
@@ -55,8 +55,6 @@ Ctrl:: WhichGUI.smartGuiTips()
 ;自动派遣
 !p:: Dispatch.dispatch()
 
-;自动跳过时间动画(仍然会有滴滴答答的声音)
--:: Skip.skip_time()
 
 ;圣遗物副本下一轮
 F1:: Skip.next_round()

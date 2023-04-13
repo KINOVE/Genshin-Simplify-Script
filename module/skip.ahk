@@ -1,29 +1,31 @@
-#Include point.ahk
-#Include genshin.ahk
+#Include ../core/point.ahk
+#Include ../core/genshin.ahk
 
 class Skip {
-    static skip_time(){
-        size := Genshin.get_game_pos()
-        width := size[1]
-        height := size[2]
-        static p1 := Point(1859,1025)
-        static p2 := Point(400,400)
-        p1.refresh_pos(width, height)
-        p2.refresh_pos(width, height)
-        Sleep(20)
-        MouseClick(,p1.x,p1.y,,0)
-        ; Sleep(20)
-        ; MouseClick(,p2.x,p2.y,,0)
-        SendInput('{Esc}')
-        SendInput('{Esc}')
-        SendInput('{Esc}')
-        ; Sleep(20)
-        
-        Sleep(1300)
-        SendInput('{Esc}')
-        Sleep(700)
-        SendInput('{Esc}')
-    }
+    ; 时间跳过，已失效
+    ; static skip_time(){
+    ;     size := Genshin.get_game_pos()
+    ;     width := size[1]
+    ;     height := size[2]
+    ;     static p1 := Point(1859,1025)
+    ;     static p2 := Point(400,400)
+    ;     p1.refresh_pos(width, height)
+    ;     p2.refresh_pos(width, height)
+    ;     Sleep(20)
+    ;     MouseClick(,p1.x,p1.y,,0)
+    ;     ; Sleep(20)
+    ;     ; MouseClick(,p2.x,p2.y,,0)
+    ;     SendInput('{Esc}')
+    ;     SendInput('{Esc}')
+    ;     SendInput('{Esc}')
+    ;     ; Sleep(20)
+    ;     Sleep(1300)
+    ;     SendInput('{Esc}')
+    ;     Sleep(700)
+    ;     SendInput('{Esc}')
+    ; }
+
+    ; 圣遗物副本结束奖励领取
     static skip_award(){
         size := Genshin.get_game_pos()
         width := size[1]
@@ -45,6 +47,8 @@ class Skip {
         Sleep(500)
         MouseMove(p3.x,p3.y,0)
     }
+
+    ; 圣遗物副本结束后，进入下一轮
     static next_round(){
         size := Genshin.get_game_pos()
         width := size[1]

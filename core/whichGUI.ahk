@@ -1,5 +1,5 @@
 #Include point.ahk
-#Include main.ahk
+#Include ../StartThis.ahk
 ; 用于定位当前处于哪种用户界面中
 ;   1:游戏主界面
 ;   2:地图界面

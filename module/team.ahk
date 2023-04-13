@@ -1,5 +1,5 @@
-#Include point.ahk
-#Include genshin.ahk
+#Include ../core/point.ahk
+#Include ../core/genshin.ahk
 
 class Team {
     ; 右下角“快速编队”按钮

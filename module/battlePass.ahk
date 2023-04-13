@@ -1,5 +1,5 @@
-#Include point.ahk
-#Include genshin.ahk
+#Include ../core/point.ahk
+#Include ../core/genshin.ahk
 
 ;纪行
 class BattlePass {
@@ -35,7 +35,7 @@ class BattlePass {
             ; 如果退出按钮的颜色正常，即未进入奖励窗口，则不休眠
             if (PixelGetColor(this.exitBtn.x, this.exitBtn.y) != '0xece5d8'){
                 ; MouseMove(900, 900, 0)
-                ; Sleep(100)
+                Sleep(1200)
                 SendInput('{Esc}')
                 ; loop 30{
                 ;     MouseClick( , this.p1.x, this.p1.y, , 0)

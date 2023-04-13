@@ -1,6 +1,6 @@
-#Include point.ahk
-#Include genshin.ahk
-#Include whichGUI.ahk
+#Include ../core/point.ahk
+#Include ../core/genshin.ahk
+#Include ../core/whichGUI.ahk
 
 class mapTeleport {
     static chioceAreaBtn := Point(2411, 1018)
