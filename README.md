@@ -4,7 +4,7 @@
 > ⚠ 项目基于群友（ID：重新做人）分享的脚本资料开发（~~旧脚本不再维护了有些可惜~~）
 
 ## 运行环境
-- 基于[AutoHotKey2.0]（https://www.autohotkey.com/）环境运行。
+- 基于[AutoHotKey2.0](https://www.autohotkey.com/)环境运行。
 - 请使用管理员模式运行
 - **启动`main.ahk`即可**
 
