@@ -17,7 +17,23 @@
 #Include module/battlePass.ahk
 #Include module/map.ahk
 
+; --------------------------------Global
+global isActive := false
+
 ;---------------------------------Trigger
+; —————————全局—————————
+
+; 开关部分脚本功能
+`::{
+    global isActive := !isActive
+    if isActive{
+        ToolTip('开启', 400, 400, 20)
+    }
+    else{
+        ToolTip('', , , 20)
+    }
+    ; SetTimer () => ToolTip('',,,20), -2000
+}
 
 ;快速拾取&对话
 f::{
@@ -33,10 +49,18 @@ f::{
     SetTimer(pick, 30)
 }
 f Up:: SendInput('{f Up}')
-Space:: SendInput('{Space}')
-;代替空格
-v:: SendInput('{Space Down}')
-v Up:: SendInput('{Space Up}')
+
+; 连跳
+Space:: {
+    if (isActive){
+        SendInput('{Space}')
+    }
+    else{
+        SendInput('{Space Down}')
+        ; SendInput('{Space Up}')
+    }
+}
+Space Up:: SendInput('{Space Up}')
 
 
 ; 使用四星狗粮
@@ -47,10 +71,19 @@ v Up:: SendInput('{Space Up}')
 !e:: Artifact.cancel_lock()
 
 ; 跳过圣遗物副本动画
-`:: Skip.skip_award()
+^s:: Skip.skip_award()
 
 ; 显示当前界面快捷键
-Ctrl:: WhichGUI.smartGuiTips()
+Ctrl:: {
+    if(isActive){
+        WhichGUI.smartGuiTips()
+    }
+    else{
+        ; 屏蔽原本Ctrl键的步态切换功能（用else输入Ctrl Down）
+        SendInput('{Ctrl Down}')
+    }
+}
+Ctrl Up:: SendInput('{Ctrl Up}')
 
 ;自动派遣
 !p:: Dispatch.dispatch()
@@ -99,16 +132,8 @@ F1:: Skip.next_round()
     SetTimer(clickPlus, 50)
 }
 
-
-; 测试功能：判断当前场景
-; ^q:: {
-;     ToolTip(WhichGUI.whichGUI())
-;     WhichGUI.smartGuiTips()
-; } 
-
 ; 快速退出游戏
 ^Esc:: Genshin.close_game()
-
 
 ;调试用功能，快速Reload脚本
 ^!r:: Reload

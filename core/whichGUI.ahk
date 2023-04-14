@@ -16,7 +16,7 @@ class WhichGUI {
 
     ; 清空tooltip
     static emptyToolTip(){
-        loop 20{
+        loop 19{
             ToolTip('', , ,  A_Index)
         }
     }
