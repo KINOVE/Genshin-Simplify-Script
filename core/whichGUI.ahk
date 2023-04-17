@@ -9,6 +9,7 @@
 class WhichGUI {
     static mainPaimon := Point(121, 72)
     static mainMission := Point(139, 204)
+    static mainPaimon2 := Point(117,63)
     static mapChioceAreaBtn := Point(2411, 1018)
     static dispathIcon := Point(139, 57)
     static mapZoomA := Point(103, 440)
@@ -24,6 +25,8 @@ class WhichGUI {
         "=====副本界面=====" 
         , 
         "=====派遣界面====="
+        ,
+        ""
     ]
 
     ; 清空tooltip
@@ -34,6 +37,23 @@ class WhichGUI {
             loop 19{
                 ToolTip('', , ,  A_Index)
             }
+        }
+    }
+
+    ; 根据取到的当前GUI的ID进行Tooltips的显示
+    static showTips(nowGuiId){
+        size := Genshin.get_game_pos()
+        width := size[1]
+        height := size[2]
+        ; 改成数组中对应的空部分
+        if(nowGuiId == -1)
+            nowGuiId := 5
+        ; 这种情况为游戏界面未激活，now_GUI置于-2
+        global now_GUI
+        if(now_GUI != nowGuiId){
+            this.emptyToolTip(11)
+            now_GUI := nowGuiId
+            ToolTip(this.GuiTips[nowGuiId], width/20, height/3, 11)
         }
     }
 
@@ -52,49 +72,7 @@ class WhichGUI {
             this.emptyToolTip()
             return
         }
-        size := Genshin.get_game_pos()
-        width := size[1]
-        height := size[2]
-        global now_GUI
-        switch this.WhichGUI() {
-            case 1:
-                if(now_GUI != 1){
-                    this.emptyToolTip()
-                    now_GUI := 1
-                    ToolTip(this.GuiTips[1], width/20, height/3, 11)
-                    ; ToolTip('游戏主界面', width/20, height/3, 1)
-                    ; ToolTip('Ctrl+[1~10]: 切换队伍', width/20, height/3 + 30, 2)
-                    ; ToolTip('Alt+F4: 纪行', width/20, height/3 + 60, 3)
-                }
-            case 2:
-                if(now_GUI != 2){
-                    this.emptyToolTip()
-                    now_GUI := 2
-                    ToolTip(this.GuiTips[2], width/20, height/3, 11)
-                    ; ToolTip('地图界面', width/2, height/4, 1)
-                }
-            case 3:
-                if(now_GUI != 3){
-                    this.emptyToolTip()
-                    now_GUI := 3
-                    ToolTip(this.GuiTips[3], width/20, height/3, 11)
-                    ; ToolTip('副本界面', width/2, height/4, 1)
-                }
-            case 4:
-                if(now_GUI != 4){
-                    this.emptyToolTip()
-                    now_GUI := 4
-                    ToolTip(this.GuiTips[4], width/20, height/3, 11)
-                    ; ToolTip('派遣界面', width/2, height/4, 1)
-                }
-            case -1:
-                if(now_GUI != -1){
-                    this.emptyToolTip()
-                    now_GUI := -1
-                    ; ToolTip('未能识别', width/2, height/4, 1)
-                }
-        }
-        ; SetTimer () => this.emptyToolTip(), -3000
+        this.showTips(this.WhichGUI())
     }
 
     ; 判断当前所处界面并返回
@@ -102,6 +80,7 @@ class WhichGUI {
         ; 判别依据
         main_1 := PixelGetColor(this.mainPaimon.x, this.mainPaimon.y) == '0xFFFFFF'
         main_2 := PixelGetColor(this.mainMission.x, this.mainMission.y) == '0xFFFFFF'
+        main_3 := PixelGetColor(this.mainPaimon2.x, this.mainPaimon2.y) == '0xFAEEE0'
         ; 测试只通过zoom是否能够判别地图界面
         ; map_1 := Tool.pixelExist(this.mapChioceAreaBtn, '0xe2dccf')
         map_2 := Tool.pixelSearchPlus(this.mapZoomA, this.mapZoomB, '0xede5da', , , 0)
@@ -110,7 +89,7 @@ class WhichGUI {
         battle_2 := PixelGetColor(this.mainMission.x, this.mainMission.y) == '0xFFFFFF'
         dispatch_1 := PixelGetColor(this.dispathIcon.x, this.dispathIcon.y) == '0xECE5D8'
         ;   1:游戏主界面
-        if ( main_1 && main_2){
+        if ( main_1 && main_2 && main_3){
             return 1
         }
         ;   2:地图界面
