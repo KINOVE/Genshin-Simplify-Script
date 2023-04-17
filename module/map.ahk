@@ -100,7 +100,7 @@ class mapTeleport {
         ; condition0 : 是否存在小箭头
         ; condition1 : 是否存在蓝色的传送锚点
         ; condition2 : 蓝色锚点附近是否有深色（目的为找到List背景颜色）
-
+        
         ; 找到小箭头，将箭头坐标传入arrowTargetBtnX/Y
         condition0 := PixelSearch(&arrowTargetBtnX, &arrowTargetBtnY
             , this.targetBtnRange[1].x, this.targetBtnRange[1].y

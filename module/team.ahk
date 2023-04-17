@@ -2,6 +2,8 @@
 #Include ../core/genshin.ahk
 
 class Team {
+    static green1 := Point(1105, 50)
+
     ; 右下角“快速编队”按钮
     static greenButtonPos := Point(1776,1021)
     static greenButtonColor := '0x99cc33'
@@ -14,20 +16,34 @@ class Team {
     static ChangeToLeftBtn := Point(131, 527)
     static ChangeToRightBtn := Point(2418, 527)
 
+
     ; 切换队伍方法
     static changeTeam(teamId){
+        global executing_function := true
 
-        ; 进入队伍切换界面(因为我自己的游戏中将键改成了g)
-        SendInput('g')
-        Sleep(2000)
-
+        KeyWait('Control')
+        KeyWait('3')
+        ; 进入队伍切换界面(自行在StartThis.ahk中修改按键)
+        global teamChangeBtn
+        SendInput(teamChangeBtn)
         ; 每隔20毫秒，检测一次是否进入到了界面中
+        Sleep(500)
         time := A_TickCount
+        while (A_TickCount - time < 1500 ){
+            Sleep(20)
+            ; 如果超过了4000ms, 那么直接结束本次队伍切换
+            if (PixelGetColor(this.green1.x, this.green1.y) != '0xffeb5f'){
+                executing_function := false
+                return
+            }
+        }
         while (PixelGetColor(this.greenButtonPos.x, this.greenButtonPos.y) != this.greenButtonColor){
             Sleep(20)
-            ; 如果超过了2000ms, 那么直接结束本次队伍切换
-            if (A_TickCount - time > 2000)
+            ; 如果超过了4000ms, 那么直接结束本次队伍切换
+            if (A_TickCount - time > 4000){
+                executing_function := false
                 return
+            }
         }
 
         ; ***************************
@@ -78,6 +94,7 @@ class Team {
         if (teamId > count){
             ToolTip("你选择的目标队伍为" . teamId . "但是实际队伍数量为" . count, width/2, height/2)
             SetTimer () => ToolTip(), -5000
+            executing_function := false
             return
         }
 
@@ -99,5 +116,6 @@ class Team {
         MouseClick(, this.CheckBtn.x, this.CheckBtn.y, , 0)
         Sleep(100)
         SendInput('{Esc}')
+        executing_function := false
     }
 }

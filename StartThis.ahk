@@ -1,15 +1,16 @@
+; 推荐安装官网的统一新环境，可以兼容多版本的AHK，按以下格式声明版本即可（缺少的它会自动下载）
 #Requires AutoHotkey v2.0
 #SingleInstance
-;脚本只在以下条件满足时执行
+; 脚本只在以下条件满足时执行
 #HotIf Genshin.is_game_active()
 
-; --------------------------------Core
+/* Core */
 #Include core/genshin.ahk
 #Include core/whichGUI.ahk
 #Include core/tool.ahk
 #Include core/point.ahk
 
-;---------------------------------Module
+/* Module */
 #Include module/artifact.ahk
 #Include module/dispatch.ahk
 #Include module/skip.ahk
@@ -17,25 +18,68 @@
 #Include module/battlePass.ahk
 #Include module/map.ahk
 
-; --------------------------------Global
-global isActive := false
+/* Global */
+isActive := true
+now_GUI := -1
+executing_function := false
 
-;---------------------------------Trigger
-; —————————全局—————————
+; ⚠⚠⚠ 不明白在干什么的话，就别改上面的内容 ⚠⚠⚠
+
+
+
+; --------------------------按键（填游戏里设置的按键）-------------------------
+
+; 队伍切换
+teamChangeBtn := 'g' 
+
+; 行走和奔跑的状态切换（也是花灵降低高度的按钮）
+walkRunSwitch := 'h' 
+
+; --------------------------------Settings 设置--------------------------------
+
+    ; 开启每秒一次的界面检测和按键提示
+    OpenSmartGuiTips := true
+
+
+; --------------------------------功能--------------------------------
+
+; 每秒刷新：显示当前界面快捷键
+if(OpenSmartGuiTips){
+    SetTimer () => WhichGUI.smartGuiTips(), 1000, -100
+}
 
 ; 开关部分脚本功能
 `::{
     global isActive := !isActive
-    if isActive{
-        ToolTip('开启', 400, 400, 20)
+    if !isActive{
+        ToolTip('关闭', 400, 400, 20)
     }
     else{
         ToolTip('', , , 20)
     }
-    ; SetTimer () => ToolTip('',,,20), -2000
 }
 
-;快速拾取&对话
+; 鼠标快速连点
+^!LButton::{
+    Click
+    clickPlus(){
+        if GetKeyState('LButton','P'){
+            Sleep(Random(100,150))
+            Click
+        } else {
+            SetTimer(clickPlus, 0)
+        }
+    }
+    SetTimer(clickPlus, 50)
+}
+
+; 快速退出游戏
+^Esc:: Genshin.close_game()
+
+; 调试用功能，快速Reload脚本
+^!r:: Reload
+
+; 快速拾取&对话
 f::{
     SendInput('f')
     pick(){
@@ -57,43 +101,30 @@ Space:: {
     }
     else{
         SendInput('{Space Down}')
-        ; SendInput('{Space Up}')
     }
 }
 Space Up:: SendInput('{Space Up}')
 
-
-; 使用四星狗粮
-!q:: Artifact.enhance_once()
-; 使用五星狗粮
-!w:: Artifact.enhance_five()
-; 取消锁定
-!e:: Artifact.cancel_lock()
-
-; 跳过圣遗物副本动画
-^s:: Skip.skip_award()
-
-; 显示当前界面快捷键
+; 实现走/跑切换按键的屏蔽开关逻辑
 Ctrl:: {
     if(isActive){
-        WhichGUI.smartGuiTips()
-    }
-    else{
-        ; 屏蔽原本Ctrl键的步态切换功能（用else输入Ctrl Down）
+        ; WhichGUI.smartGuiTips()
         SendInput('{Ctrl Down}')
     }
+    else{
+        ; global walkRunSwitch
+        SendInput('{' . walkRunSwitch . ' Down}')
+    }
 }
-Ctrl Up:: SendInput('{Ctrl Up}')
-
-;自动派遣
-!p:: Dispatch.dispatch()
-
-
-;圣遗物副本下一轮
-F1:: Skip.next_round()
-
-;纪行奖励领取
-^F4:: BattlePass.bp_award()
+Ctrl Up::{ 
+    if(isActive){
+        SendInput('{Ctrl Up}')
+    }
+    else{
+        SendInput('{Ctrl Up}')
+        SendInput('{' . walkRunSwitch . ' Up}')
+    }
+}
 
 ; Ctrl + [1 ~ 0] 切换队伍
 ; Ctrl + [1 ~ 7] 传送到各地区（注意：此功能会根据游戏进度不同导致部分地区未解锁，请按实际情况选择）
@@ -115,25 +146,27 @@ F1:: Skip.next_round()
 ^9:: Team.changeTeam(9)
 ^0:: Team.changeTeam(0)
 
-; Test:快速传送
+; 快速传送
 ^t::mapTeleport.fastTeleport()
 
-; 鼠标快速连点
-^!LButton::{
-    Click
-    clickPlus(){
-        if GetKeyState('LButton','P'){
-            Sleep(Random(100,150))
-            Click
-        } else {
-            SetTimer(clickPlus, 0)
-        }
-    }
-    SetTimer(clickPlus, 50)
+;自动派遣
+!p:: Dispatch.dispatch()
+
+;纪行奖励领取
+^F4:: BattlePass.bp_award()
+
+
+; 使用四星狗粮
+!q:: Artifact.enhance_once()
+; 使用五星狗粮
+!w:: Artifact.enhance_five()
+; 取消锁定
+!e:: Artifact.cancel_lock()
+
+; 跳过圣遗物副本动画
+^f:: {
+    Sleep(500)
+    Skip.skip_award()
 }
-
-; 快速退出游戏
-^Esc:: Genshin.close_game()
-
-;调试用功能，快速Reload脚本
-^!r:: Reload
+;圣遗物副本下一轮
+; F1:: Skip.next_round()

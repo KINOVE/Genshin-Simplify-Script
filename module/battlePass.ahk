@@ -1,7 +1,7 @@
 #Include ../core/point.ahk
 #Include ../core/genshin.ahk
 
-;纪行
+; 纪行
 class BattlePass {
     ; p1,p2分别为纪行界面的两个选项卡点位
     static p1 := Point(1185,55)
@@ -29,17 +29,16 @@ class BattlePass {
         static temp1,temp2
         if (PixelSearch( &temp1, &temp2, this.upgrade.x - 10, this.upgrade.y - 10 , this.upgrade.x + 10, this.upgrade.y + 10 , '0xdad9cd', 20)){
             MouseClick( , this.upgrade.x, this.upgrade.y, , 0)
-            Sleep(50)
-            MouseClick( , this.p1.x, this.p1.y, , 0)
-            Sleep(100)
+            Sleep(200)
             ; 如果退出按钮的颜色正常，即未进入奖励窗口，则不休眠
             if (PixelGetColor(this.exitBtn.x, this.exitBtn.y) != '0xece5d8'){
                 ; MouseMove(900, 900, 0)
-                Sleep(1200)
+                Sleep(100)
                 SendInput('{Esc}')
                 ; loop 30{
                 ;     MouseClick( , this.p1.x, this.p1.y, , 0)
                 ; }
+                ; Pause
             }
         }
         ; if (WhichGUI.whichGUI == 1){
@@ -49,11 +48,11 @@ class BattlePass {
         ; 这里其实可以加一个延时等待判断(判断是否完成动画，是否可点击)的逻辑
         loop 3
             MouseClick( , this.p1.x, this.p1.y, , 0)
-        Sleep(1000)
+        Sleep(400)
         ; 如果奖励领取按钮可触发
-        if (PixelSearch( &temp1, &temp2, this.upgrade.x - 10, this.upgrade.y - 10 , this.upgrade.x + 10, this.upgrade.y + 10 , '0xdad9cd', 20))
-            {MouseClick( , this.upgrade.x, this.upgrade.y, , 0)
-            Sleep(50)
+        if (PixelSearch( &temp1, &temp2, this.upgrade.x - 10, this.upgrade.y - 10 , this.upgrade.x + 10, this.upgrade.y + 10 , '0xdad9cd', 20)){
+            MouseClick( , this.upgrade.x, this.upgrade.y, , 0)
+            Sleep(200)
             SendInput('{Esc}')
             Sleep(200)
         }

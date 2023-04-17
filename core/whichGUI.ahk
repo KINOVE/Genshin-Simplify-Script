@@ -13,34 +13,88 @@ class WhichGUI {
     static dispathIcon := Point(139, 57)
     static mapZoomA := Point(103, 440)
     static mapZoomB := Point(131, 639)
+    static newline := '`n'
+    static GuiTips := [
+        "=====游戏主界面=====" this.newline . 
+        "Ctrl+[1~10]: 切换队伍" this.newline . 
+        "Alt+F4: 纪行"
+        , 
+        "=====地图界面=====" 
+        , 
+        "=====副本界面=====" 
+        , 
+        "=====派遣界面====="
+    ]
 
     ; 清空tooltip
-    static emptyToolTip(){
-        loop 19{
-            ToolTip('', , ,  A_Index)
+    static emptyToolTip(targetId?){
+        if(IsSet(targetId))
+            ToolTip('', , ,  targetId)
+        else{
+            loop 19{
+                ToolTip('', , ,  A_Index)
+            }
         }
     }
 
     ; 根据界面显示tooltip
     static smartGuiTips(){
+        ; 如果游戏界面未激活
+        if !Genshin.is_game_active(){
+            ; 清空tips
+            this.emptyToolTip()
+            now_GUI := -2
+            return
+        }
+        ; 如果正在执行其他功能
+        global executing_function
+        if executing_function{
+            this.emptyToolTip()
+            return
+        }
         size := Genshin.get_game_pos()
         width := size[1]
         height := size[2]
+        global now_GUI
         switch this.WhichGUI() {
             case 1:
-                ToolTip('游戏主界面', width/20, height/4, 1)
-                ToolTip('Ctrl+[1~10]: 切换队伍', width/20, height/4 + 30, 2)
-                ToolTip('Alt+F4: 纪行', width/20, height/4 + 60, 3)
+                if(now_GUI != 1){
+                    this.emptyToolTip()
+                    now_GUI := 1
+                    ToolTip(this.GuiTips[1], width/20, height/3, 11)
+                    ; ToolTip('游戏主界面', width/20, height/3, 1)
+                    ; ToolTip('Ctrl+[1~10]: 切换队伍', width/20, height/3 + 30, 2)
+                    ; ToolTip('Alt+F4: 纪行', width/20, height/3 + 60, 3)
+                }
             case 2:
-                ToolTip('地图界面', width/2, height/4, 1)
+                if(now_GUI != 2){
+                    this.emptyToolTip()
+                    now_GUI := 2
+                    ToolTip(this.GuiTips[2], width/20, height/3, 11)
+                    ; ToolTip('地图界面', width/2, height/4, 1)
+                }
             case 3:
-                ToolTip('副本界面', width/2, height/4, 1)
+                if(now_GUI != 3){
+                    this.emptyToolTip()
+                    now_GUI := 3
+                    ToolTip(this.GuiTips[3], width/20, height/3, 11)
+                    ; ToolTip('副本界面', width/2, height/4, 1)
+                }
             case 4:
-                ToolTip('派遣界面', width/2, height/4, 1)
+                if(now_GUI != 4){
+                    this.emptyToolTip()
+                    now_GUI := 4
+                    ToolTip(this.GuiTips[4], width/20, height/3, 11)
+                    ; ToolTip('派遣界面', width/2, height/4, 1)
+                }
             case -1:
-                ToolTip('未能识别', width/2, height/4, 1)
+                if(now_GUI != -1){
+                    this.emptyToolTip()
+                    now_GUI := -1
+                    ; ToolTip('未能识别', width/2, height/4, 1)
+                }
         }
-        SetTimer () => this.emptyToolTip(), -3000
+        ; SetTimer () => this.emptyToolTip(), -3000
     }
 
     ; 判断当前所处界面并返回
