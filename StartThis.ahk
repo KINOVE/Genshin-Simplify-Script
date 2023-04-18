@@ -19,9 +19,9 @@
 #Include module/map.ahk
 
 /* Global */
-isActive := true
-now_GUI := -1
-executing_function := false
+global isActive := true
+global now_GUI := -1
+global executing_function := false
 
 ; ⚠⚠⚠ 不明白在干什么的话，就别改上面的内容 ⚠⚠⚠
 
@@ -30,10 +30,10 @@ executing_function := false
 ; --------------------------按键（填游戏里设置的按键）-------------------------
 
 ; 队伍切换
-teamChangeBtn := 'g' 
+global teamChangeBtn := 'g' 
 
 ; 行走和奔跑的状态切换（也是花灵降低高度的按钮）
-walkRunSwitch := 'h' 
+global walkRunSwitch := 'h' 
 
 ; --------------------------------Settings 设置--------------------------------
 

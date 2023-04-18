@@ -26,7 +26,7 @@ class BattlePass {
         Sleep(300)
 
         ; 如果此时有exp可以领取
-        static temp1,temp2
+        static temp1 := 0,temp2 := 0
         if (PixelSearch( &temp1, &temp2, this.upgrade.x - 10, this.upgrade.y - 10 , this.upgrade.x + 10, this.upgrade.y + 10 , '0xdad9cd', 20)){
             MouseClick( , this.upgrade.x, this.upgrade.y, , 0)
             Sleep(200)
@@ -35,6 +35,7 @@ class BattlePass {
                 ; MouseMove(900, 900, 0)
                 Sleep(100)
                 SendInput('{Esc}')
+                Sleep(400)
                 ; loop 30{
                 ;     MouseClick( , this.p1.x, this.p1.y, , 0)
                 ; }

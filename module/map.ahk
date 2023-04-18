@@ -6,7 +6,7 @@ class mapTeleport {
     static chioceAreaBtn := Point(2411, 1018)
     static AreaBtn := [Point(2115,149), Point(2115,268), Point(2115,387), Point(2115,506), Point(2115,625), Point(2115,744), Point(2115,863)]
     static CenterPoint := Point(1272,535)
-    static targetBtnRange := [Point(1730,160), Point(1794,938)]
+    static targetBtnRange := [Point(1730,160), Point(1800,1000)]
     static teleportBtn := Point(2047, 1013)
     static ListRange := [Point(2021, 97), Point(2039, 902)]
 
@@ -94,22 +94,38 @@ class mapTeleport {
         arrowTargetBtnX := 0
         arrowTargetBtnY := 0
 
+
+
         ; ----------------------------------条件准备--------------------------------------
 
         ; (因为搜索语句太乱了，提前放在前面存入变量)
         ; condition0 : 是否存在小箭头
         ; condition1 : 是否存在蓝色的传送锚点
         ; condition2 : 蓝色锚点附近是否有深色（目的为找到List背景颜色）
+        ; condition2 : 根据图片搜索，返回秘境的位置
         
         ; 找到小箭头，将箭头坐标传入arrowTargetBtnX/Y
         condition0 := PixelSearch(&arrowTargetBtnX, &arrowTargetBtnY
             , this.targetBtnRange[1].x, this.targetBtnRange[1].y
             , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0xece5d8', 7)
+        ; 提前声明，防止找不到
+        condition2 := false
         if(condition0){
             ; 在此基础上，找到传送锚点的蓝色，将传送锚点坐标传入targetBtnX/Y
             condition1 := PixelSearch(&targetBtnX, &targetBtnY
                 , arrowTargetBtnX, arrowTargetBtnY
                 , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0x2d91d9', 10)
+            tempTargetX := 0
+            tempTargetY := 0
+            condition3 := ImageSearch(&tempTargetX, &tempTargetY, this.targetBtnRange[1].x, this.targetBtnRange[1].y, this.targetBtnRange[2].x, this.targetBtnRange[2].y, "*100 *Trans00ffff files\Domain.png")
+            
+            if(condition1 && condition3){
+            ; if(condition3){
+                if(tempTargetY <= targetBtnY){
+                    targetBtnX := tempTargetX
+                    targetBtnY := tempTargetY   
+                }
+            }
             if(condition1){
                 temp_point := Point(targetBtnX, targetBtnY)
                 ; 查找锚点附近是否有List背景颜色（有待实验是否有效）
@@ -122,7 +138,7 @@ class mapTeleport {
         if (tool.pixelExist(this.teleportBtn, '0xffcd33')){
             MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
         }
-        else if (condition0 && condition2) {
+        else if (condition0 && condition2 || condition3) {
             MouseClick(, targetBtnX, targetBtnY, ,0)
             Sleep(100)
             MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
