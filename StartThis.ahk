@@ -37,8 +37,8 @@ global walkRunSwitch := 'h'
 
 ; --------------------------------Settings 设置--------------------------------
 
-    ; 开启每秒一次的界面检测和按键提示
-    OpenSmartGuiTips := true
+; 开启每秒一次的界面检测和按键提示
+OpenSmartGuiTips := true
 
 
 ; --------------------------------功能--------------------------------
@@ -112,7 +112,6 @@ Ctrl:: {
         SendInput('{Ctrl Down}')
     }
     else{
-        ; global walkRunSwitch
         SendInput('{' . walkRunSwitch . ' Down}')
     }
 }

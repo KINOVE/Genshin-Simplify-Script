@@ -19,12 +19,12 @@ class Team {
 
     ; 切换队伍方法
     static changeTeam(teamId){
-        global executing_function := true
+        executing_function := true
 
         KeyWait('Control')
         KeyWait('3')
         ; 进入队伍切换界面(自行在StartThis.ahk中修改按键)
-        global teamChangeBtn
+        ; global teamChangeBtn
         SendInput(teamChangeBtn)
         ; 每隔20毫秒，检测一次是否进入到了界面中
         Sleep(500)
@@ -52,11 +52,11 @@ class Team {
         ; ***************************
 
         ; 当前高亮队伍的横纵坐标
-        local nowTeamPosX, nowTeamPosY
+        local nowTeamPosX := 0 , nowTeamPosY := 0
         ; 正在识别中的左右两边的队伍图标位置，所有队伍的显示都在同一行，所以此处没有设新的Y轴变量
         local LeftTeamPosX , RightTeamPosX
         ; 临时接受找到的xy坐标，由于此处使用pixelSearch只是为了确认是否存在队伍，因此这两个变量没有后续用途
-        local tempX, tempY
+        local tempX := 0 , tempY := 0 
         ; count为队伍总数量
         local count := 1 
         ; nowTeam为当前队伍排第几

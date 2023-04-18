@@ -67,7 +67,6 @@ class WhichGUI {
             return
         }
         ; 如果正在执行其他功能
-        global executing_function
         if executing_function{
             this.emptyToolTip()
             return

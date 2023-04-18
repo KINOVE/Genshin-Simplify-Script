@@ -2,29 +2,7 @@
 #Include ../core/genshin.ahk
 
 class Skip {
-    ; 时间跳过，已失效
-    ; static skip_time(){
-    ;     size := Genshin.get_game_pos()
-    ;     width := size[1]
-    ;     height := size[2]
-    ;     static p1 := Point(1859,1025)
-    ;     static p2 := Point(400,400)
-    ;     p1.refresh_pos(width, height)
-    ;     p2.refresh_pos(width, height)
-    ;     Sleep(20)
-    ;     MouseClick(,p1.x,p1.y,,0)
-    ;     ; Sleep(20)
-    ;     ; MouseClick(,p2.x,p2.y,,0)
-    ;     SendInput('{Esc}')
-    ;     SendInput('{Esc}')
-    ;     SendInput('{Esc}')
-    ;     ; Sleep(20)
-    ;     Sleep(1300)
-    ;     SendInput('{Esc}')
-    ;     Sleep(700)
-    ;     SendInput('{Esc}')
-    ; }
-
+    
     ; 圣遗物副本结束奖励领取
     static skip_award(){
         size := Genshin.get_game_pos()
@@ -57,8 +35,8 @@ class Skip {
         static p2 := Point(1369,1021)
         p1.refresh_pos(width, height)
         p2.refresh_pos(width, height)
-        static targetColorPositionX
-        static targetColorPositionY
+        static targetColorPositionX := 0
+        static targetColorPositionY := 0
         if( PixelSearch(&targetColorPositionX,&targetColorPositionY,p1.x,p1.y,p2.x,p2.y,'0x323131', 20) && 
             PixelSearch(&targetColorPositionX,&targetColorPositionY,p1.x,p1.y,p2.x,p2.y,'0xffcb32', 20)){
             MouseClick(,targetColorPositionX, targetColorPositionY,,0)

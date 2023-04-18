@@ -69,10 +69,10 @@ class Artifact {
 
     static cancel_lock() {
         this.refresh_pos()
-        static targetColorPositionX
-        static targetColorPositionY
-        static nowMousePosX
-        static nowMousePosY
+        static targetColorPositionX := 0 
+        static targetColorPositionY := 0 
+        static nowMousePosX := 0 
+        static nowMousePosY := 0 
         MouseGetPos( &nowMousePosX, &nowMousePosY)
         if( PixelSearch( &targetColorPositionX, &targetColorPositionY, 1442, 320, 1512, 502, '0x9da0a7') || 
             PixelSearch( &targetColorPositionX, &targetColorPositionY, 1442, 320, 1512, 502, '0xff8a75')){
