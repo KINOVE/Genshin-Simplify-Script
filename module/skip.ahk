@@ -24,6 +24,10 @@ class Skip {
         MouseClick(,p2.x,p2.y,,0)
         Sleep(500)
         MouseMove(p3.x,p3.y,0)
+
+        if(KeyWait('n', 'D T20')){
+            this.next_round()
+        }
     }
 
     ; 圣遗物副本结束后，进入下一轮

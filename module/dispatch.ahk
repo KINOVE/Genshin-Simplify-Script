@@ -118,4 +118,16 @@ class Dispatch {
         ;退出
         SendInput("{Esc}")
     }
+    
+    ; 每日任务
+    ; static p1 := Point(1750, 330)
+    ; static p2 := Point(1800, 900)
+    ; static daily() {
+    ;     local targetx := 0, targety := 0
+    ;     todo := Tool.pixelSearchPlus(this.p1, this.p2, '0xFFCC32', &targetx, &targety, 10)
+    ;     if(todo){
+    ;         MouseClick(, targetx, targety, , 0)
+    ;         Sleep(1200)
+    ;     }
+    ; }
 }
