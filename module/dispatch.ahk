@@ -120,14 +120,35 @@ class Dispatch {
     }
     
     ; 每日任务
-    ; static p1 := Point(1750, 330)
-    ; static p2 := Point(1800, 900)
-    ; static daily() {
-    ;     local targetx := 0, targety := 0
-    ;     todo := Tool.pixelSearchPlus(this.p1, this.p2, '0xFFCC32', &targetx, &targety, 10)
-    ;     if(todo){
-    ;         MouseClick(, targetx, targety, , 0)
-    ;         Sleep(1200)
-    ;     }
-    ; }
+    static daily_reword_region := [Point(1750, 330), Point(1800, 900)]
+    static FindYellowTarget() {
+        if(WhichGUI.whichGUI() == 4){
+            return this.dispatch()
+        }
+        local targetx := 0, targety := 0
+        isTargetExist := Tool.pixelSearchPlus(this.daily_reword_region[1], this.daily_reword_region[2], '0xFFCC32', &targetx, &targety, 10)
+        if(isTargetExist){
+            ; MouseMove(targetx, targety, 0)
+            MouseClick( , targetx, targety, , 0)
+            Sleep(1200)
+            if(WhichGUI.whichGUI() == 4){
+                return this.dispatch()
+            }
+            SendInput('{Space}')
+            Sleep(3000)
+            SendInput('{Esc}')
+            Sleep(3000)
+            SendInput('f')
+            Sleep(1500)
+            SendInput('{Space}')
+            Sleep(600)
+            return this.FindYellowTarget() 
+        }
+        SendInput('Esc')
+        size := Genshin.get_game_pos()
+        width := size[1]
+        height := size[2]
+        ToolTip('当前没有需要处理的任务',width/2, height/2)
+        SetTimer () => ToolTip(''), -1000
+    }
 }

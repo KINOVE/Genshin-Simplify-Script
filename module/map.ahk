@@ -138,13 +138,13 @@ class mapTeleport {
         if (tool.pixelExist(this.teleportBtn, '0xffcd33')){
             MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
         }
-        else if (condition0 && condition2 || condition3) {
+        else if ((condition0 && condition2) || condition3) {
             MouseClick(, targetBtnX, targetBtnY, ,0)
             Sleep(100)
             MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
         }
         else{
-            ToolTip("当前程序未找到目标传送点，请检查内容")
+            ToolTip("当前程序未找到目标传送点，请检查内容" . ' condition0:' . condition0 . ' condition2:'  . condition2 . ' condition3:' .  condition3)
             SetTimer () => ToolTip(""), -1000
         }
     }

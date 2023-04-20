@@ -148,8 +148,9 @@ Ctrl Up::{
 ; 快速传送
 ^t::mapTeleport.fastTeleport()
 
-;自动派遣
-!p:: Dispatch.dispatch()
+;自动派遣 & 日常任务奖励
+; !p:: Dispatch.dispatch()
+!p:: Dispatch.FindYellowTarget()
 
 ;纪行奖励领取
 ^F4:: BattlePass.bp_award()
