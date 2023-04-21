@@ -101,36 +101,78 @@ class mapTeleport {
         ; (因为搜索语句太乱了，提前放在前面存入变量)
         ; condition0 : 是否存在小箭头
         ; condition1 : 是否存在蓝色的传送锚点
-        ; condition2 : 蓝色锚点附近是否有深色（目的为找到List背景颜色）
+        ; condition1plus : 蓝色锚点附近是否有深色（目的为找到List背景颜色）
         ; condition2 : 根据图片搜索，返回秘境的位置
+        ; condition3 : 根据图片搜索，返回洞天锚点的位置
         
         ; 找到小箭头，将箭头坐标传入arrowTargetBtnX/Y
         condition0 := PixelSearch(&arrowTargetBtnX, &arrowTargetBtnY
             , this.targetBtnRange[1].x, this.targetBtnRange[1].y
             , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0xece5d8', 7)
         ; 提前声明，防止找不到
+        condition1 := false
+        condition1plus := false
         condition2 := false
+        condition3 := false
+        targetX1 := 0
+        targetY1 := 0
+        targetX2 := 0
+        targetY2 := 0
+        targetX3 := 0
+        targetY3 := 0
+        targetX4 := 0
+        targetY4 := 0
+        ArrayTargetX := []
+        ArrayTargetY := []
         if(condition0){
             ; 在此基础上，找到传送锚点的蓝色，将传送锚点坐标传入targetBtnX/Y
-            condition1 := PixelSearch(&targetBtnX, &targetBtnY
+            ; condition1 := PixelSearch(&targetBtnX, &targetBtnY
+            ;     , arrowTargetBtnX, arrowTargetBtnY
+            ;     , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0x2d91d9', 10)
+            condition1 := PixelSearch(&targetX1, &targetY1
                 , arrowTargetBtnX, arrowTargetBtnY
                 , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0x2d91d9', 10)
-            tempTargetX := 0
-            tempTargetY := 0
-            condition3 := ImageSearch(&tempTargetX, &tempTargetY, this.targetBtnRange[1].x, this.targetBtnRange[1].y, this.targetBtnRange[2].x, this.targetBtnRange[2].y, "*100 *Trans00ffff files\Domain.png")
-            
-            if(condition1 && condition3){
-            ; if(condition3){
-                if(tempTargetY <= targetBtnY){
-                    targetBtnX := tempTargetX
-                    targetBtnY := tempTargetY   
+            if(condition1){
+                temp_point := Point(targetX1, targetY1)
+                ; 查找锚点附近是否有List背景颜色（有待实验是否有效）
+                condition1plus := Tool.pixelExist(temp_point, '0x1c242c', 40, 10)
+                if(condition1plus){
+                    ArrayTargetX.Push(targetX1)
+                    ArrayTargetY.Push(targetY1)
                 }
             }
-            if(condition1){
-                temp_point := Point(targetBtnX, targetBtnY)
-                ; 查找锚点附近是否有List背景颜色（有待实验是否有效）
-                condition2 := Tool.pixelExist(temp_point, '0x1c242c', 40, 10)
+            ; tempTargetX := 0
+            ; tempTargetY := 0
+            condition2 := ImageSearch(&targetX2, &targetY2, this.targetBtnRange[1].x, this.targetBtnRange[1].y, this.targetBtnRange[2].x, this.targetBtnRange[2].y, "*100 *Trans00ffff files\Domain.png")
+            if(condition2){
+                ArrayTargetX.Push(targetX2)
+                ArrayTargetY.Push(targetY2)
             }
+            condition3 := ImageSearch(&targetX3, &targetY3, this.targetBtnRange[1].x, this.targetBtnRange[1].y, this.targetBtnRange[2].x, this.targetBtnRange[2].y, "*100 *Transfecc00 files\HomeDomain.png")
+            if(condition3){
+                ArrayTargetX.Push(targetX3)
+                ArrayTargetY.Push(targetY3)
+            }
+
+            if(condition1plus || condition2 || condition3){
+                targetBtnX := ArrayTargetX[1]
+                targetBtnY := Min(ArrayTargetY*)
+            }
+            
+
+            
+            ; MouseMove(targetX1, targetY1)
+            ; MsgBox('condition1plus' condition1plus . 'condition2' condition2 . 'condition3' condition3)
+            ; Pause
+
+            ; if(condition1 && condition2){
+            ; if(condition2){
+            ;     if(tempTargetY <= targetBtnY){
+            ;         targetBtnX := tempTargetX
+            ;         targetBtnY := tempTargetY   
+            ;     }
+            ; }
+            
         }
 
         ; ----------------------------------判断执行---------------------------------------
@@ -138,13 +180,15 @@ class mapTeleport {
         if (tool.pixelExist(this.teleportBtn, '0xffcd33')){
             MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
         }
-        else if ((condition0 && condition2) || condition3) {
+        ; else if ((condition0 && condition1plus) || condition2) {
+        else if (condition1 || condition2 || condition3) {
+            ; MsgBox('condition1' . condition1 . 'targetBtnX' . targetBtnX . 'targetBtnY' . targetBtnY)
             MouseClick(, targetBtnX, targetBtnY, ,0)
             Sleep(100)
             MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
         }
         else{
-            ToolTip("当前程序未找到目标传送点，请检查内容" . ' condition0:' . condition0 . ' condition2:'  . condition2 . ' condition3:' .  condition3)
+            ToolTip("当前程序未找到目标传送点，请检查内容" . ' condition0:' . condition0 . ' condition1plus:'  . condition1plus . ' condition2:' .  condition2)
             SetTimer () => ToolTip(""), -1000
         }
     }

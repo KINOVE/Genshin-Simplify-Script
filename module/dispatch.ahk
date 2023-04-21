@@ -1,5 +1,7 @@
 #Include ../core/point.ahk
 #Include ../core/genshin.ahk
+#Include ../core/tool.ahk
+#include ../core/whichGUI.ahk
 
 class Dispatch {
     static sleep_time := 200
@@ -137,11 +139,11 @@ class Dispatch {
             SendInput('{Space}')
             Sleep(3000)
             SendInput('{Esc}')
-            Sleep(3000)
+            Sleep(1500)
             SendInput('f')
             Sleep(1500)
             SendInput('{Space}')
-            Sleep(600)
+            Sleep(1500)
             return this.FindYellowTarget() 
         }
         SendInput('Esc')
