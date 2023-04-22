@@ -114,6 +114,7 @@ class mapTeleport {
         condition1plus := false
         condition2 := false
         condition3 := false
+        condition4 := false
         targetX1 := 0
         targetY1 := 0
         targetX2 := 0
@@ -148,13 +149,18 @@ class mapTeleport {
                 ArrayTargetX.Push(targetX2)
                 ArrayTargetY.Push(targetY2)
             }
-            condition3 := ImageSearch(&targetX3, &targetY3, this.targetBtnRange[1].x, this.targetBtnRange[1].y, this.targetBtnRange[2].x, this.targetBtnRange[2].y, "*100 *Transfecc00 files\HomeDomain.png")
+            condition3 := ImageSearch(&targetX3, &targetY3, this.targetBtnRange[1].x, this.targetBtnRange[1].y, this.targetBtnRange[2].x, this.targetBtnRange[2].y, "*100 *Transfecc00 files\HomeTeleport.png")
             if(condition3){
                 ArrayTargetX.Push(targetX3)
                 ArrayTargetY.Push(targetY3)
             }
+            condition4 := ImageSearch(&targetX4, &targetY4, this.targetBtnRange[1].x, this.targetBtnRange[1].y, this.targetBtnRange[2].x, this.targetBtnRange[2].y, "*100 *Trans00ffff files\Domain2.png")
+            if(condition4){
+                ArrayTargetX.Push(targetX4)
+                ArrayTargetY.Push(targetY4)
+            }
 
-            if(condition1plus || condition2 || condition3){
+            if(condition1plus || condition2 || condition3 || condition4){
                 targetBtnX := ArrayTargetX[1]
                 targetBtnY := Min(ArrayTargetY*)
             }
@@ -181,7 +187,7 @@ class mapTeleport {
             MouseClick(, this.teleportBtn.x, this.teleportBtn.y, ,0)
         }
         ; else if ((condition0 && condition1plus) || condition2) {
-        else if (condition1 || condition2 || condition3) {
+        else if (condition1 || condition2 || condition3 || condition4) {
             ; MsgBox('condition1' . condition1 . 'targetBtnX' . targetBtnX . 'targetBtnY' . targetBtnY)
             MouseClick(, targetBtnX, targetBtnY, ,0)
             Sleep(100)
