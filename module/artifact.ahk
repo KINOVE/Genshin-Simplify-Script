@@ -1,3 +1,4 @@
+#Include ../core/genshin.ahk
 
 ; 圣遗物强化/加减锁功能
 ; "快捷放入"按钮
@@ -19,21 +20,30 @@ class Artifact {
     static p_enhance_tab := Point(157, 225)
     static time_sleep := 40
 
+    static LockP1 := Point(1442, 320)
+    static LockP2 := Point(1512, 502)
+
     static refresh_pos() {
         size := Genshin.get_game_pos()
         width := size[1]
         height := size[2]
+
         
-        this.p_auto_add_button.refresh_pos(width, height)
-        this.p_enhance_button.refresh_pos(width, height)
-        this.p_check_button.refresh_pos(width, height)
-        this.p_five_enhance_button.refresh_pos(width, height)
+        this.p_auto_add_button.refresh_pos(width, height, 1830)
+        this.p_enhance_button.refresh_pos(width, height, 1616)
+        this.p_check_button.refresh_pos(width, height, 1018)
+        this.p_five_enhance_button.refresh_pos(width, height, 1745)
+        this.p_lock.refresh_pos(width, height, 1827)
         this.p_details_tab.refresh_pos(width, height)
         this.p_enhance_tab.refresh_pos(width, height)
+        this.LockP1.refresh_pos(width, height, 1141)
+        this.LockP2.refresh_pos(width, height, 1180)
+        ; MsgBox(this.p_enhance_button.x)
     }
 
     static enhance_once() {
         this.refresh_pos()
+        ; MsgBox(this.p_enhance_button.x)
         if PixelGetColor(this.p_enhance_button.x, this.p_enhance_button.y) = this.color_enhance_button {
             MouseClick(, this.p_auto_add_button.x, this.p_auto_add_button.y, , 0)
             Sleep(this.time_sleep)
@@ -44,6 +54,10 @@ class Artifact {
             MouseClick(, this.p_enhance_tab.x, this.p_enhance_tab.y, , 0)
             Sleep(this.time_sleep)
             MouseMove(this.p_auto_add_button.x, this.p_auto_add_button.y, 0)
+        }
+        else{
+            MsgBox(PixelGetColor(this.p_enhance_button.x, this.p_enhance_button.y))
+            MsgBox(this.p_enhance_button.x . ' -- ' . this.p_enhance_button.y)
         }
     }
     
@@ -63,8 +77,8 @@ class Artifact {
         Sleep(this.time_sleep)
         MouseClick(, this.p_enhance_tab.x, this.p_enhance_tab.y, , 0)
         Sleep(this.time_sleep)
-        MouseClick(, this.p_details_tab.x, this.p_details_tab.y, , 0)
-        Sleep(this.time_sleep)
+        ; MouseClick(, this.p_details_tab.x, this.p_details_tab.y, , 0)
+        ; Sleep(this.time_sleep)
     }
 
     static cancel_lock() {
@@ -73,9 +87,11 @@ class Artifact {
         static targetColorPositionY := 0 
         static nowMousePosX := 0 
         static nowMousePosY := 0 
+        
         MouseGetPos( &nowMousePosX, &nowMousePosY)
-        if( PixelSearch( &targetColorPositionX, &targetColorPositionY, 1442, 320, 1512, 502, '0x9da0a7') || 
-            PixelSearch( &targetColorPositionX, &targetColorPositionY, 1442, 320, 1512, 502, '0xff8a75')){
+        ; 1141,320:1180.502
+        if( PixelSearch( &targetColorPositionX, &targetColorPositionY, this.LockP1.x, this.LockP1.y, this.LockP2.x, this.LockP2.y, '0x9da0a7') || 
+            PixelSearch( &targetColorPositionX, &targetColorPositionY, this.LockP1.x, this.LockP1.y, this.LockP2.x, this.LockP2.y, '0xff8a75')){
             MouseClick( , targetColorPositionX, targetColorPositionY, , 0)
             SendInput("{Esc}")
         }
@@ -86,7 +102,8 @@ class Artifact {
             Sleep(this.time_sleep)
             ; 取消lock
             MouseClick(, this.p_lock.x, this.p_lock.y, , 0)
-            SendInput "{Esc}"
+            Sleep(this.time_sleep)
+            SendInput("{Esc}")
         }
         Sleep(20)
         MouseMove( nowMousePosX, nowMousePosY, 0)
