@@ -4,10 +4,10 @@
 ; 纪行
 class BattlePass {
     ; p1,p2分别为纪行界面的两个选项卡点位
-    static p1 := Point(1185,55)
-    static p2 := Point(1280,55)
-    static upgrade := Point(2198,981)
-    static exitBtn := Point(2420,48)
+    static p1 := Point(Pos(1185,55))
+    static p2 := Point(Pos(1280,55))
+    static upgrade := Point(Pos(2198,981))
+    static exitBtn := Point(Pos(2420,48))
 
     ; 纪行结算并获取奖励
     static bp_award(){

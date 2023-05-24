@@ -8,9 +8,9 @@ class Skip {
         size := Genshin.get_game_pos()
         width := size[1]
         height := size[2]
-        static p1 := Point(955,744)
-        static p2 := Point(2418,50)
-        static p3 := Point(659,507)
+        static p1 := Point(Pos(955, 744))
+        static p2 := Point(Pos(2418, 50))
+        static p3 := Point(Pos(659, 507))
         p1.refresh_pos(width, height, 602)
         p2.refresh_pos(width, height, 1788)
         p3.refresh_pos(width, height, 573)
@@ -35,8 +35,8 @@ class Skip {
         size := Genshin.get_game_pos()
         width := size[1]
         height := size[2]
-        static p1 := Point(1324,978)
-        static p2 := Point(1369,1021)
+        static p1 := Point(Pos(1324, 978))
+        static p2 := Point(Pos(1369, 1021))
         p1.refresh_pos(width, height, 1006)
         p2.refresh_pos(width, height, 1044)
         static targetColorPositionX := 0

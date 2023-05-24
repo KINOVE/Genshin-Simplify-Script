@@ -7,28 +7,32 @@ class Dispatch {
     static sleep_time := 200
     
     ;四个派遣区域
-    static p_area_range := [Point(208, 165), Point(208, 237), Point(208, 309), Point(208, 382)]
+    static p_area_range := [Point(Pos(208, 165)), Point(Pos(208, 237)), Point(Pos(208, 309)), Point(Pos(208, 382))]
 
     ;四个派遣区域的六个点位
     static p_characters := [
-        [Point(883,414), Point(1135,248), Point(1375,338), Point(1439,455), Point(1063,538), Point(1495,662)],
-        [Point(883,572), Point(1047,332), Point(1283,456), Point(1131,563), Point(1493,619), Point(1051,822)],
-        [Point(1420,283),Point(1257,350), Point(1467,441), Point(1046,700), Point(906,809), Point(1150,834)],
-        [Point(1374,248),Point(1117,301), Point(1280,380), Point(1221,563), Point(1350,616), Point(1000,643)]
+        [Point(Pos(883, 414)), Point(Pos(1135, 248)), Point(Pos(1375, 338)), Point(Pos(1439, 455)), Point(Pos(1063, 538)), Point(Pos(1495, 662))],
+        [Point(Pos(883, 572)), Point(Pos(1047, 332)), Point(Pos(1283, 456)), Point(Pos(1131, 563)), Point(Pos(1493, 619)), Point(Pos(1051, 822))],
+        [Point(Pos(1420, 283)),Point(Pos(1257, 350)), Point(Pos(1467, 441)), Point(Pos(1046, 700)), Point(Pos(906, 809)), Point(Pos(1150, 834))],
+        [Point(Pos(1374, 248)),Point(Pos(1117, 301)), Point(Pos(1280, 380)), Point(Pos(1221, 563)), Point(Pos(1350, 616)), Point(Pos(1000, 643))]
     ]
 
     ; 设置点位派遣时间
-    static p_time := Point(2400, 682)
+    static p_time := Point(Pos(2400, 682))
 
     ;派遣检查
-    static p_favourable := [Point(1200,467), Point(1200,362), Point(1200,257), Point(1200,151)]
+    static p_favourable := [Point(Pos(1200, 467)), Point(Pos(1200, 362)), Point(Pos(1200, 257)), Point(Pos(1200, 151))]
 
     ;按钮信息
-    static p_button_pos := Point(2170,1021)
+    static p_button_pos := Point(Pos(2170, 1021))
     static color_dis := '0xFE5C5C'
     static color_yes := '0x99CC33'
     static color_ready := '0x313131'
     static color_in_yes := '0x99ff22'
+
+    ; 每日任务
+    static daily_reword_region := [Point(Pos(1750, 330)), Point(Pos(1800, 900))]
+
     static refresh_pos() {
         size := Genshin.get_game_pos()
         width := size[1]
@@ -121,8 +125,6 @@ class Dispatch {
         SendInput("{Esc}")
     }
     
-    ; 每日任务
-    static daily_reword_region := [Point(1750, 330), Point(1800, 900)]
     static FindYellowTarget() {
         if(WhichGUI.whichGUI() == 4){
             return this.dispatch()

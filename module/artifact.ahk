@@ -8,20 +8,20 @@
 ; "强化"
 
 class Artifact {
-    static p_auto_add_button := Point(2321, 768)
-    static p_enhance_button := Point(2184, 1020)
-    static p_check_button := Point(1501, 758)
-    static p_five_enhance_button := Point(2317, 1020)
+    static p_auto_add_button := Point(Pos(2321, 768))
+    static p_enhance_button := Point(Pos(2184, 1020))
+    static p_check_button := Point(Pos(1501, 758))
+    static p_five_enhance_button := Point(Pos(2317, 1020))
     ; 详情页的lock按钮位置
-    static p_lock := Point(2394,446)
+    static p_lock := Point(Pos(2394,446))
     
     static color_enhance_button := '0x313131'
-    static p_details_tab := Point(157, 154)
-    static p_enhance_tab := Point(157, 225)
+    static p_details_tab := Point(Pos(157, 154))
+    static p_enhance_tab := Point(Pos(157, 225))
     static time_sleep := 40
 
-    static LockP1 := Point(1442, 320)
-    static LockP2 := Point(1512, 502)
+    static LockP1 := Point(Pos(1442, 320))
+    static LockP2 := Point(Pos(1512, 502))
 
     static refresh_pos() {
         size := Genshin.get_game_pos()

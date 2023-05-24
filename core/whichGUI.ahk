@@ -7,13 +7,13 @@
 ;   4:派遣界面
 ;   -1:未能识别
 class WhichGUI {
-    static mainPaimon := Point(121, 72)
-    static mainMission := Point(139, 204)
-    static mainPaimon2 := Point(117,63)
-    static mapChioceAreaBtn := Point(2411, 1018)
-    static dispathIcon := Point(139, 57)
-    static mapZoomA := Point(103, 440)
-    static mapZoomB := Point(131, 639)
+    static mainPaimon := Point(Pos(121, 72))
+    static mainMission := Point(Pos(139, 204))
+    static mainPaimon2 := Point(Pos(117,63))
+    static mapChioceAreaBtn := Point(Pos(2411, 1018))
+    static dispathIcon := Point(Pos(139, 57))
+    static mapZoomA := Point(Pos(103, 440))
+    static mapZoomB := Point(Pos(131, 639))
     static newline := '`n'
     static GuiTips := [
         "=====游戏主界面=====" this.newline . 

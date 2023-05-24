@@ -2,19 +2,19 @@
 #Include ../core/genshin.ahk
 
 class Team {
-    static green1 := Point(1105, 50)
+    static green1 := Point(Pos(1105, 50))
 
     ; 右下角“快速编队”按钮
-    static greenButtonPos := Point(1776,1021)
+    static greenButtonPos := Point(Pos(1776, 1021))
     static greenButtonColor := '0x99cc33'
     ; 右下角“出战”按钮
-    static CheckBtn := Point(2125,1021)
+    static CheckBtn := Point(Pos(2125, 1021))
     ; 中间顶部队伍显示区域
-    static TeamIconRangeLeft := Point(1109, 39)
-    static TeamIconRangeRight := Point(1542, 57)
+    static TeamIconRangeLeft := Point(Pos(1109, 39))
+    static TeamIconRangeRight := Point(Pos(1542, 57))
     ; 左右两侧切换队伍按钮
-    static ChangeToLeftBtn := Point(131, 527)
-    static ChangeToRightBtn := Point(2418, 527)
+    static ChangeToLeftBtn := Point(Pos(131, 527))
+    static ChangeToRightBtn := Point(Pos(2418, 527))
 
 
     ; 切换队伍方法
