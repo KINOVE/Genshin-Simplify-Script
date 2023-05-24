@@ -1,6 +1,10 @@
 class Genshin {
     static game_name_cn:='YuanShen.exe'             ;官服程序名
     static game_name_global:='GenshinImpact.exe'    ;国际服程序名
+    static game_size := {
+        width : 0,
+        height : 0
+    }
 
     static get_game_pos() {
         if ProcessExist(this.game_name_cn) {
@@ -8,10 +12,12 @@ class Genshin {
         } else if ProcessExist(this.game_name_global) {
             WinGetClientPos(, , &width, &height, 'ahk_exe ' this.game_name_global)
         } else {
-            width := 0
-            height := 0
+            this.game_size.width := 0
+            this.game_size.height := 0
+            return
         }
-        return [width, height]
+        this.game_size.width := width
+        this.game_size.height := height
     }
 
     static is_game_exist() {
