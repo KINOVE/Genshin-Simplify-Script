@@ -54,11 +54,13 @@ class Artifact {
             MouseClick(, this.p_enhance_tab.x, this.p_enhance_tab.y, , 0)
             Sleep(this.time_sleep)
             MouseMove(this.p_auto_add_button.x, this.p_auto_add_button.y, 0)
+            return
         }
-        else{
-            MsgBox(PixelGetColor(this.p_enhance_button.x, this.p_enhance_button.y))
-            MsgBox(this.p_enhance_button.x . ' -- ' . this.p_enhance_button.y)
-        }
+        MsgBox(
+            PixelGetColor(this.p_enhance_button.x, this.p_enhance_button.y) . 
+            '`n' . 
+            this.p_enhance_button.x . ' -- ' . this.p_enhance_button.y
+        )
     }
     
     static enhance_five() {
