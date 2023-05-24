@@ -134,7 +134,7 @@ class mapTeleport {
                 , arrowTargetBtnX, arrowTargetBtnY
                 , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0x2d91d9', 10)
             if(condition1){
-                temp_point := Point(targetX1, targetY1)
+                temp_point := Point(Pos(targetX1, targetY1))
                 ; 查找锚点附近是否有List背景颜色（有待实验是否有效）
                 condition1plus := Tool.pixelExist(temp_point, '0x1c242c', 40, 10)
                 if(condition1plus){
