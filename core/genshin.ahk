@@ -18,6 +18,7 @@ class Genshin {
         }
         this.game_size.width := width
         this.game_size.height := height
+        return [width, height]
     }
 
     static is_game_exist() {

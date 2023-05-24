@@ -8,6 +8,7 @@ class Point {
     }
 
     refresh_pos() {
+        Genshin.get_game_pos()
         game_width := Genshin.game_size.width
         game_height := Genshin.game_size.height
         if(game_width == 0 || game_height == 0){
