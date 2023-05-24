@@ -8,20 +8,20 @@
 ; "强化"
 
 class Artifact {
-    static p_auto_add_button := Point(Pos(2321, 768))
-    static p_enhance_button := Point(Pos(2184, 1020))
-    static p_check_button := Point(Pos(1501, 758))
-    static p_five_enhance_button := Point(Pos(2317, 1020))
+    static p_auto_add_button := Point(Pos(2321, 768), Pos(1830, 768))
+    static p_enhance_button := Point(Pos(2184, 1020), Pos(1616, 1020))
+    static p_check_button := Point(Pos(1501, 758), Pos(1018, 758))
+    static p_five_enhance_button := Point(Pos(2317, 1020), Pos(1745, 1020))
     ; 详情页的lock按钮位置
-    static p_lock := Point(Pos(2394,446))
+    static p_lock := Point(Pos(2394,446), Pos(1827,446))
     
     static color_enhance_button := '0x313131'
-    static p_details_tab := Point(Pos(157, 154))
-    static p_enhance_tab := Point(Pos(157, 225))
+    static p_details_tab := Point(Pos(157, 154), Pos(157, 154))
+    static p_enhance_tab := Point(Pos(157, 225), Pos(157, 225))
     static time_sleep := 40
 
-    static LockP1 := Point(Pos(1442, 320))
-    static LockP2 := Point(Pos(1512, 502))
+    static LockP1 := Point(Pos(1442, 320), Pos(1141, 320))
+    static LockP2 := Point(Pos(1512, 502), Pos(1180, 502))
 
     static refresh_pos() {
         size := Genshin.get_game_pos()
@@ -29,15 +29,15 @@ class Artifact {
         height := size[2]
 
         
-        this.p_auto_add_button.refresh_pos(width, height, 1830)
-        this.p_enhance_button.refresh_pos(width, height, 1616)
-        this.p_check_button.refresh_pos(width, height, 1018)
-        this.p_five_enhance_button.refresh_pos(width, height, 1745)
-        this.p_lock.refresh_pos(width, height, 1827)
-        this.p_details_tab.refresh_pos(width, height)
-        this.p_enhance_tab.refresh_pos(width, height)
-        this.LockP1.refresh_pos(width, height, 1141)
-        this.LockP2.refresh_pos(width, height, 1180)
+        this.p_auto_add_button.refresh_pos()
+        this.p_enhance_button.refresh_pos()
+        this.p_check_button.refresh_pos()
+        this.p_five_enhance_button.refresh_pos()
+        this.p_lock.refresh_pos()
+        this.p_details_tab.refresh_pos()
+        this.p_enhance_tab.refresh_pos()
+        this.LockP1.refresh_pos()
+        this.LockP2.refresh_pos()
         ; MsgBox(this.p_enhance_button.x)
     }
 

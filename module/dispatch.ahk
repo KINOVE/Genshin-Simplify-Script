@@ -42,20 +42,20 @@ class Dispatch {
 
         ; 区域选择
         for i in this.p_area_range {
-            i.refresh_pos(width, height)
+            i.refresh_pos()
         }
-        this.p_button_pos.refresh_pos(width, height)
+        this.p_button_pos.refresh_pos()
 
         ; 各区域点位
         for i in this.p_characters{
             for j in i{
-                j.refresh_pos(width, height)
+                j.refresh_pos()
             }
         }
         
         ; 派遣加成
         for i in this.p_favourable {
-            i.refresh_pos(width, height)
+            i.refresh_pos()
         }
     }
 
