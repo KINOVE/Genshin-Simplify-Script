@@ -14,7 +14,7 @@ class Genshin {
         } else {
             this.game_size.width := 0
             this.game_size.height := 0
-            return
+            return [width, height]
         }
         this.game_size.width := width
         this.game_size.height := height
