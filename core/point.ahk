@@ -6,12 +6,6 @@ class Point {
         this.x := pos219.x
         this.y := pos219.y
     }
-    New(x := '', y := '') {
-        this.x := x
-        this.y := y
-        this.x0 := x
-        this.y0 := y
-    }
 
     refresh_pos() {
         game_width := Genshin.game_size.width
