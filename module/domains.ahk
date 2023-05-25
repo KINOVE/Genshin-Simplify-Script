@@ -11,6 +11,11 @@ class Domain {
         Point(Pos(1559,590))
     ]
 
+    static p_exit_btn_area := [
+        Point(Pos(900, 984)),
+        Point(Pos(931, 1012))
+    ]
+
 
     static refresh_pos(){
         size := Genshin.get_game_pos()
@@ -39,9 +44,31 @@ class Domain {
         else if(Tool.pixelSearchPlus(this.p_reward_area[1], this.p_reward_area[2], '0x8f79c4', &targetx, &targety)){
             MouseMove(targetx, targety)
         }
+        
+        ih := InputHook("V T20")
+        ih.KeyOpt("{N}{Esc}","E")
+        ih.Start()
+        ih.Wait()
+        switch ih.EndKey {
+            case 'n':
+                this.next_round()
+            case 'Escape':
+                this.exit()
+            default:
+                return
+        }
+    }
 
-        if(KeyWait('n', 'D T20')){
-            this.next_round()
+    ; 圣遗物副本结束后，直接退出
+    static exit(){
+        Sleep(500)
+        targetx := 0, targety := 0
+        if (
+            Tool.pixelSearchPlus(this.p_exit_btn_area[1],this.p_exit_btn_area[2], '0x2d2e2b') &&
+            Tool.pixelSearchPlus(this.p_exit_btn_area[1],this.p_exit_btn_area[2], '0x349ee1', &targetx, &targety)
+        )
+        {
+            MouseClick(, targetx, targety)
         }
     }
 
@@ -59,7 +86,7 @@ class Domain {
         if( PixelSearch(&targetColorPositionX,&targetColorPositionY,p1.x,p1.y,p2.x,p2.y,'0x323131', 20) && 
             PixelSearch(&targetColorPositionX,&targetColorPositionY,p1.x,p1.y,p2.x,p2.y,'0xffcb32', 20)){
             MouseClick(,targetColorPositionX, targetColorPositionY,,0)
-            Sleep(1000)
+            Sleep(3000)
             Click(2)
         }
     }
