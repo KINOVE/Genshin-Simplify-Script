@@ -13,7 +13,7 @@
 /* Module */
 #Include module/artifact.ahk
 #Include module/dispatch.ahk
-#Include module/skip.ahk
+#Include module/domains.ahk
 #Include module/team.ahk
 #Include module/battlePass.ahk
 #Include module/map.ahk
@@ -166,7 +166,7 @@ Ctrl Up::{
 ; 跳过圣遗物副本动画
 ^f:: {
     Sleep(500)
-    Skip.skip_award()
+    Domain.skip_award()
 }
 ;圣遗物副本下一轮
 ; F1:: Skip.next_round()

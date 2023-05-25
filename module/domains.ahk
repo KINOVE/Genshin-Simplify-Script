@@ -1,7 +1,7 @@
 #Include ../core/point.ahk
 #Include ../core/genshin.ahk
 
-class Skip {
+class Domain {
     
     ; 圣遗物副本结束奖励领取
     static skip_award(){
