@@ -92,8 +92,11 @@ class Artifact {
         
         MouseGetPos( &nowMousePosX, &nowMousePosY)
         ; 1141,320:1180.502
-        if( PixelSearch( &targetColorPositionX, &targetColorPositionY, this.LockP1.x, this.LockP1.y, this.LockP2.x, this.LockP2.y, '0x9da0a7') || 
-            PixelSearch( &targetColorPositionX, &targetColorPositionY, this.LockP1.x, this.LockP1.y, this.LockP2.x, this.LockP2.y, '0xff8a75')){
+        if (
+            PixelSearch( &targetColorPositionX, &targetColorPositionY, this.LockP1.x, this.LockP1.y, this.LockP2.x, this.LockP2.y, '0xff8a75', 20) ||
+            PixelSearch( &targetColorPositionX, &targetColorPositionY, this.LockP1.x, this.LockP1.y, this.LockP2.x, this.LockP2.y, '0x9da0a7', 20)
+        )
+        {
             MouseClick( , targetColorPositionX, targetColorPositionY, , 0)
             SendInput("{Esc}")
         }
