@@ -24,4 +24,14 @@ class Tool{
             return PixelSearch(&temp, &temp, targetA.x, targetA.y, targetB.x, targetB.y, colorId, colorDeviation)
         }
     }
+
+    ; 简化的鼠标移动
+    static MMove(target, speed := 1){
+        MouseMove(target.x, target.y, speed)
+    }
+    
+    ; 简化的鼠标点击
+    static MClick(target, speed := 1){
+        MouseClick(,target.x, target.y, ,speed)
+    }
 }
