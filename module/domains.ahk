@@ -1,29 +1,44 @@
 #Include ../core/point.ahk
 #Include ../core/genshin.ahk
+#Include ../core/tool.ahk
 
 class Domain {
-    
-    ; 圣遗物副本结束奖励领取
-    static skip_award(){
+    static p_choose_condensed_resin := Point(Pos(955, 744), Pos(602, 744))
+    static p_skip_btn := Point(Pos(2418, 50), Pos(1788, 50))
+    ; static p3 := Point(Pos(659, 507), Pos(573, 507))
+    static p_reward_area := [
+        Point(Pos(659, 507), Pos(573, 507)),
+        Point(Pos(1559,590))
+    ]
+
+
+    static refresh_pos(){
         size := Genshin.get_game_pos()
         width := size[1]
         height := size[2]
-        static p1 := Point(Pos(955, 744), Pos(602, 744))
-        static p2 := Point(Pos(2418, 50), Pos(1788, 50))
-        static p3 := Point(Pos(659, 507), Pos(573, 507))
-        p1.refresh_pos()
-        p2.refresh_pos()
-        p3.refresh_pos()
+        this.p_choose_condensed_resin.refresh_pos()
+        this.p_skip_btn.refresh_pos()
+    }
+
+    ; 圣遗物副本结束奖励领取
+    static skip_award(){
         SendInput('f')
         Sleep(300)
-        MouseClick(,p1.x,p1.y,,0)
+        Tool.MClick( this.p_choose_condensed_resin, 0)
         Sleep(600)
-        MouseClick(,p2.x,p2.y,,0)
-        MouseClick(,p2.x,p2.y,,0)
+        loop 3{
+            Tool.MClick( this.p_skip_btn, 0)
+        }
         Sleep(250)
-        MouseClick(,p2.x,p2.y,,0)
-        Sleep(500)
-        MouseMove(p3.x,p3.y,0)
+        Tool.MClick( this.p_skip_btn, 0)
+        Sleep(4000)
+        targetx:= 0, targety:= 0
+        if(Tool.pixelSearchPlus(this.p_reward_area[1], this.p_reward_area[2], '0xb37c36', &targetx, &targety)){
+            MouseMove(targetx, targety)
+        }
+        else if(Tool.pixelSearchPlus(this.p_reward_area[1], this.p_reward_area[2], '0x8f79c4', &targetx, &targety)){
+            MouseMove(targetx, targety)
+        }
 
         if(KeyWait('n', 'D T20')){
             this.next_round()
