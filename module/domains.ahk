@@ -46,13 +46,13 @@ class Domain {
         }
         
         ih := InputHook("V T20")
-        ih.KeyOpt("{N}{Esc}","E")
+        ih.KeyOpt("{N}{Space}","E")
         ih.Start()
         ih.Wait()
         switch ih.EndKey {
             case 'n':
                 this.next_round()
-            case 'Escape':
+            case 'Space':
                 this.exit()
             default:
                 return
@@ -61,7 +61,7 @@ class Domain {
 
     ; 圣遗物副本结束后，直接退出
     static exit(){
-        Sleep(500)
+        Sleep(200)
         targetx := 0, targety := 0
         if (
             Tool.pixelSearchPlus(this.p_exit_btn_area[1],this.p_exit_btn_area[2], '0x2d2e2b') &&
