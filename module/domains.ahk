@@ -36,13 +36,25 @@ class Domain {
         }
         Sleep(250)
         Tool.MClick( this.p_skip_btn, 0)
-        Sleep(4000)
-        targetx:= 0, targety:= 0
-        if(Tool.pixelSearchPlus(this.p_reward_area[1], this.p_reward_area[2], '0xb37c36', &targetx, &targety)){
-            MouseMove(targetx, targety)
+        Sleep(3700)
+        targetx1:= 0, targety1:= 0
+        find_gold_color := Tool.pixelSearchPlus(this.p_reward_area[1], this.p_reward_area[2], '0xb37c36', &targetx1, &targety1)
+        targetx2:= 0, targety2:= 0
+        find_purple_color := Tool.pixelSearchPlus(this.p_reward_area[1], this.p_reward_area[2], '0x8f79c4', &targetx2, &targety2)
+        if(find_gold_color && find_purple_color){
+            ; 如果找到的金色在紫色之后
+            if(targetx1 > targetx2){
+                MouseMove(targetx2, targety2)
+            }
+            else{
+                MouseMove(targetx1, targety1)
+            }
         }
-        else if(Tool.pixelSearchPlus(this.p_reward_area[1], this.p_reward_area[2], '0x8f79c4', &targetx, &targety)){
-            MouseMove(targetx, targety)
+        else if(find_gold_color && !find_purple_color){
+            MouseMove(targetx1, targety1)
+        }
+        else if(find_purple_color){
+            MouseMove(targetx2, targety2)
         }
         
         ih := InputHook("V T20")
