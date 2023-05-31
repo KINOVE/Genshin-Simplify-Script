@@ -22,6 +22,11 @@ class Artifact {
 
     static LockP1 := Point(Pos(1442, 320), Pos(1141, 320))
     static LockP2 := Point(Pos(1512, 502), Pos(1180, 502))
+    static LockP3 := Point(Pos(2423,191))
+    static StarArea1 := [
+        Point(Pos(2025,268)),
+        Point(Pos(2200,301))
+    ]
 
     static refresh_pos() {
         size := Genshin.get_game_pos()
@@ -93,22 +98,28 @@ class Artifact {
         MouseGetPos( &nowMousePosX, &nowMousePosY)
         ; 1141,320:1180.502
         if (
-            PixelSearch( &targetColorPositionX, &targetColorPositionY, this.LockP1.x, this.LockP1.y, this.LockP2.x, this.LockP2.y, '0xff8a75', 20) ||
-            PixelSearch( &targetColorPositionX, &targetColorPositionY, this.LockP1.x, this.LockP1.y, this.LockP2.x, this.LockP2.y, '0x9da0a7', 20)
+            (
+                PixelSearch( &targetColorPositionX, &targetColorPositionY, this.LockP1.x, this.LockP1.y, this.LockP2.x, this.LockP2.y, '0xff8a75', 20) ||
+                PixelSearch( &targetColorPositionX, &targetColorPositionY, this.LockP1.x, this.LockP1.y, this.LockP2.x, this.LockP2.y, '0x9da0a7', 20)
+            ) && !Tool.pixelSearchPlus(this.StarArea1[1], this.StarArea1[2], '0xffcc32')
         )
         {
             MouseClick( , targetColorPositionX, targetColorPositionY, , 0)
             SendInput("{Esc}")
         }
-        else{
+        else if(WhichGUI.whichGUI() == 5){
             ; 圣遗物强化界面下
             ; 转到详情页
             MouseClick(, this.p_details_tab.x, this.p_details_tab.y, , 0)
-            Sleep(this.time_sleep)
+            Sleep(200)
             ; 取消lock
             MouseClick(, this.p_lock.x, this.p_lock.y, , 0)
-            Sleep(this.time_sleep)
+            Sleep(200)
             SendInput("{Esc}")
+        }
+        else if (Tool.pixelSearchPlus(this.StarArea1[1], this.StarArea1[2], '0xffcc32'))
+        {
+            MouseClick(,this.LockP3.x, this.LockP3.y, ,0)
         }
         Sleep(20)
         MouseMove( nowMousePosX, nowMousePosY, 0)

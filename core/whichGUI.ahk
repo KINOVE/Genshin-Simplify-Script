@@ -14,6 +14,7 @@ class WhichGUI {
     static dispathIcon := Point(Pos(139, 57))
     static mapZoomA := Point(Pos(103, 440))
     static mapZoomB := Point(Pos(131, 639))
+    static artifact_strengthen_icon := Point(Pos(143,39))
     static newline := '`n'
     static GuiTips := [
         "=====游戏主界面=====" this.newline . 
@@ -25,6 +26,8 @@ class WhichGUI {
         "=====副本界面=====" 
         , 
         "=====派遣界面====="
+        ,
+        "artifact_strengthen"
         ,
         ""
     ]
@@ -47,7 +50,7 @@ class WhichGUI {
         height := size[2]
         ; 改成数组中对应的空部分
         if(nowGuiId == -1)
-            nowGuiId := 5
+            nowGuiId := 6
         ; 这种情况为游戏界面未激活，now_GUI置于-2
         global now_GUI
         if(now_GUI != nowGuiId){
@@ -87,6 +90,7 @@ class WhichGUI {
         battle_1 := PixelGetColor(this.mainPaimon.x, this.mainPaimon.y) != '0xFFFFFF' 
         battle_2 := PixelGetColor(this.mainMission.x, this.mainMission.y) == '0xFFFFFF'
         dispatch_1 := PixelGetColor(this.dispathIcon.x, this.dispathIcon.y) == '0xECE5D8'
+        artifact_strengthen := PixelGetColor(this.artifact_strengthen_icon.x, this.artifact_strengthen_icon.y) == '0xD3BC8E'
         ;   1:游戏主界面
         if ( main_1 && main_2 && main_3){
             return 1
@@ -101,6 +105,9 @@ class WhichGUI {
         ;   4:派遣界面
         else if (dispatch_1)
             return 4
+        else if (artifact_strengthen){
+            return 5
+        }
         ;   -1:未能识别
         else{
             return -1
