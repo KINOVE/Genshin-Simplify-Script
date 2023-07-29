@@ -55,7 +55,6 @@ myGui.Add("Text", "xp-200 yp20 w200", "代替长按空格")
 myGui.Add("Text", "xp200", "Ctrl + Space")
 myGui.Add("Text", "xp-200 yp20 w200", "纪行奖励领取")
 myGui.AddHotkey("xp200 yp-5 vHotKey_battlePass", "^!F4")
-; myGui.Add("Text", "xp150", "Ctrl+F4")
 myGui.Add("Text", "xp-200 yp25 w200", "快速切换队伍")
 myGui.Add("Text", "xp200", "Ctrl + [1~10]")
 
@@ -90,7 +89,7 @@ myGui.Add("Button", "yp660 Default", "确定并重启脚本")
 myGui.Add("Button", "xp110 Default", "重置")
 
 
-myGui.Show()
+; myGui.Show()
 
 
 

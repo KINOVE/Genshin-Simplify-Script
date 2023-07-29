@@ -61,11 +61,11 @@ class Artifact {
             MouseMove(this.p_auto_add_button.x, this.p_auto_add_button.y, 0)
             return
         }
-        MsgBox(
-            PixelGetColor(this.p_enhance_button.x, this.p_enhance_button.y) . 
-            '`n' . 
-            this.p_enhance_button.x . ' -- ' . this.p_enhance_button.y
-        )
+        ; MsgBox(
+        ;     PixelGetColor(this.p_enhance_button.x, this.p_enhance_button.y) . 
+        ;     '`n' . 
+        ;     this.p_enhance_button.x . ' -- ' . this.p_enhance_button.y
+        ; )
     }
     
     static enhance_five() {
