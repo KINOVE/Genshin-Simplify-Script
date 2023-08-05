@@ -25,73 +25,8 @@ global executing_function := false
 
 ; ⚠⚠⚠ 不明白在干什么的话，就别改上面的内容 ⚠⚠⚠
 
-myGuiName := "GSS设置"
-myGui := Gui(, myGuiName)
-myGui.Opt("+AlwaysOnTop -MinimizeBox")
-Tab := myGui.AddTab3(, ["按键设置", "脚本设置"])
-
-Tab.UseTab(1)
-
-myGui.AddGroupBox("r2 w400", "全局")
-myGui.Add("Text", "xp10 yp20 w200", "重新加载脚本")
-myGui.Add("Text", "xp200", "Ctrl + Alt + R")
-myGui.Add("Text", "xp-200 yp20 w200", "打开/关闭设置窗口")
-myGui.Add("Text", "xp200", "Alt + ~")
-
-myGui.AddGroupBox("xp-210 yp35 r3 w400", "全局（在游戏窗口内）")
-myGui.Add("Text", "xp10 yp20 w200", "关闭游戏和脚本")
-myGui.Add("Text", "xp200", "Ctrl + Esc")
-myGui.Add("Text", "xp-200 yp20 w200", "循环点击左键")
-myGui.Add("Text", "xp200", "Ctrl + Alt + LeftMouseBtn")
-myGui.Add("Text", "xp-200 yp20 w200", "开关斯露莎飞行按键兼容")
-myGui.Add("Text", "xp200", "~")
-
-myGui.AddGroupBox("xp-210 yp35 r5 w400", "大世界")
-myGui.Add("Text", "xp10 yp20 w200", "循环触发F键")
-myGui.Add("Text", "xp200", "F")
-myGui.Add("Text", "xp-200 yp20 w200", "循环触发空格")
-myGui.Add("Text", "xp200", "Space")
-myGui.Add("Text", "xp-200 yp20 w200", "代替长按空格")
-myGui.Add("Text", "xp200", "Ctrl + Space")
-myGui.Add("Text", "xp-200 yp20 w200", "纪行奖励领取")
-myGui.AddHotkey("xp200 yp-5 vHotKey_battlePass", "^!F4")
-myGui.Add("Text", "xp-200 yp25 w200", "快速切换队伍")
-myGui.Add("Text", "xp200", "Ctrl + [1~10]")
-
-myGui.AddGroupBox("xp-210 yp35 r1 w400", "与凯瑟琳对话")
-myGui.Add("Text", "xp10 yp20 w200", "收取每日任务奖励 + 快速派遣")
-myGui.Add("Text", "xp200", "Alt + P")
-
-myGui.AddGroupBox("xp-210 yp35 r2 w400", "地图界面")
-myGui.Add("Text", "xp10 yp20 w200", "快速传送")
-myGui.AddHotkey("xp200 yp-5 vHotkey_fastTeleport", "^t")
-myGui.Add("Text", "xp-200 yp25 w200", "快速传送到区域")
-myGui.Add("Text", "xp200", "Ctrl + [1~7]")
-
-myGui.AddGroupBox("xp-210 yp35 r3 w400", "圣遗物界面")
-myGui.Add("Text", "xp10 yp20 w200", "快速使用四星及以下狗粮强化")
-myGui.AddHotkey("xp200 yp-5 vHotkey_enhance_once", "!q")
-myGui.Add("Text", "xp-200 yp25 w200", "选择五星狗粮后快速强化")
-myGui.AddHotkey("xp200 yp-5 vHotkey_enhance_five", "!w")
-myGui.Add("Text", "xp-200 yp25 w200", "快速加/减圣遗物锁")
-myGui.AddHotkey("xp200 yp-5 vHotkey_cancel_lock", "!e")
-
-myGui.AddGroupBox("xp-210 yp40 r3 w400", "普通副本")
-myGui.Add("Text", "xp10 yp20 w200", "快速领取圣遗物奖励")
-myGui.AddHotkey("xp200 yp-5 vHotkey_skip_award", "^f")
-myGui.Add("Text", "xp-200 yp25 w200", "进入下一轮")
-myGui.Add("Text", "xp200", "N")
-myGui.Add("Text", "xp-200 yp20 w200", "退出副本")
-myGui.Add("Text", "xp200", "Space")
-
-Tab.UseTab()
-myGui.Add("Button", "yp660 Default", "确定并重启脚本")
-myGui.Add("Button", "xp110 Default", "重置")
-
 
 ; myGui.Show()
-
-
 
 ; --------------------------按键（填游戏里设置的按键）-------------------------
 
@@ -233,14 +168,14 @@ Ctrl Up::{
 }
 
 #HotIf
-!`::{
-    if(!WinExist("ahk_id " myGui.Hwnd)){
-        myGui.Show()
-    }
-    else{
-        myGui.Hide()
-    }
-}
+; !`::{
+;     if(!WinExist("ahk_id " myGui.Hwnd)){
+;         myGui.Show()
+;     }
+;     else{
+;         myGui.Hide()
+;     }
+; }
 
 ; 调试用功能，快速Reload脚本
 ^!r:: Reload
