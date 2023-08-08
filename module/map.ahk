@@ -1,4 +1,5 @@
 #Include ../core/point.ahk
+#Include ../core/Color.ahk
 #Include ../core/genshin.ahk
 #Include ../core/whichGUI.ahk
 
@@ -8,18 +9,26 @@ class mapTeleport {
     static CenterPoint := Point(Pos(1272, 535))
     static targetBtnRange := [Point(Pos(1730, 160)), Point(Pos(1800, 1000))]
     static teleportBtn := Point(Pos(2047, 1013))
-    static ListRange := [Point(Pos(2021, 97)), Point(Pos(2039, 902))]
+    static ListRange := [Point(Pos(2021, 97)), Point(Pos(2039, 1066))]
 
     ; 等待到list打开
     static untilListOpen(){
         MouseClick(, this.chioceAreaBtn.x, this.chioceAreaBtn.y, ,0)
         time := A_TickCount
-        while(!tool.pixelSearchPlus(this.ListRange[1], this.ListRange[2] ,'0xE4DDD2', , , 3)){
+        while(!this.isListOpen()){
             Sleep(20)
             if(A_TickCount - time > 3000)
                 return
         }
-        Sleep(20)
+        Sleep(500)
+    }
+
+    static isListOpen(){
+        condition1 := tool.pixelSearchPlus(this.ListRange[1], this.ListRange[2] ,'0xE4DDD2', , , 3)
+        condition2 := Tool.pixelExist(Point(Pos(2446,37)),Color("#ece5d8").c)
+        condition3 := !Tool.pixelExist(Point(Pos(2411,48)),Color("#3b4255").c,5,1)
+        ToolTip(condition3,300, 300)
+        return condition3 && condition2
     }
 
     ; 判断当前的地区
