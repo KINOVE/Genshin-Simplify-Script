@@ -9,6 +9,7 @@
 #Include core/whichGUI.ahk
 #Include core/tool.ahk
 #Include core/point.ahk
+#Include core/ini.ahk
 
 /* Module */
 #Include module/artifact.ahk
@@ -31,15 +32,15 @@ global executing_function := false
 ; --------------------------按键（填游戏里设置的按键）-------------------------
 
 ; 队伍切换
-global teamChangeBtn := 'g' 
+global teamChangeBtn := setting.getIni("global","teamChangeBtn")
 
 ; 行走和奔跑的状态切换（也是花灵降低高度的按钮）
-global walkRunSwitch := 'h' 
+global walkRunSwitch := setting.getIni("global","walkRunSwitch")
 
 ; --------------------------------Settings 设置--------------------------------
 
 ; 开启每秒一次的界面检测和按键提示
-OpenSmartGuiTips := true
+OpenSmartGuiTips := setting.getIni("global","OpenSmartGuiTips")
 
 
 ; --------------------------------功能--------------------------------
@@ -48,6 +49,8 @@ OpenSmartGuiTips := true
 if(OpenSmartGuiTips){
     SetTimer () => WhichGUI.smartGuiTips(), 1000, -100
 }
+
+; setting.initSetting()
 
 ; 开关部分脚本功能
 `::{
@@ -77,20 +80,6 @@ if(OpenSmartGuiTips){
 ; 快速退出游戏
 ^Esc:: Genshin.close_game()
 
-; 快速拾取&对话
-f::{
-    SendInput('f')
-    pick(){
-        if GetKeyState('f','P'){
-            Sleep(30)
-            SendInput('f')
-        } else {
-            SetTimer(pick, 0)
-        }
-    }
-    SetTimer(pick, 30)
-}
-f Up:: SendInput('{f Up}')
 
 ; 连跳
 Space:: {
@@ -166,6 +155,22 @@ Ctrl Up::{
     Sleep(500)
     Domain.skip_award()
 }
+
+#HotIf Genshin.is_game_active() && (isActive == true)
+; 快速拾取&对话
+f::{
+    SendInput('f')
+    pick(){
+        if GetKeyState('f','P'){
+            Sleep(30)
+            SendInput('f')
+        } else {
+            SetTimer(pick, 0)
+        }
+    }
+    SetTimer(pick, 30)
+}
+f Up:: SendInput('{f Up}')
 
 #HotIf
 ; !`::{
