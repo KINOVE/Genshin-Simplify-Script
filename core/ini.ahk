@@ -21,10 +21,13 @@ class setting {
         IniWrite(value,this.iniPath,section,key)
     }
 
+    /**
+     * getIni -> 获取对应设置内容
+     * @param section 所属的`[section]`字段
+     * @param key `key=...`
+     * @returns {`any`} `key=value` <- `value`值
+     */
     static getIni(section,key){
-        if IniRead(this.iniPath,section,key) == true {
-            MsgBox("1")
-        }
         return IniRead(this.iniPath,section,key)
     }
 }
