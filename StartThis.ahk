@@ -80,38 +80,6 @@ if(OpenSmartGuiTips){
 ; 快速退出游戏
 ^Esc:: Genshin.close_game()
 
-
-; 连跳
-Space:: {
-    if (isActive){
-        SendInput('{Space}')
-    }
-    else{
-        SendInput('{Space Down}')
-    }
-}
-Space Up:: SendInput('{Space Up}')
-
-; 实现走/跑切换按键的屏蔽开关逻辑
-Ctrl:: {
-    if(isActive){
-        ; WhichGUI.smartGuiTips()
-        SendInput('{Ctrl Down}')
-    }
-    else{
-        SendInput('{' . walkRunSwitch . ' Down}')
-    }
-}
-Ctrl Up::{ 
-    if(isActive){
-        SendInput('{Ctrl Up}')
-    }
-    else{
-        SendInput('{Ctrl Up}')
-        SendInput('{' . walkRunSwitch . ' Up}')
-    }
-}
-
 ; Ctrl + [1 ~ 0] 切换队伍
 ; Ctrl + [1 ~ 7] 传送到各地区（注意：此功能会根据游戏进度不同导致部分地区未解锁，请按实际情况选择）
 ; 蒙德
@@ -171,6 +139,17 @@ f::{
     SetTimer(pick, 30)
 }
 f Up:: SendInput('{f Up}')
+
+; 连跳
+Space:: {
+    SendInput('{Space}')
+}
+
+#HotIf Genshin.is_game_active() && (isActive == false)
+; 实现走/跑切换按键的屏蔽开关逻辑
+Ctrl:: {
+    SendInput('{' . walkRunSwitch . '}')
+}
 
 #HotIf
 ; !`::{

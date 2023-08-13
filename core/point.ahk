@@ -5,10 +5,15 @@ class Point {
         this.pos169 := pos169
         this.x := pos219.x
         this.y := pos219.y
+        this.refresh_pos()
     }
 
     refresh_pos() {
-        Genshin.get_game_pos()
+        while (!Genshin.is_game_exist()) || (Genshin.game_size.width == 0 || Genshin.game_size.height == 0) {
+            Sleep(500)
+            Genshin.get_game_pos()
+            ; MsgBox("!" . Genshin.is_game_exist() . ' ' . Genshin.game_size.width . Genshin.game_size.height)
+        }
         game_width := Genshin.game_size.width
         game_height := Genshin.game_size.height
         if(game_width == 0 || game_height == 0){

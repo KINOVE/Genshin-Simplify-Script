@@ -103,6 +103,7 @@ class Dispatch {
         Sleep(50)
     }
 
+    ; 派遣任务
     static dispatch() {
         ; 刷新所有点位
         this.refresh_pos()
