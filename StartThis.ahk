@@ -1,25 +1,18 @@
 ; 推荐安装官网的统一新环境，可以兼容多版本的AHK，按以下格式声明版本即可（缺少的它会自动下载）
 #Requires AutoHotkey v2.0
 #SingleInstance
-#HotIf
+
 /* Global */
-; 功能是否开启
-global isActive := true
 ; 当前所处在哪个游戏界面
 global now_GUI := -1
 ; 是否正在执行其他功能
 global executing_function := false
-; !`::{
-;     if(!WinExist("ahk_id " myGui.Hwnd)){
-;         myGui.Show()
-;     }
-;     else{
-;         myGui.Hide()
-;     }
-; }
-
 ; 调试用功能，快速Reload脚本
 ^!r:: Reload
+; 队伍切换
+global teamChangeBtn := setting.getIni("global","teamChangeBtn")
+; 行走和奔跑的状态切换（也是花灵降低高度的按钮）
+global walkRunSwitch := setting.getIni("global","walkRunSwitch")
 
 ; 脚本只在以下条件满足时执行
 #HotIf Genshin.is_game_active()
@@ -30,6 +23,7 @@ global executing_function := false
 #Include core/tool.ahk
 #Include core/point.ahk
 #Include core/ini.ahk
+#Include core/ActiveLock.ahk
 
 /* Module */
 #Include module/artifact.ahk
@@ -40,19 +34,11 @@ global executing_function := false
 #Include module/map.ahk
 
 
-
 ; ⚠⚠⚠ 不明白在干什么的话，就别改上面的内容 ⚠⚠⚠
-
-
-; myGui.Show()
 
 ; --------------------------按键（填游戏里设置的按键）-------------------------
 
-; 队伍切换
-global teamChangeBtn := setting.getIni("global","teamChangeBtn")
 
-; 行走和奔跑的状态切换（也是花灵降低高度的按钮）
-global walkRunSwitch := setting.getIni("global","walkRunSwitch")
 
 ; --------------------------------Settings 设置--------------------------------
 
@@ -64,21 +50,14 @@ OpenSmartGuiTips := setting.getIni("global","OpenSmartGuiTips")
 
 ; 每秒刷新：显示当前界面快捷键
 if(OpenSmartGuiTips){
+    MsgBox("!")
     SetTimer () => WhichGUI.smartGuiTips(), 1000, -100
 }
 
 ; setting.initSetting()
 
 ; 开关部分脚本功能
-`::{
-    global isActive := !isActive
-    if !isActive{
-        ToolTip('关闭', 400, 400, 20)
-    }
-    else{
-        ToolTip('', , , 20)
-    }
-}
+`::Status.Toggle()
 
 ; 鼠标快速连点
 ^!LButton::{
@@ -125,8 +104,9 @@ if(OpenSmartGuiTips){
 !p:: Dispatch.FindYellowTarget()
 
 ;纪行奖励领取
-^F4:: BattlePass.bp_award()
-
+^F4:: {
+    BattlePass.bp_award()
+}
 
 ; 使用四星狗粮
 !q:: Artifact.enhance_once()
@@ -141,7 +121,7 @@ if(OpenSmartGuiTips){
     Domain.skip_award()
 }
 
-#HotIf Genshin.is_game_active() && (isActive == true)
+#HotIf Genshin.is_game_active() && Status.IsActive()
 ; 快速拾取&对话
 f::{
     SendInput('f')
@@ -162,7 +142,7 @@ Space:: {
     SendInput('{Space}')
 }
 
-#HotIf Genshin.is_game_active() && (isActive == false)
+#HotIf Genshin.is_game_active() && Status.IsNotActive()
 ; 实现走/跑切换按键的屏蔽开关逻辑
 Ctrl:: {
     SendInput('{' . walkRunSwitch . '}')

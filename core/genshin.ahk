@@ -7,9 +7,9 @@ class Genshin {
     }
 
     static get_game_pos() {
-        if WinExist(this.game_name_cn) {
+        if WinExist("ahk_exe " this.game_name_cn) {
             WinGetClientPos(, , &width, &height, 'ahk_exe ' this.game_name_cn)
-        } else if WinExist(this.game_name_global) {
+        } else if WinExist("ahk_exe " this.game_name_global) {
             WinGetClientPos(, , &width, &height, 'ahk_exe ' this.game_name_global)
         } else {
             this.game_size.width := 0
