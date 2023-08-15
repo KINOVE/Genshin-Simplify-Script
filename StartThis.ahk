@@ -1,6 +1,26 @@
 ; 推荐安装官网的统一新环境，可以兼容多版本的AHK，按以下格式声明版本即可（缺少的它会自动下载）
 #Requires AutoHotkey v2.0
 #SingleInstance
+#HotIf
+/* Global */
+; 功能是否开启
+global isActive := true
+; 当前所处在哪个游戏界面
+global now_GUI := -1
+; 是否正在执行其他功能
+global executing_function := false
+; !`::{
+;     if(!WinExist("ahk_id " myGui.Hwnd)){
+;         myGui.Show()
+;     }
+;     else{
+;         myGui.Hide()
+;     }
+; }
+
+; 调试用功能，快速Reload脚本
+^!r:: Reload
+
 ; 脚本只在以下条件满足时执行
 #HotIf Genshin.is_game_active()
 
@@ -19,10 +39,7 @@
 #Include module/battlePass.ahk
 #Include module/map.ahk
 
-/* Global */
-global isActive := true
-global now_GUI := -1
-global executing_function := false
+
 
 ; ⚠⚠⚠ 不明白在干什么的话，就别改上面的内容 ⚠⚠⚠
 
@@ -150,16 +167,3 @@ Space:: {
 Ctrl:: {
     SendInput('{' . walkRunSwitch . '}')
 }
-
-#HotIf
-; !`::{
-;     if(!WinExist("ahk_id " myGui.Hwnd)){
-;         myGui.Show()
-;     }
-;     else{
-;         myGui.Hide()
-;     }
-; }
-
-; 调试用功能，快速Reload脚本
-^!r:: Reload

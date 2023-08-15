@@ -7,18 +7,18 @@ class Genshin {
     }
 
     static get_game_pos() {
-        if ProcessExist(this.game_name_cn) {
+        if WinExist(this.game_name_cn) {
             WinGetClientPos(, , &width, &height, 'ahk_exe ' this.game_name_cn)
-        } else if ProcessExist(this.game_name_global) {
+        } else if WinExist(this.game_name_global) {
             WinGetClientPos(, , &width, &height, 'ahk_exe ' this.game_name_global)
         } else {
             this.game_size.width := 0
             this.game_size.height := 0
-            return [width, height]
+            return [this.game_size.width, this.game_size.height]
         }
         this.game_size.width := width
         this.game_size.height := height
-        return [width, height]
+        return [this.game_size.width, this.game_size.height]
     }
 
     static is_game_exist() {
