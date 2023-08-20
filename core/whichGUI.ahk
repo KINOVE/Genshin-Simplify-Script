@@ -122,7 +122,6 @@ class WhichGUI {
         }
         ; 如果是地图界面：
         else if (this.whichGUI() == 2){
-            ; ToolTip("1")
             mapTeleport.teleportToArea(num)
         }
     }

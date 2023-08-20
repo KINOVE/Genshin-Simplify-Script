@@ -11,8 +11,18 @@ class mapTeleport {
     static teleportBtn := Point(Pos(2047, 1013))
     static ListRange := [Point(Pos(2021, 97)), Point(Pos(2039, 1066))]
 
+    static isListOpen(){
+        condition1 := tool.pixelSearchPlus(this.ListRange[1], this.ListRange[2] ,'0xE4DDD2', , , 3)
+        condition2 := Tool.pixelExist(Point(Pos(2446,37)),Color("#ece5d8").c)
+        condition3 := !Tool.pixelExist(Point(Pos(2411,48)),Color("#3b4255").c,5,1)
+        return condition3 && condition2
+    }
+
     ; 等待到list打开
     static untilListOpen(){
+        if(this.isListOpen()) {
+            return
+        }
         MouseClick(, this.chioceAreaBtn.x, this.chioceAreaBtn.y, ,0)
         time := A_TickCount
         while(!this.isListOpen()){
@@ -21,14 +31,6 @@ class mapTeleport {
                 return
         }
         Sleep(500)
-    }
-
-    static isListOpen(){
-        condition1 := tool.pixelSearchPlus(this.ListRange[1], this.ListRange[2] ,'0xE4DDD2', , , 3)
-        condition2 := Tool.pixelExist(Point(Pos(2446,37)),Color("#ece5d8").c)
-        condition3 := !Tool.pixelExist(Point(Pos(2411,48)),Color("#3b4255").c,5,1)
-        ToolTip(condition3,300, 300)
-        return condition3 && condition2
     }
 
     ; 判断当前的地区
@@ -63,6 +65,7 @@ class mapTeleport {
             else{
                 MouseClick(, this.AreaBtn[1].x, this.AreaBtn[1].y, ,0)
             }
+            ; 为了精准确定是否打开了地图
             time := A_TickCount
             while(!tool.pixelExist(this.chioceAreaBtn,'0xE2DCCF')){
                 Sleep(20)

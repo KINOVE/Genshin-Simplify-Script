@@ -1,6 +1,9 @@
 ; 用于控制脚本功能开关
 Class Status{
 
+    ; 0 -> normal   开启连跳和Ctrl功能键
+    ; 1 -> fly      花灵飞行模式，连跳和Ctrl功能键关闭
+
     static Active := true
     
     ; 是否激活

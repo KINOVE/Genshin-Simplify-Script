@@ -7,15 +7,18 @@ class Dispatch {
     static sleep_time := 200
     
     ;四个派遣区域
-    static p_area_range := [Point(Pos(208, 165)), Point(Pos(208, 237)), Point(Pos(208, 309)), Point(Pos(208, 382))]
+    static p_area_range := [Point(Pos(208, 165)), Point(Pos(208, 237)), Point(Pos(208, 309)), Point(Pos(208, 382)), Point(Pos(208, 455))]
 
     ;四个派遣区域的六个点位
     static p_characters := [
         [Point(Pos(883, 414)), Point(Pos(1135, 248)), Point(Pos(1375, 338)), Point(Pos(1439, 455)), Point(Pos(1063, 538)), Point(Pos(1495, 662))],
         [Point(Pos(883, 572)), Point(Pos(1047, 332)), Point(Pos(1283, 456)), Point(Pos(1131, 563)), Point(Pos(1493, 619)), Point(Pos(1051, 822))],
         [Point(Pos(1420, 283)),Point(Pos(1257, 350)), Point(Pos(1467, 441)), Point(Pos(1046, 700)), Point(Pos(906, 809)), Point(Pos(1150, 834))],
-        [Point(Pos(1374, 248)),Point(Pos(1117, 301)), Point(Pos(1280, 380)), Point(Pos(1221, 563)), Point(Pos(1350, 616)), Point(Pos(1000, 643))]
+        [Point(Pos(1374, 248)),Point(Pos(1117, 301)), Point(Pos(1280, 380)), Point(Pos(1221, 563)), Point(Pos(1350, 616)), Point(Pos(1000, 643))],
+        [Point(Pos(977, 324)), Point(Pos(1376, 256)), Point(Pos(1218, 466)), Point(Pos(941, 559)), Point(Pos(1351, 596)), Point(Pos(1148, 652))]
     ]
+
+    
 
     ; 设置点位派遣时间
     static p_time := Point(Pos(2400, 682))
@@ -25,10 +28,10 @@ class Dispatch {
 
     ;按钮信息
     static p_button_pos := Point(Pos(2170, 1021))
-    static color_dis := '0xFE5C5C'
-    static color_yes := '0x99CC33'
-    static color_ready := '0x313131'
-    static color_in_yes := '0x99ff22'
+    static color_dis := Color("#FE5C5C").c
+    static color_yes := Color("#99CC33").c
+    static color_ready := Color("#313131").c
+    static color_in_yes := Color("#99ff22").c
 
     ; 每日任务
     static daily_reword_region := [Point(Pos(1750, 330)), Point(Pos(1800, 900))]
@@ -63,8 +66,17 @@ class Dispatch {
     static sendpatch() {
         ;等待界面打开
         Sleep(500)
+        flag := false
         for p in this.p_favourable{
             if PixelGetColor(p.x, p.y) = this.color_in_yes {
+                flag := true
+                Sleep(50)
+                MouseClick(,p.x, p.y,,0)
+            }
+        }
+
+        if flag == false {
+            for p in this.p_favourable {
                 Sleep(50)
                 MouseClick(,p.x, p.y,,0)
             }
@@ -114,13 +126,9 @@ class Dispatch {
         this.checkifpatch(2,4)
         this.checkifpatch(2,3)
 
-        ;点击第3区域
-        this.changeArea(3)
-        this.checkifpatch(3,6)
-
-        ;点击第4区域
-        this.changeArea(4)
-        this.checkifpatch(4,3)
+        this.changeArea(5)
+        this.checkifpatch(5,3)
+        this.checkifpatch(5,5)
 
         ;退出
         SendInput("{Esc}")
