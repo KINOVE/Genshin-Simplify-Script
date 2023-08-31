@@ -9,6 +9,7 @@
 #Include core/point.ahk
 #Include core/ini.ahk
 #Include core/ActiveLock.ahk
+#Include core\PointExtractor.ahk
 
 /* Module */
 #Include module/artifact.ahk
@@ -25,6 +26,15 @@ global now_GUI := -1
 global executing_function := false
 ; 调试用功能，快速Reload脚本
 ^!r:: Reload
+
+!`::PointExtractor.getPoint()
+!^`::PointExtractor.searchColor()
+
+!^1::{
+    MsgBox(WhichGUI.whichGUI())
+}
+
+
 ; 队伍切换
 global teamChangeBtn := setting.getIni("global","teamChangeBtn")
 ; 行走和奔跑的状态切换（也是花灵降低高度的按钮）
@@ -34,6 +44,6 @@ global walkRunSwitch := setting.getIni("global","walkRunSwitch")
 #Include ShortcutKeys1.ahk
 #Include ShortcutKeys2.ahk
 #Include ShortcutKeys3.ahk
-
+#Include ShortcutKeys4.ahk
 
 

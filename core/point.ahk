@@ -1,4 +1,5 @@
 #Include genshin.ahk
+
 class Point {
     __New(pos219 := Pos(), pos169 := Pos()) {
         this.pos219 := pos219
@@ -6,6 +7,11 @@ class Point {
         this.x := pos219.x
         this.y := pos219.y
         this.refresh_pos()
+    }
+
+    set(x,y){
+        this.x := x
+        this.y := y
     }
 
     refresh_pos() {
@@ -30,24 +36,30 @@ class Point {
             case 2560/1080:
                 if(this.pos219.x == '' || this.pos219.y == ''){
                     MsgBox('尚未设置符合要求的21:9点位坐标, 脚本已暂停, debug后请按Ctrl+Alt+R重置脚本状态')
-                    Pause
+                    ; Pause
+                    this.set(0,0)
+                } else {
+                    this.x := this.pos219.x * game_width / 2560
+                    this.y := this.pos219.y * game_height / 1080
                 }
-                this.x := this.pos219.x * game_width / 2560
-                this.y := this.pos219.y * game_height / 1080
             case 3440/1440:
                 if(this.pos219.x == '' || this.pos219.y == ''){
                     MsgBox('尚未设置符合要求的21:9点位坐标, 脚本已暂停, debug后请按Ctrl+Alt+R重置脚本状态')
-                    Pause
+                    ; Pause
+                    this.set(0,0)
+                } else {
+                    this.x := this.pos219.x * game_width / 2560
+                    this.y := this.pos219.y * game_height / 1080
                 }
-                this.x := this.pos219.x * game_width / 2560
-                this.y := this.pos219.y * game_height / 1080
             case 16/9:
                 if(this.pos169.x == '' || this.pos169.y == ''){
-                    MsgBox('尚未设置符合要求的16:9点位坐标, 脚本已暂停, debug后请按Ctrl+Alt+R重置脚本状态')
-                    Pause
+                    ; MsgBox('尚未设置符合要求的16:9点位坐标, 脚本已暂停, debug后请按Ctrl+Alt+R重置脚本状态')
+                    ; Pause
+                    this.set(0,0)
+                } else {
+                    this.x := this.pos169.x * game_width / 1920
+                    this.y := this.pos169.y * game_height / 1080
                 }
-                this.x := this.pos169.x * game_width / 1920
-                this.y := this.pos169.y * game_height / 1080
             default:
                 MsgBox("当前暂不支持的分辨率：" . game_width . '/' . game_height)
         }

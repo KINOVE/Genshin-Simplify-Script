@@ -58,7 +58,10 @@ if(OpenSmartGuiTips){
 ^0:: Team.changeTeam(0)
 
 ; 快速传送
-^t::mapTeleport.fastTeleport()
+^t::{
+    mapTeleport.fastTeleport()
+
+}
 
 ;自动派遣 & 日常任务奖励
 ; !p:: Dispatch.dispatch()

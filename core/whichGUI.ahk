@@ -7,14 +7,9 @@
 ;   4:派遣界面
 ;   -1:未能识别
 class WhichGUI {
-    static mainPaimon := Point(Pos(121, 72))
-    static mainMission := Point(Pos(139, 204))
-    static mainPaimon2 := Point(Pos(117,63))
-    static mapChioceAreaBtn := Point(Pos(2411, 1018))
-    static dispathIcon := Point(Pos(139, 57))
-    static mapZoomA := Point(Pos(103, 440))
-    static mapZoomB := Point(Pos(131, 639))
-    static artifact_strengthen_icon := Point(Pos(143,39))
+    static mapChioceAreaBtn := Point(Pos(2411, 1018), Pos(1841, 1018))
+    
+    
     static newline := '`n'
     static GuiTips := [
         "=====游戏主界面=====" this.newline . 
@@ -79,39 +74,94 @@ class WhichGUI {
 
     ; 判断当前所处界面并返回
     static whichGUI(){
-        ; 判别依据
-        main_1 := PixelGetColor(this.mainPaimon.x, this.mainPaimon.y) == '0xFFFFFF'
-        main_2 := PixelGetColor(this.mainMission.x, this.mainMission.y) == '0xFFFFFF'
-        main_3 := PixelGetColor(this.mainPaimon2.x, this.mainPaimon2.y) == '0xFAEEE0'
-        ; 测试只通过zoom是否能够判别地图界面
-        ; map_1 := Tool.pixelExist(this.mapChioceAreaBtn, '0xe2dccf')
-        map_2 := Tool.pixelSearchPlus(this.mapZoomA, this.mapZoomB, '0xede5da', , , 0)
-        ; map_3 := Tool.pixelExist()
-        battle_1 := PixelGetColor(this.mainPaimon.x, this.mainPaimon.y) != '0xFFFFFF' 
-        battle_2 := PixelGetColor(this.mainMission.x, this.mainMission.y) == '0xFFFFFF'
-        dispatch_1 := PixelGetColor(this.dispathIcon.x, this.dispathIcon.y) == '0xECE5D8'
-        artifact_strengthen := PixelGetColor(this.artifact_strengthen_icon.x, this.artifact_strengthen_icon.y) == '0xD3BC8E'
+        
+        
+        
         ;   1:游戏主界面
-        if ( main_1 && main_2 && main_3){
+        if ( this.isScreen1() ){
             return 1
         }
         ;   2:地图界面
-        else if (map_2){
+        else if (this.isScreen2()){
             return 2
         }
         ;   3:副本界面
-        else if (battle_1 && battle_2)
+        else if ( this.isScreen3() )
             return 3
         ;   4:派遣界面
-        else if (dispatch_1)
+        else if ( this.isScreen4() )
             return 4
-        else if (artifact_strengthen){
+        else if ( this.isScreen5() ){
             return 5
+        }
+        else if this.isScreen6() {
+            return 6
         }
         ;   -1:未能识别
         else{
             return -1
         }
+    }
+
+    ; 是否为大世界游戏界面（主界面）
+    static isScreen1(){
+        static mainPaimon := Point(Pos(121, 72),Pos(55, 60))
+        static mainMission := Point(Pos(139, 204),Pos(46,60))
+        static mainPaimon2 := Point(Pos(117,63),Pos(Pos(72,47)))
+        ; 判别依据
+        main_1 := PixelGetColor(mainPaimon.x, mainPaimon.y) == '0xFFFFFF'
+        main_2 := PixelGetColor(mainMission.x, mainMission.y) == '0xFFFFFF'
+        main_3 := PixelGetColor(mainPaimon2.x, mainPaimon2.y) == '0xFAEEE0'
+        return main_1 && main_2 && main_3
+    }
+
+    ; 是否为地图界面
+    static isScreen2(){
+        static mapZoomA := Point(Pos(103, 440),Pos(37,442))
+        static mapZoomB := Point(Pos(131, 639),Pos(59,639))
+        ; 测试只通过zoom是否能够判别地图界面
+        ; map_1 := Tool.pixelExist(this.mapChioceAreaBtn, '0xe2dccf')
+        map_2 := Tool.pixelSearchPlus(mapZoomA, mapZoomB, '0xede5da', , , 0)
+        ; map_3 := Tool.pixelExist()
+        return map_2
+    }
+
+    ; 是否为副本界面
+    static isScreen3(){
+        static mainPaimon := Point(Pos(121, 72),Pos(55, 60))
+        static mainMission := Point(Pos(139, 204),Pos(46,60))
+        battle_1 := PixelGetColor(mainPaimon.x, mainPaimon.y) != '0xFFFFFF' 
+        battle_2 := PixelGetColor(mainMission.x, mainMission.y) == '0xFFFFFF'
+        return battle_1 && battle_2
+    }
+
+    static isScreen4(){
+        ; TODO -> fix
+        static dispathIcon := Point(Pos(139, 57), Pos(75,24))
+        dispatch_1 := PixelGetColor(dispathIcon.x, dispathIcon.y) == Color('#ECE5D8').c
+        return dispatch_1
+    }
+
+    static isScreen5(){
+        ; TODO -> fix
+        static artifact_strengthen_icon := Point(Pos(143,39), Pos(0,0))
+        artifact_strengthen := PixelGetColor(artifact_strengthen_icon.x, artifact_strengthen_icon.y) == '0xD3BC8E'
+        return artifact_strengthen
+    }
+
+    ; 队伍配置界面
+    static isScreen6(){
+        static pointRange := [
+            Point(Pos(0,0),Pos(56,998)),
+            Point(Pos(0,0),Pos(98,1048))
+        ]
+        params := "*100"
+        filePath := "files\team_select.png"
+        Tool.imgSearch(&x,&y,pointRange,params,filePath,Color("#3b4255"))
+        if (x != "" && y != "") {
+            return true
+        }
+        return false
     }
 
     ; 通过识别当前界面来决定：切换队伍还是传送

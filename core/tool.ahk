@@ -34,4 +34,19 @@ class Tool{
     static MClick(target, speed := 1){
         MouseClick(,target.x, target.y, ,speed)
     }
+
+    
+    ; 图片搜素
+    static imgSearch(&xOut,&yOut,pointRange,params,filePath,targetColor){
+        if IsSet(targetColor) {
+            c := SubStr(targetColor.c,3)
+            imgParams := Format("{1} *Trans{2} {3}", params, c, filePath)
+        } else {
+            imgParams := Format("{1} {2}",params,filePath)
+        }
+        ImageSearch( &xOut, &yOut,
+             pointRange[1].x, pointRange[1].y,
+             pointRange[2].x, pointRange[2].y,
+             imgParams)
+    }
 }

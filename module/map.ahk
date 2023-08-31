@@ -4,17 +4,33 @@
 #Include ../core/whichGUI.ahk
 
 class mapTeleport {
-    static chioceAreaBtn := Point(Pos(2411, 1018))
-    static AreaBtn := [Point(Pos(2115, 149)), Point(Pos(2115, 268)), Point(Pos(2115, 387)), Point(Pos(2115, 506)), Point(Pos(2115, 625)), Point(Pos(2115, 744)), Point(Pos(2115, 863))]
-    static CenterPoint := Point(Pos(1272, 535))
-    static targetBtnRange := [Point(Pos(1730, 160)), Point(Pos(1800, 1000))]
-    static teleportBtn := Point(Pos(2047, 1013))
-    static ListRange := [Point(Pos(2021, 97)), Point(Pos(2039, 1066))]
+    static chioceAreaBtn := Point(Pos(2411, 1018),Pos(1841, 1018))
+    static AreaBtn := [
+        Point(Pos(2115, 149), Pos(1460, 149)), 
+        Point(Pos(2115, 268), Pos(1460, 268)), 
+        Point(Pos(2115, 387), Pos(1460, 387)), 
+        Point(Pos(2115, 506), Pos(1460, 506)), 
+        Point(Pos(2115, 625), Pos(1460, 625)), 
+        Point(Pos(2115, 744), Pos(1460, 744)), 
+        Point(Pos(2115, 863), Pos(1460, 863))
+    ]
+    static CenterPoint := Point(Pos(1272, 535),Pos(560,538))
+    ; TODO -> 修改范围
+    static targetBtnRange := [
+        Point(Pos(1730, 160),Pos(1240,160)), 
+        Point(Pos(1800, 1000),Pos(1266,1000))
+    ]
+    static teleportBtn := Point(Pos(2047, 1013), Pos(1478,1013))
+    ; TODO -> 修改范围
+    static ListRange := [
+        Point(Pos(2021, 97), Pos(1446,97)), 
+        Point(Pos(2039, 1066), Pos(1455,1066))
+    ]
 
     static isListOpen(){
-        condition1 := tool.pixelSearchPlus(this.ListRange[1], this.ListRange[2] ,'0xE4DDD2', , , 3)
-        condition2 := Tool.pixelExist(Point(Pos(2446,37)),Color("#ece5d8").c)
-        condition3 := !Tool.pixelExist(Point(Pos(2411,48)),Color("#3b4255").c,5,1)
+        condition1 := tool.pixelSearchPlus(this.ListRange[1], this.ListRange[2] ,Color('#E4DDD2').c, , , 3)
+        condition2 := Tool.pixelExist(Point(Pos(2446,37),Pos(1877,36)),Color("#ece5d8").c)
+        condition3 := !Tool.pixelExist(Point(Pos(2411,48),Pos(1841,48)),Color("#3b4255").c,5,1)
         return condition3 && condition2
     }
 
@@ -36,7 +52,7 @@ class mapTeleport {
     ; 判断当前的地区
     static getNowArea(){
         for i in this.AreaBtn{
-            if(Tool.pixelExist(i, '0xE4DDD2')){
+            if(Tool.pixelExist(i, Color('#E4DDD2').c)){
                 return A_Index
             }
         }
@@ -93,9 +109,10 @@ class mapTeleport {
         Sleep(100)
         
         ; 如果并不在地图界面
-        if (WhichGUI.whichGUI() != 2)
+        if (WhichGUI.whichGUI() != 2){
+            ; MsgBox("1")
             return
-
+        }
         ; ----------------------------------变量准备--------------------------------------
 
         ; 存放传送锚点坐标
@@ -120,7 +137,7 @@ class mapTeleport {
         ; 找到小箭头，将箭头坐标传入arrowTargetBtnX/Y
         condition0 := PixelSearch(&arrowTargetBtnX, &arrowTargetBtnY
             , this.targetBtnRange[1].x, this.targetBtnRange[1].y
-            , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0xece5d8', 7)
+            , this.targetBtnRange[2].x, this.targetBtnRange[2].y, Color('#ece5d8').c, 7)
         ; 提前声明，防止找不到
         condition1 := false
         condition1plus := false
@@ -144,11 +161,12 @@ class mapTeleport {
             ;     , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0x2d91d9', 10)
             condition1 := PixelSearch(&targetX1, &targetY1
                 , arrowTargetBtnX, arrowTargetBtnY
-                , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0x2d91d9', 10)
+                , this.targetBtnRange[2].x, this.targetBtnRange[2].y, Color('#2d91d9').c, 10)
             if(condition1){
-                temp_point := Point(Pos(targetX1, targetY1))
+                temp_point := Point(Pos(targetX1, targetY1),Pos(targetX1, targetY1))
                 ; 查找锚点附近是否有List背景颜色（有待实验是否有效）
-                condition1plus := Tool.pixelExist(temp_point, '0x1c242c', 40, 10)
+                ; Tool.MMove(temp_point)
+                condition1plus := Tool.pixelExist(temp_point, Color('#26313f').c, 40, 20)
                 if(condition1plus){
                     ArrayTargetX.Push(targetX1)
                     ArrayTargetY.Push(targetY1)

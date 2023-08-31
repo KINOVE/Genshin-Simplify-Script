@@ -49,7 +49,7 @@ class BattlePass {
         ; 这里其实可以加一个延时等待判断(判断是否完成动画，是否可点击)的逻辑
         loop 3
             MouseClick( , this.p1.x, this.p1.y, , 0)
-        Sleep(400)
+        Sleep(600)
         ; 如果奖励领取按钮可触发
         if (PixelSearch( &temp1, &temp2, this.upgrade.x - 10, this.upgrade.y - 10 , this.upgrade.x + 10, this.upgrade.y + 10 , '0xdad9cd', 20)){
             MouseClick( , this.upgrade.x, this.upgrade.y, , 0)
