@@ -1,5 +1,6 @@
 ; 脚本只在以下条件满足时执行
-#Include StartThis.ahk
+#Include core\core.ahk
+#Include module\module.ahk
 #HotIf Genshin.is_game_active()
 ; --------------------------------Settings 设置--------------------------------
 
@@ -11,7 +12,7 @@ OpenSmartGuiTips := setting.getIni("global","OpenSmartGuiTips")
 
 ; 每秒刷新：显示当前界面快捷键
 if(OpenSmartGuiTips){
-    MsgBox("!")
+    ; MsgBox("!")
     SetTimer () => WhichGUI.smartGuiTips(), 1000, -100
 }
 
@@ -84,10 +85,3 @@ if(OpenSmartGuiTips){
     Sleep(500)
     Domain.skip_award()
 }
-
-
-; 1::{
-;     if Tool.pixelSearchPlus( Point(Pos(1063,25)),Point(Pos(1083,70)),"0x5E78A1",&x,&y) {
-;         MouseMove(x,y)
-;     }
-; }

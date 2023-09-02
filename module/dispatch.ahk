@@ -1,7 +1,4 @@
-#Include ../core/point.ahk
-#Include ../core/genshin.ahk
-#Include ../core/tool.ahk
-#include ../core/whichGUI.ahk
+#Include ../core/core.ahk
 
 class Dispatch {
     static sleep_time := 200

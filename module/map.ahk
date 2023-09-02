@@ -1,7 +1,4 @@
-#Include ../core/point.ahk
-#Include ../core/Color.ahk
-#Include ../core/genshin.ahk
-#Include ../core/whichGUI.ahk
+#Include ../core/core.ahk
 
 class mapTeleport {
     static chioceAreaBtn := Point(Pos(2411, 1018),Pos(1841, 1018))

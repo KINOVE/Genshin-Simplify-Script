@@ -1,4 +1,5 @@
-#Include StartThis.ahk
+#Include core\core.ahk
+#Include module\module.ahk
 ; 处于队伍切换界面时
 #HotIf Genshin.is_game_active() && (WhichGUI.whichGUI() == 6)
 ^a::{

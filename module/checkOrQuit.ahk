@@ -1,6 +1,4 @@
-#Include ../core/Color.ahk
-#Include ../core/point.ahk
-#Include ../core/tool.ahk
+#Include ../core/core.ahk
 class CheckOrQuit {
     static pointRange := [
         ; todo -> fix

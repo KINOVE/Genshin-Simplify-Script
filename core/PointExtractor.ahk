@@ -1,7 +1,4 @@
-#Include Color.ahk
-#Include tool.ahk
-#Include point.ahk
-#Include genshin.ahk
+#Include core.ahk
 ; 用于快速提取点位和颜色信息
 Class PointExtractor {
     ; model -> 

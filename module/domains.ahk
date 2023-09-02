@@ -1,6 +1,4 @@
-#Include ../core/point.ahk
-#Include ../core/genshin.ahk
-#Include ../core/tool.ahk
+#Include ../core/core.ahk
 
 class Domain {
     static p_choose_condensed_resin := Point(Pos(955, 744), Pos(602, 744))

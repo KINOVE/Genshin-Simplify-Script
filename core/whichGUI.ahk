@@ -1,5 +1,5 @@
 #Include point.ahk
-#Include ../StartThis.ahk
+
 ; 用于定位当前处于哪种用户界面中
 ;   1:游戏主界面
 ;   2:地图界面
@@ -62,11 +62,6 @@ class WhichGUI {
             ; 清空tips
             this.emptyToolTip()
             now_GUI := -2
-            return
-        }
-        ; 如果正在执行其他功能
-        if executing_function{
-            this.emptyToolTip()
             return
         }
         this.showTips(this.WhichGUI())

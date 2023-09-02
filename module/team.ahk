@@ -1,5 +1,4 @@
-#Include ../core/point.ahk
-#Include ../core/genshin.ahk
+#Include ../core/core.ahk
 
 class Team {
     static green1 := Point(Pos(1105, 50))
@@ -25,7 +24,7 @@ class Team {
         KeyWait('3')
         ; 进入队伍切换界面(自行在StartThis.ahk中修改按键)
         ; global teamChangeBtn
-        SendInput(teamChangeBtn)
+        SendInput(Keys.teamChangeBtn())
         ; 每隔20毫秒，检测一次是否进入到了界面中
         Sleep(500)
         time := A_TickCount

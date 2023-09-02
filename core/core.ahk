@@ -1,0 +1,9 @@
+#Include ActiveLock.ahk
+#Include Color.ahk
+#Include genshin.ahk
+#Include ini.ahk
+#Include point.ahk
+#Include PointExtractor.ahk
+#Include tool.ahk
+#Include whichGUI.ahk
+#Include keys.ahk
