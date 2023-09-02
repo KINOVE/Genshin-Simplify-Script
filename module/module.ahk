@@ -1,6 +1,6 @@
 #Include artifact.ahk
-#Include battlePass.ahk
-#Include checkOrQuit.ahk
+#Include battle_pass.ahk
+#Include check_or_quit.ahk
 #Include dispatch.ahk
 #Include domains.ahk
 #Include map.ahk
