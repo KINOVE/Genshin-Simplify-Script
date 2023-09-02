@@ -1,6 +1,6 @@
 ; 脚本只在以下条件满足时执行
 #Include StartThis.ahk
-#HotIf Genshin.is_game_active() && Status.IsActive()
+#HotIf Genshin.is_game_active() && (Status.IsActive() || Status.IsFlyOrDive())
 ; 快速拾取&对话
 f::{
     SendInput('f')
@@ -15,6 +15,10 @@ f::{
     SetTimer(pick, 30)
 }
 f Up:: SendInput('{f Up}')
+
+
+
+#HotIf Genshin.is_game_active() && Status.IsActive()
 
 ; 连跳
 Space:: {

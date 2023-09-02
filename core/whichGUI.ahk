@@ -72,28 +72,32 @@ class WhichGUI {
         this.showTips(this.WhichGUI())
     }
 
-    ; 判断当前所处界面并返回
+    /*
+    判断当前所处界面并返回
+    1 ->  游戏主界面
+    2 ->  地图界面
+    3 ->  副本界面
+    4 ->  派遣界面
+    5 ->  圣遗物强化界面
+    6 ->  队伍配置界面
+    -1->  未能识别*/
     static whichGUI(){
-        
-        
-        
         ;   1:游戏主界面
-        if ( this.isScreen1() ){
+        if ( this.isScreen1() )
             return 1
-        }
         ;   2:地图界面
-        else if (this.isScreen2()){
+        else if (this.isScreen2())
             return 2
-        }
         ;   3:副本界面
         else if ( this.isScreen3() )
             return 3
         ;   4:派遣界面
         else if ( this.isScreen4() )
             return 4
-        else if ( this.isScreen5() ){
+        ;   5:圣遗物强化界面
+        else if ( this.isScreen5() )
             return 5
-        }
+        ;   6:队伍配置界面
         else if this.isScreen6() {
             return 6
         }

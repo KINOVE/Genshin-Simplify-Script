@@ -18,6 +18,7 @@
 #Include module/team.ahk
 #Include module/battlePass.ahk
 #Include module/map.ahk
+#Include module/checkOrQuit.ahk
 
 /* Global */
 ; 当前所处在哪个游戏界面
@@ -45,5 +46,6 @@ global walkRunSwitch := setting.getIni("global","walkRunSwitch")
 #Include ShortcutKeys2.ahk
 #Include ShortcutKeys3.ahk
 #Include ShortcutKeys4.ahk
+#Include ShortcutKeys5.ahk
 
 
