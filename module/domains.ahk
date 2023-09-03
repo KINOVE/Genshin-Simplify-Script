@@ -6,12 +6,12 @@ class Domain {
     ; static p3 := Point(Pos(659, 507), Pos(573, 507))
     static p_reward_area := [
         Point(Pos(659, 507), Pos(573, 507)),
-        Point(Pos(1559,590))
+        Point(Pos(1559,590), Pos(1034,1008))
     ]
 
     static p_exit_btn_area := [
-        Point(Pos(900, 984)),
-        Point(Pos(931, 1012))
+        Point(Pos(900, 984), Pos(583,983)),
+        Point(Pos(931, 1012), Pos(606,1005))
     ]
 
 
