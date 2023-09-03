@@ -28,9 +28,10 @@ global now_GUI := -1
 ; global walkRunSwitch := setting.getIni("global","walkRunSwitch")
 
 /* ShortCutKeys */
-#Include ShortcutKeys1.ahk
-#Include ShortcutKeys2.ahk
-#Include ShortcutKeys3.ahk
-#Include ShortcutKeys4.ahk
-#Include ShortcutKeys5.ahk
+#Include keys1.ahk
+#Include keys2.ahk
+#Include keys3.ahk
+#Include keys4.ahk
+#Include keys5.ahk
+#Include keys6.ahk
 
