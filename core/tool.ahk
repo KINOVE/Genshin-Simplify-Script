@@ -36,17 +36,35 @@ class Tool{
     }
 
     
-    ; 图片搜素
+    /*
+        图片搜索
+        static pointRange := [
+            Point(Pos(0,0),Pos(56,998)),
+            Point(Pos(0,0),Pos(98,1048))
+        ]
+        params := "*100"
+        filePath := "files\team_select.png"
+        Tool.imgSearch(&x,&y,pointRange,params,filePath,Color("#3b4255"))
+        if (x != "" && y != "") {
+            return true
+        }
+        return false
+    */
     static imgSearch(&xOut,&yOut,pointRange,params,filePath,targetColor){
         if IsSet(targetColor) {
-            c := SubStr(targetColor.c,3)
+            if targetColor == "TransBlack" {
+                c := 'Black'
+            } else {
+                c := SubStr(targetColor.c,3)
+            }
             imgParams := Format("{1} *Trans{2} {3}", params, c, filePath)
         } else {
             imgParams := Format("{1} {2}",params,filePath)
         }
-        ImageSearch( &xOut, &yOut,
+        res := ImageSearch( &xOut, &yOut,
              pointRange[1].x, pointRange[1].y,
              pointRange[2].x, pointRange[2].y,
              imgParams)
+        return res
     }
 }

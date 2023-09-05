@@ -85,3 +85,22 @@ if(OpenSmartGuiTips){
     Sleep(500)
     Domain.skip_award()
 }
+
+^=::{
+    range := [
+        Point(,Pos(1220,569)),
+        Point(,Pos(1282,907))
+    ]
+    params := '*10'
+    filePath := 'files/map/cursor.png'
+    target := 'TransBlack'
+    res := Tool.imgSearch(&x,&y,range,params,filePath,target)
+    ; res := ImageSearch(&x,&y,range[1].x, range[1].y,range[2].x, range[2].y, "*100 *TransBlack " . filePath)
+    if x != '' && y != '' {
+        MouseMove(x,y)
+    }
+    MsgBox(res)
+
+    ; Tool.pixelSearchPlus(range[1],range[2],target.c, &x,&y, 5)
+    ; MouseMove(x,y)
+}

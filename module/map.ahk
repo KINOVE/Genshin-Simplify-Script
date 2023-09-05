@@ -11,11 +11,11 @@ class mapTeleport {
         Point(Pos(2115, 744), Pos(1460, 744)), 
         Point(Pos(2115, 863), Pos(1460, 863))
     ]
-    static CenterPoint := Point(Pos(1272, 535),Pos(560,538))
-    ; TODO -> 修改范围
+    static CenterPoint := Point(Pos(1272, 535),Pos(956,535))
+    ; 待选列表中，锚点图标存在的范围
     static targetBtnRange := [
         Point(Pos(1730, 160),Pos(1240,160)), 
-        Point(Pos(1800, 1000),Pos(1266,1000))
+        Point(Pos(1800, 1000),Pos(1310,1002))
     ]
     static teleportBtn := Point(Pos(2047, 1013), Pos(1478,1013))
     ; TODO -> 修改范围
@@ -57,6 +57,19 @@ class mapTeleport {
         return -1
     }
 
+    ; 找到标黄的小箭头
+    ; files/map/cursor.png
+    static find_arrow_target(&arrowTargetBtnX, &arrowTargetBtnY){
+        params := '*10'
+        filePath := 'files/map/cursor.png'
+        target := 'TransBlack'
+        res := Tool.imgSearch(&arrowTargetBtnX,&arrowTargetBtnY,this.targetBtnRange,params,filePath,target)
+        ; if res {
+        ;     MouseMove(arrowTargetBtnX,arrowTargetBtnY)
+        ; }
+        return res
+    }
+
     ; 传送到地区
     static teleportToArea(AreaId) {
         ; 如果并不在地图界面
@@ -93,9 +106,9 @@ class mapTeleport {
         this.untilListOpen()
         Sleep(20)
         MouseClick(, this.AreaBtn[AreaId].x, this.AreaBtn[AreaId].y, ,0)
-        Sleep(20)
-        MouseClick(, this.CenterPoint.x, this.CenterPoint.y, ,0)
         Sleep(400)
+        MouseClick(, this.CenterPoint.x, this.CenterPoint.y, ,0)
+        Sleep(300)
         this.fastTeleport()
     }
 
@@ -132,9 +145,10 @@ class mapTeleport {
         ; condition3 : 根据图片搜索，返回洞天锚点的位置
         
         ; 找到小箭头，将箭头坐标传入arrowTargetBtnX/Y
-        condition0 := PixelSearch(&arrowTargetBtnX, &arrowTargetBtnY
-            , this.targetBtnRange[1].x, this.targetBtnRange[1].y
-            , this.targetBtnRange[2].x, this.targetBtnRange[2].y, Color('#ece5d8').c, 7)
+        ; condition0 := PixelSearch(&arrowTargetBtnX, &arrowTargetBtnY
+        ;     , this.targetBtnRange[1].x, this.targetBtnRange[1].y
+        ;     , this.targetBtnRange[2].x, this.targetBtnRange[2].y, Color('#ece5d8').c, 7)
+        condition0 := this.find_arrow_target(&arrowTargetBtnX, &arrowTargetBtnY)
         ; 提前声明，防止找不到
         condition1 := false
         condition1plus := false
@@ -153,14 +167,15 @@ class mapTeleport {
         ArrayTargetY := []
         if(condition0){
             ; 在此基础上，找到传送锚点的蓝色，将传送锚点坐标传入targetBtnX/Y
-            ; condition1 := PixelSearch(&targetBtnX, &targetBtnY
-            ;     , arrowTargetBtnX, arrowTargetBtnY
-            ;     , this.targetBtnRange[2].x, this.targetBtnRange[2].y, '0x2d91d9', 10)
+            ; MouseMove(arrowTargetBtnX,arrowTargetBtnY)
+            ; Sleep(500)
+            ; MouseMove(THIS.targetBtnRange[2].x,this.targetBtnRange[2].y)
             condition1 := PixelSearch(&targetX1, &targetY1
                 , arrowTargetBtnX, arrowTargetBtnY
                 , this.targetBtnRange[2].x, this.targetBtnRange[2].y, Color('#2d91d9').c, 10)
             if(condition1){
-                temp_point := Point(Pos(targetX1, targetY1),Pos(targetX1, targetY1))
+                temp_point := Pos(targetX1, targetY1)
+                MouseMove(temp_point.x,temp_point.y)
                 ; 查找锚点附近是否有List背景颜色（有待实验是否有效）
                 ; Tool.MMove(temp_point)
                 condition1plus := Tool.pixelExist(temp_point, Color('#26313f').c, 40, 20)
