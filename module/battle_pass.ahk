@@ -4,16 +4,18 @@
 ; 纪行
 class BattlePass {
     ; p1,p2分别为纪行界面的两个选项卡点位
-    static p1 := Point(Pos(1185,55))
-    static p2 := Point(Pos(1280,55))
-    static upgrade := Point(Pos(2198,981))
-    static exitBtn := Point(Pos(2420,48))
+    static p1 := Point(Pos(1185,55),Pos(862,55))
+    static p2 := Point(Pos(1280,55),Pos(959,54))
+    static upgrade := Point(Pos(2198,981),Pos(1729,975))
+    static exitBtn := Point(Pos(2420,48),Pos(1829,47))
+    static c_exit_btn := Color('#ece5d8').c
+    
 
     ; 纪行结算并获取奖励
     static bp_award(){
 
         ; 检测当前所处的界面
-        if (WhichGUI.whichGUI() != 1){
+        if (not WhichGUI.isScreen1()){
             ToolTip('当前可能处于特殊场景，无法使用纪行功能', )
             SetTimer () => ToolTip(''), -1000
             return
@@ -31,20 +33,13 @@ class BattlePass {
             MouseClick( , this.upgrade.x, this.upgrade.y, , 0)
             Sleep(200)
             ; 如果退出按钮的颜色正常，即未进入奖励窗口，则不休眠
-            if (PixelGetColor(this.exitBtn.x, this.exitBtn.y) != '0xece5d8'){
+            if (PixelGetColor(this.exitBtn.x, this.exitBtn.y) != this.c_exit_btn){
                 ; MouseMove(900, 900, 0)
-                Sleep(100)
+                Sleep(300)
                 SendInput('{Esc}')
-                Sleep(400)
-                ; loop 30{
-                ;     MouseClick( , this.p1.x, this.p1.y, , 0)
-                ; }
-                ; Pause
+                Sleep(700)
             }
         }
-        ; if (WhichGUI.whichGUI == 1){
-        ;     this.bp_award()
-        ; }        
         ; 打开奖励领取界面
         ; 这里其实可以加一个延时等待判断(判断是否完成动画，是否可点击)的逻辑
         loop 3

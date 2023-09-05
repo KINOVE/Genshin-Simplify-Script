@@ -105,12 +105,13 @@ class WhichGUI {
     ; 是否为大世界游戏界面（主界面）
     static isScreen1(){
         static mainPaimon := Point(Pos(121, 72),Pos(55, 60))
-        static mainMission := Point(Pos(139, 204),Pos(46,60))
-        static mainPaimon2 := Point(Pos(117,63),Pos(Pos(72,47)))
+        static mainMission := Point(Pos(139, 204),Pos(46,72))
+        static mainPaimon2 := Point(Pos(117,63),Pos(67,32))
         ; 判别依据
-        main_1 := PixelGetColor(mainPaimon.x, mainPaimon.y) == '0xFFFFFF'
-        main_2 := PixelGetColor(mainMission.x, mainMission.y) == '0xFFFFFF'
-        main_3 := PixelGetColor(mainPaimon2.x, mainPaimon2.y) == '0xFAEEE0'
+        main_1 := PixelGetColor(mainPaimon.x, mainPaimon.y) == Color('#FFFFFF').c
+        main_2 := PixelGetColor(mainMission.x, mainMission.y) == Color('#FFFFFF').c
+        main_3 := Tool.pixelExist(mainPaimon2, Color('#e9c48f').c)
+        ; temp := PixelGetColor(mainPaimon2.x, mainPaimon2.y) == Color('#e9c48f').c
         return main_1 && main_2 && main_3
     }
 
