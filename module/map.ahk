@@ -70,11 +70,11 @@ class mapTeleport {
         return res
     }
 
-    ; 传送到地区
-    static teleportToArea(AreaId) {
+    ; 切换到目标区域
+    static switchToArea(AreaId) {
         ; 如果并不在地图界面
-        if (WhichGUI.whichGUI() != 2)
-            return
+        ; if (WhichGUI.whichGUI() != 2)
+        ;     return
         ; 打开地图切换列表
         this.untilListOpen()
 
@@ -107,6 +107,12 @@ class mapTeleport {
         Sleep(20)
         MouseClick(, this.AreaBtn[AreaId].x, this.AreaBtn[AreaId].y, ,0)
         Sleep(400)
+        MouseMove(this.CenterPoint.x, this.CenterPoint.y, 0)
+    }
+
+    ; 传送到地区
+    static teleportToArea(AreaId) {
+        this.switchToArea(AreaId)
         MouseClick(, this.CenterPoint.x, this.CenterPoint.y, ,0)
         Sleep(300)
         this.fastTeleport()
@@ -120,7 +126,6 @@ class mapTeleport {
         
         ; 如果并不在地图界面
         if (WhichGUI.whichGUI() != 2){
-            ; MsgBox("1")
             return
         }
         ; ----------------------------------变量准备--------------------------------------

@@ -34,4 +34,5 @@ global now_GUI := -1
 #Include keys4.ahk
 #Include keys5.ahk
 #Include keys6.ahk
+#Include keys7.ahk
 

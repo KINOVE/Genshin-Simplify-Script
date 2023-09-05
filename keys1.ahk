@@ -39,29 +39,20 @@ if(OpenSmartGuiTips){
 ^Esc:: Genshin.close_game()
 
 ; Ctrl + [1 ~ 0] 切换队伍
-; Ctrl + [1 ~ 7] 传送到各地区（注意：此功能会根据游戏进度不同导致部分地区未解锁，请按实际情况选择）
-; 蒙德
-; 璃月
-; 稻妻
-; 须弥
-; 渊下宫
-; 层岩
-; 尘歌壶
-^1:: WhichGUI.changeTeamOrTeleport(1)
-^2:: WhichGUI.changeTeamOrTeleport(2)
-^3:: WhichGUI.changeTeamOrTeleport(3)
-^4:: WhichGUI.changeTeamOrTeleport(4)
-^5:: WhichGUI.changeTeamOrTeleport(5)
-^6:: WhichGUI.changeTeamOrTeleport(6)
-^7:: WhichGUI.changeTeamOrTeleport(7)
-^8:: Team.changeTeam(8)
-^9:: Team.changeTeam(9)
-^0:: Team.changeTeam(0)
+; ^1:: WhichGUI.changeTeamOrTeleport(1)
+; ^2:: WhichGUI.changeTeamOrTeleport(2)
+; ^3:: WhichGUI.changeTeamOrTeleport(3)
+; ^4:: WhichGUI.changeTeamOrTeleport(4)
+; ^5:: WhichGUI.changeTeamOrTeleport(5)
+; ^6:: WhichGUI.changeTeamOrTeleport(6)
+; ^7:: WhichGUI.changeTeamOrTeleport(7)
+; ^8:: Team.changeTeam(8)
+; ^9:: Team.changeTeam(9)
+; ^0:: Team.changeTeam(0)
 
 ; 快速传送
 ^t::{
     mapTeleport.fastTeleport()
-
 }
 
 ;自动派遣 & 日常任务奖励
@@ -84,23 +75,4 @@ if(OpenSmartGuiTips){
 ^f:: {
     Sleep(500)
     Domain.skip_award()
-}
-
-^=::{
-    range := [
-        Point(,Pos(1220,569)),
-        Point(,Pos(1282,907))
-    ]
-    params := '*10'
-    filePath := 'files/map/cursor.png'
-    target := 'TransBlack'
-    res := Tool.imgSearch(&x,&y,range,params,filePath,target)
-    ; res := ImageSearch(&x,&y,range[1].x, range[1].y,range[2].x, range[2].y, "*100 *TransBlack " . filePath)
-    if x != '' && y != '' {
-        MouseMove(x,y)
-    }
-    MsgBox(res)
-
-    ; Tool.pixelSearchPlus(range[1],range[2],target.c, &x,&y, 5)
-    ; MouseMove(x,y)
 }
