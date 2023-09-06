@@ -1,17 +1,17 @@
 #Include ../core/core.ahk
 
 class Domain {
-    static p_choose_condensed_resin := Point(Pos(955, 744), Pos(602, 744))
-    static p_skip_btn := Point(Pos(2418, 50), Pos(1788, 50))
+    static p_choose_condensed_resin := Point(Pos(955, 744), Pos(602, 744), Pos(0,0))
+    static p_skip_btn := Point(Pos(2418, 50), Pos(1788, 50), Pos(0,0))
     ; static p3 := Point(Pos(659, 507), Pos(573, 507))
     static p_reward_area := [
-        Point(Pos(659, 507), Pos(573, 507)),
-        Point(Pos(1559,590), Pos(1034,1008))
+        Point(Pos(659, 507), Pos(573, 507), Pos(0,0)),
+        Point(Pos(1559,590), Pos(1034,1008), Pos(0,0))
     ]
 
     static p_exit_btn_area := [
-        Point(Pos(900, 984), Pos(583,983)),
-        Point(Pos(931, 1012), Pos(606,1005))
+        Point(Pos(900, 984), Pos(583,983), Pos(0,0)),
+        Point(Pos(931, 1012), Pos(606,1005), Pos(0,0))
     ]
 
 
