@@ -6,26 +6,32 @@
 ; 缩小
 ^X::{
     MouseGetPos(&x,&y)
-    Tool.MClick(Point(Pos(0,0),Pos(46,651)))
+    Tool.MClick(Point(Pos(118,650),Pos(46,651)))
     MouseMove(x,y,0)
 }
 
 ; 放大
 ^C::{
     MouseGetPos(&x,&y)
-    Tool.MClick(Point(Pos(0,0),Pos(47,421)))
+    Tool.MClick(Point(Pos(116,425),Pos(47,421)))
     MouseMove(x,y,0)
 }
 
 ; 删除标点
 ^D::{
-    p_delete_btn := Point(,Pos(1476,1012))
+    p_delete_btn := Point(Pos(2048,996),Pos(1476,1012))
     c_delete_btn := Color("#FE5C5C").c
     if Tool.pixelExist(p_delete_btn, c_delete_btn) {
         MouseGetPos(&x,&y)
         Tool.MClick(p_delete_btn)
         MouseMove(x,y,0)
     }
+}
+
+^Space::{
+    MouseGetPos(&x,&y)
+    Tool.MClick(Point(Pos(2050,1008),Pos(1478,1008)))
+    MouseMove(x,y,0)
 }
 
 ; Ctrl + Alt + [1 ~ 8] 传送到各地区（注意：此功能会根据游戏进度不同导致部分地区未解锁，请按实际情况选择）

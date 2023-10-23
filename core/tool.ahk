@@ -67,4 +67,27 @@ class Tool{
              imgParams)
         return res
     }
+
+        /*
+        图片搜索
+        static pointRange := [
+            Point(Pos(0,0),Pos(56,998)),
+            Point(Pos(0,0),Pos(98,1048))
+        ]
+        params := "*100"
+        filePath := "files\team_select.png"
+        Tool.imgSearch(&x,&y,pointRange,params,filePath,Color("#3b4255"))
+        if (x != "" && y != "") {
+            return true
+        }
+        return false
+    */
+    static imgSearchList(&xOut,&yOut,pointRange,params,filePaths,targetColor){
+        for filePath in filePaths {
+            res := this.imgSearch(&xOut,&yOut,pointRange,params,filePath,targetColor)
+            if (res == true)
+                return res
+        }
+        return res
+    }
 }

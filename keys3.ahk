@@ -6,6 +6,10 @@
 
 ; 实现走/跑切换按键的屏蔽开关逻辑
 Ctrl:: {
+    ; 假如是地图界面的话
+    if WhichGUI.isScreen2() {
+        Status.SetTrue()
+    }
     ; walkRunSwitch := setting.getIni("global","walkRunSwitch")]
     SendInput('{' . Keys.walkRunSwitch() . ' Down}')
 }

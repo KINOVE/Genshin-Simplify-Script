@@ -58,16 +58,28 @@ Class Status{
 
     ; 激活为正常模式
     static SetTrue(){
+        width := 0
+        height := Genshin.game_size.height/2
         this.Active := 0
+        SoundPlay("files/audio/open.wav")
+        ToolTip('', , , 20)
     }
 
     ; Fly/Diving模式
     static SetFlyOrDive(){
+        width := 0
+        height := Genshin.game_size.height/2
         this.Active := 2
+        SoundPlay("files/audio/fly_mode.wav")
+        ToolTip('Fly/Dive', width, height, 20)
     }
 
     ; 关闭
     static SetFalse(){
+        width := 0
+        height := Genshin.game_size.height/2
         this.Active := 1
+        SoundPlay("files/audio/close.wav")
+        ToolTip('关闭', width, height, 20)
     }
 }

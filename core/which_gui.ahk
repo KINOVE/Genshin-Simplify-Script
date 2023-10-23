@@ -152,12 +152,15 @@ class WhichGUI {
     ; 队伍配置界面
     static isScreen6(){
         static pointRange := [
-            Point(Pos(0,0),Pos(56,998)),
-            Point(Pos(0,0),Pos(98,1048))
+            Point(Pos(127,1002),Pos(56,998)),
+            Point(Pos(162,1036),Pos(98,1048))
         ]
         params := "*100"
-        filePath := "files\team_select.png"
-        Tool.imgSearch(&x,&y,pointRange,params,filePath,Color("#3b4255"))
+        filePaths := [
+            "files\team_select.png",
+            "files\team_select_1440.png"
+        ]
+        Tool.imgSearchList(&x,&y,pointRange,params,filePaths,Color("#3b4255"))
         if (x != "" && y != "") {
             return true
         }

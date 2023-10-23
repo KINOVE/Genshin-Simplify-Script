@@ -76,3 +76,8 @@ if(OpenSmartGuiTips){
     Sleep(500)
     Domain.skip_award()
 }
+
+!1::{
+    ToolTip(WhichGUI.whichGUI(),,,10)
+    SetTimer () => ToolTip(,,,10), 1000
+}

@@ -10,6 +10,10 @@ Class PointExtractor {
         MouseGetPos(&x,&y)
         c := PixelGetColor(x,y)
         c := "#" . SubStr(c,3,6)
+
+        x := this.transX_1440to1080(x)
+        y := this.transY_1440to1080(y)
+
         switch this.model {
             case 1:
                 A_Clipboard := Format('Point(Pos({1},{2}))`nColor("{3}")',x,y,c)
@@ -32,5 +36,13 @@ Class PointExtractor {
             c := "#" . SubStr(c,3,6)
             A_Clipboard := Format('Point(Pos({1},{2}))`nColor("{3}")',x,y,c)
         }
+    }
+
+    static transX_1440to1080(x){
+        return Floor(x/3440*2560)
+    }
+
+    static transY_1440to1080(y){
+        return Floor(y/1440*1080)
     }
 }
