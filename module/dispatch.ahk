@@ -66,7 +66,12 @@ class Dispatch {
         ]
     ]
 
-    
+    ; 全部领取按钮
+    static p_claim_all := Point(Pos(124, 1015),Pos(75, 1015))
+    static c_claim_all := Color('#ffcc33').c
+
+    ; 重复派遣按钮
+    static p_dispatch_again := Point(Pos(1662, 1020),Pos(1007, 1020))
 
     ; 设置点位派遣时间
     static p_time := Point(Pos(2400, 682),Pos(1804,681))
@@ -177,14 +182,24 @@ class Dispatch {
         this.refresh_pos()
 
         ;点击第2区域
-        this.changeArea(2)
-        this.checkifpatch(2,1)
-        this.checkifpatch(2,4)
-        this.checkifpatch(2,3)
+        ; this.changeArea(2)
+        ; this.checkifpatch(2,1)
+        ; this.checkifpatch(2,4)
+        ; this.checkifpatch(2,3)
 
-        this.changeArea(5)
-        this.checkifpatch(5,3)
-        this.checkifpatch(5,5)
+        ; this.changeArea(5)
+        ; this.checkifpatch(5,3)
+        ; this.checkifpatch(5,5)
+
+        ; 4.2更新功能：全部领取 - 检查是否可以一键收取
+        if (!Tool.pixelExist(this.p_claim_all, this.c_claim_all)) {
+            MsgBox('没有待领取的奖励')
+            return
+        }
+        Tool.MClick(this.p_claim_all)
+        Sleep(1000)
+        Tool.MClick(this.p_dispatch_again)
+        Sleep(500)
 
         ;退出
         SendInput("{Esc}")
