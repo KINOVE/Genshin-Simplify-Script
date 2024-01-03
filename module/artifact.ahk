@@ -1,4 +1,5 @@
 #Include ../core/genshin.ahk
+#Include ../core/point.ahk
 
 ; 圣遗物强化/加减锁功能
 ; "快捷放入"按钮

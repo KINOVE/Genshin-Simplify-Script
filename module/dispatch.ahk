@@ -67,11 +67,11 @@ class Dispatch {
     ]
 
     ; 全部领取按钮
-    static p_claim_all := Point(Pos(124, 1015),Pos(75, 1015))
+    static p_claim_all := Point(Pos(147, 1015), Pos(75, 1015))
     static c_claim_all := Color('#ffcc33').c
 
     ; 重复派遣按钮
-    static p_dispatch_again := Point(Pos(1662, 1020),Pos(1007, 1020))
+    static p_dispatch_again := Point(Pos(1412, 1017),Pos(1007, 1020))
 
     ; 设置点位派遣时间
     static p_time := Point(Pos(2400, 682),Pos(1804,681))
@@ -103,6 +103,9 @@ class Dispatch {
         height := size[2]
         
         ; 刷新点位坐标---------------------------------------
+
+        ; 一键领取奖励
+        this.p_claim_all.refresh_pos()
 
         ; 区域选择
         for i in this.p_area_range {
