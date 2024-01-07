@@ -5,3 +5,4 @@
 #Include domains.ahk
 #Include map.ahk
 #Include team.ahk
+#Include auto_buy.ahk

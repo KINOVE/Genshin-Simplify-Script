@@ -81,3 +81,12 @@ if(OpenSmartGuiTips){
     ToolTip(WhichGUI.whichGUI(),,,10)
     SetTimer () => ToolTip(,,,10), 1000
 }
+
+; 一键购买当前商品（杂货店可用）
+^b::AutoBuy.autoBuy()
+
+^1::{
+    MouseGetPos(&x,&y)
+    MsgBox("x" . x . "y" . y)
+}
+
