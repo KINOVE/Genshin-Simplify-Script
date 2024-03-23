@@ -90,3 +90,19 @@ if(OpenSmartGuiTips){
     MsgBox("x" . x . "y" . y)
 }
 
+; 那维莱特转圈
+XButton1::{
+    MRound(){
+        if GetKeyState('XButton1','P'){
+            ; 按下左键
+            SendInput('{LButton Down}')
+            ; 转圈
+            DllCall('mouse_event','uint',1,'int',1000,'int',0,'uint',0,'int',0)
+        }
+        else{
+            ; 抬起左键
+            SendInput('{LButton Up}')
+        }
+    }
+    SetTimer(MRound,1)
+}
