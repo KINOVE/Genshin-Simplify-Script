@@ -106,5 +106,5 @@ XButton1::{
             Reload
         }
     }
-    SetTimer(MRound,50)
+    SetTimer(MRound,20)
 }
