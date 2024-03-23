@@ -98,11 +98,13 @@ XButton1::{
             SendInput('{LButton Down}')
             ; 转圈
             DllCall('mouse_event','uint',1,'int',1000,'int',0,'uint',0,'int',0)
-        }
-        else{
-            ; 抬起左键
+        } else {
+            ; 抬起左键  
             SendInput('{LButton Up}')
+            SendInput('{Shift Up}')
+            SendInput('{Ctrl Up}')
+            Reload
         }
     }
-    SetTimer(MRound,1)
+    SetTimer(MRound,50)
 }
