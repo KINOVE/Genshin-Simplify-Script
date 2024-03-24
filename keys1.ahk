@@ -101,9 +101,7 @@ XButton1::{
         } else {
             ; 抬起左键  
             SendInput('{LButton Up}')
-            SendInput('{Shift Up}')
-            SendInput('{Ctrl Up}')
-            Reload
+            SetTimer(MRound,0)
         }
     }
     SetTimer(MRound,20)
